@@ -15,8 +15,9 @@ func _ready() -> void:
 	
 	load_config()
 	$settings_things.hide()
-	$start.hide()
-	$settings.hide()
+	$start.disabled = true
+	$settings.disabled = true
+	$exit.disabled = true
 	text.text = ""
 	#text.default_color = Color(1.0, 0.635, 0.227, 1.0)
 	await wait(0.5)
@@ -88,27 +89,32 @@ func main_menu():
 	text.text = "-".repeat(155)
 	await wait(0.2)
 	text.text += "\n"
-	text.text += "     ##          -=     ##-=-=       #           #       #                #     ##             ##    -=-=-=-=-=    ##-=-=-=        -=-=-=-=     ##               ##       2
-     ##      -=         ##         #    #           #       #       #      #     ##        -= ##             #             ##                    #            #     ##         -= ##            
-     ##-=-=           ##==-=       #=-=-=#       #       #      #     ##    -=     ##             #             ##-=-=            #            #     ##     -=     ##         
-     ##      -=         ##                             #      #       #      #     ## -=        ##             #             ##                    #            #     ## -=         ##
-     ##          -=     ##               =-=-=-=-      #=-= #-=-#     ##             ##             #             ##-=-=-=     =-#            #    ##              ##"
+	text.text += "   ##         -=     ##-=-=        #           #      #                #     ##             ##     -=-=-=-=-=      ##-=-=-=           -=-=-=-=      ##             ##       2
+    ##     -=         ##       #     #           #      #       #      #     ##        -= ##             #             ##                     #          #     ##        -= ##            
+    ##-=-=           ##==-=       #=-=-=#       #       #      #     ##    -=     ##             #             ##-=-=              #          #     ##    -=     ##         
+     ##     -=         ##                            #     #       #      #     ## -=        ##             #             ##                    #          #     ## -=        ##
+     ##         -=     ##                =-=-=-=-      #=-= #-=-#      ##             ##             #             ##-=-=-=      =-#          #    ##             ## "
 	await wait(0.2)
 	text.text += "\n" + "-".repeat(155)
 	text.text += "\n\n\n" + "         НАЧАТЬ"
 	text.text += "\n\n\n" + "         НАСТРОЙКИ"
 	text.text += "\n\n\n" + "         ВЫХОД"
-	$settings.show()
-	$start.show()
+	$settings.disabled = false
+	$start.disabled = false
+	$exit.disabled = false
 func settings():
-	$settings.hide()
-	$start.hide()
+	$settings.disabled = true
+	$start.disabled = true
+	$exit.disabled = true
+	$settings.text = ""
+	$start.text = ""
+	$exit.text = ""
 	text.text = ""
 	text.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	await wait(0.2)
 	$settings_things.show()
 	text.text += "\n\n"
-	repeat(" ", 134)
+	repeat(" ", 141)
 	text.text += "СОХРАНИТЬ\n\n\n\n"
 	repeat(" ", 10)
 	text.text += "Общая громкость\n"
@@ -133,8 +139,9 @@ func _on_start_button_pressed() -> void:
 	GlobalVars.lifes = 3
 	get_tree().change_scene_to_file("res://main.tscn")
 func _on_start_button_mouse_entered() -> void:
-	$choose.play()
-	$start.text = ">>"
+	if not $start.disabled:
+		$choose.play()
+		$start.text = ">>"
 func _on_start_button_mouse_exited() -> void:
 	$start.text = ""
 
@@ -145,8 +152,9 @@ func _on_settings_pressed() -> void:
 	$settings_things/atm_volume.value = round((GlobalConfig.get_value("audio", "Atmosphere_volume_db") + 25) / 50 * 100)
 	settings()
 func _on_settings_mouse_entered() -> void:
-	$choose.play()
-	$settings.text = ">>"
+	if not $settings.disabled:
+		$choose.play()
+		$settings.text = ">>"
 func _on_settings_mouse_exited() -> void:
 	$settings.text = ""
 
@@ -174,7 +182,8 @@ func _on_atm_volume_value_changed(value: float) -> void:
 func _on_exit_pressed() -> void:
 	get_tree().quit(0)
 func _on_exit_mouse_entered() -> void:
-	$choose.play()
-	$exit.text = ">>"
+	if not $exit.disabled:
+		$choose.play()
+		$exit.text = ">>"
 func _on_exit_mouse_exited() -> void:
 	$exit.text = ""

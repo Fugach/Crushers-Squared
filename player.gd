@@ -64,8 +64,6 @@ func _physics_process(delta: float) -> void:
 				if body.global_position.distance_to(global_position) < 25:
 					if body.has_method("damage"):
 						body.damage(10)
-			else:
-				print(body)
 	if is_on_wall_only() and (not is_on_floor()) and velocity.y > 0 and\
 	(Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 		is_sliding = true

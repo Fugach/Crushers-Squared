@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://b2bqsykegryfi" path="res://music/table1.ogg" id="17_ok6jj"]
 [ext_resource type="FontFile" uid="uid://b7t3o1ojv4rym" path="res://fonts/JetBrainsMono-Bold.ttf" id="18_wat4s"]
 [ext_resource type="Texture2D" uid="uid://xcabiap7vul7" path="res://textures/UI/QuickVolume/volume1.png" id="19_0cp0l"]
+[ext_resource type="Texture2D" uid="uid://dunvc7g4f8cym" path="res://textures/UI/window_buttons.png" id="19_rt5wr"]
 [ext_resource type="Texture2D" uid="uid://c4unfjjs0h0k5" path="res://textures/UI/X.png" id="19_ywjan"]
 [ext_resource type="Texture2D" uid="uid://cie5c7i6jocr" path="res://textures/UI/QuickVolume/volume2.png" id="20_d2t1y"]
 [ext_resource type="Texture2D" uid="uid://btsihdgho6s3l" path="res://textures/UI/X_pressed.png" id="20_m74q3"]
@@ -67,6 +68,7 @@
 [ext_resource type="AudioStream" uid="uid://bwsufio7vmb7u" path="res://music/cw_amen_deeptouch.wav" id="47_u81y6"]
 [ext_resource type="Texture2D" uid="uid://bg6u1yluf7c10" path="res://textures/home_tip.png" id="51_cpm2s"]
 [ext_resource type="Texture2D" uid="uid://bv2hxdygufa4q" path="res://textures/elevator/elevator_bg.png" id="53_5yh34"]
+[ext_resource type="Texture2D" uid="uid://das4nqkt47h5y" path="res://textures/micro-table-front.png" id="54_mnw77"]
 [ext_resource type="Texture2D" uid="uid://ddxctqpkgg2lg" path="res://textures/elevator/open/open_0001.png" id="54_pjuso"]
 [ext_resource type="Texture2D" uid="uid://p8r84j0vjtn4" path="res://textures/elevator/close/close_0001.png" id="55_23xmf"]
 [ext_resource type="Texture2D" uid="uid://cbf5lrjlisfqt" path="res://textures/elevator/close/close_0002.png" id="56_swlj1"]
@@ -124,7 +126,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("28_uypp3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"RL",
 "speed": 5.0
 }, {
@@ -132,7 +134,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_wnkbs")
 }],
-"loop": false,
+"loop": 0,
 "name": &"empty",
 "speed": 0.0
 }, {
@@ -140,7 +142,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("26_f6a44")
 }],
-"loop": true,
+"loop": 1,
 "name": &"pistol",
 "speed": 5.0
 }, {
@@ -148,7 +150,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_blkrb")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shotgun",
 "speed": 5.0
 }]
@@ -368,7 +370,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_gngh3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -1139,7 +1141,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("54_pjuso")
 }],
-"loop": true,
+"loop": 1,
 "name": &"base",
 "speed": 5.0
 }, {
@@ -1177,7 +1179,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("65_yvsr8")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 30.0
 }, {
@@ -1248,7 +1250,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("86_mnw77")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 30.0
 }]
@@ -1349,7 +1351,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("84_jcxqu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"1",
 "speed": 5.0
 }, {
@@ -1357,7 +1359,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("85_0arob")
 }],
-"loop": true,
+"loop": 1,
 "name": &"2",
 "speed": 5.0
 }, {
@@ -1365,7 +1367,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("86_dij0e")
 }],
-"loop": true,
+"loop": 1,
 "name": &"3",
 "speed": 5.0
 }, {
@@ -1373,7 +1375,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("87_k1udn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"4",
 "speed": 5.0
 }, {
@@ -1381,7 +1383,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("88_wat4s")
 }],
-"loop": true,
+"loop": 1,
 "name": &"5",
 "speed": 5.0
 }, {
@@ -1389,7 +1391,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("89_ywjan")
 }],
-"loop": true,
+"loop": 1,
 "name": &"6",
 "speed": 5.0
 }, {
@@ -1397,7 +1399,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("90_m74q3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"7",
 "speed": 5.0
 }]
@@ -1776,11 +1778,15 @@ theme_override_font_sizes/font_size = 5
 text = "Выберите улучшение"
 horizontal_alignment = 1
 
+[node name="Sprite2D" type="Sprite2D" parent="UI/HUD/Table/table" unique_id=256380708]
+position = Vector2(192, -52)
+texture = ExtResource("19_rt5wr")
+
 [node name="TextureButton" type="TextureButton" parent="UI/HUD/Table/table" unique_id=46510825]
 offset_left = 196.0
 offset_top = -54.0
-offset_right = 204.0
-offset_bottom = -46.0
+offset_right = 206.0
+offset_bottom = -47.0
 texture_normal = ExtResource("19_ywjan")
 texture_pressed = ExtResource("20_m74q3")
 texture_hover = ExtResource("20_m74q3")
@@ -2192,6 +2198,10 @@ texture = SubResource("GradientTexture2D_gngh3")
 [node name="home_tip" type="Sprite2D" parent="Table" unique_id=957584673]
 position = Vector2(-40, -46)
 texture = ExtResource("51_cpm2s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Table" unique_id=1438901029]
+z_index = 1
+texture = ExtResource("54_mnw77")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1062142319]
 light_mask = 3
