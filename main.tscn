@@ -2309,7 +2309,6 @@ region_enabled = true
 region_rect = Rect2(16, 12, 16, 7)
 
 [node name="PointLight2D" type="PointLight2D" parent="elevator_fake/sign" unique_id=1622864890]
-position = Vector2(0, -2)
 shadow_enabled = true
 texture = ExtResource("7_dg77c")
 texture_scale = 0.5

@@ -113,8 +113,13 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	jump()
+	debug()
 
-
+func debug():
+	if Input.is_action_just_pressed("spawn_ENEMY"):
+		var new_enemy = Enemy.instantiate()
+		new_enemy.global_position = get_global_mouse_position()
+		get_parent().add_child(new_enemy)
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
 		velocity.y += JUMP_VELOCITY

@@ -7,16 +7,19 @@ const PARTS = preload("uid://o34nfwjqh6ot")
 
 
 @onready var weapons = [Shotgun, RL, Pistol]
+
 @onready var my_weapon : PackedScene = weapons.pick_random()
 @onready var player = GlobalVars.player
+@onready var FloorLookerLeft = $FloorLookerLeft
 var WEAPON : Node2D = null
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 500.0
+const JUMP_VELOCITY = -300.0
 var direction = Vector2(0, 0)
 var hp = 100
 var total_damage : int = 0
 var base_damage	 : int = 0
 var parts_amount : int = 0
+var is_following : bool = false
 
 func _ready() -> void:
 	var get_WEAPON = my_weapon.instantiate()
@@ -33,20 +36,28 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and hp > 0:
 		velocity += get_gravity() * delta
 	if player != null and hp > 0:
-		if WEAPON.is_player_nearby and WEAPON.can_shoot and GlobalVars.player_hp > 0:
-			WEAPON.shoot(base_damage, false)
-		if global_position.y - player.global_position.y > 50 and is_on_floor() and $shock.is_stopped() and global_position.distance_to(player.global_position) < 100:
-			velocity.y = JUMP_VELOCITY
-
+		
+		#if WEAPON.is_player_nearby and WEAPON.can_shoot and GlobalVars.player_hp > 0:
+			#WEAPON.shoot(base_damage, false)
+		if FloorLookerLeft.get_collider() == null and is_following:
+			jump()
+		
+		#if global_position.y - player.global_position.y > 50 and is_on_floor() and $shock.is_stopped() and global_position.distance_to(player.global_position) < 100:
+			#velocity.y = JUMP_VELOCITY
+	
 		direction = global_position.direction_to(player.global_position)
 		if $shock.is_stopped():
 			if (global_position.distance_to(player.global_position) < 300 and\
 			global_position.distance_to(player.global_position) > 150) and abs(velocity.x) < 300:
 				velocity.x += direction.x * SPEED * delta
+				is_following = true
 				if sign(velocity.x) != sign(global_position.direction_to(player.global_position).x):
 					velocity.x += velocity.x * -0.05
 			elif global_position.distance_to(player.global_position) < 50:
 				velocity.x -= direction.x * SPEED * delta
+				is_following = true
+			else:
+				is_following = false
 		if hp > 0:
 			velocity.x *= 0.9
 	elif hp <= 0 and str(WEAPON) != "<Freed Object>":
@@ -82,6 +93,10 @@ func kill():
 func push(pwr, dir):
 	velocity += pwr * dir
 	$shock.start()
+
+func jump():
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
 
 func damage(damage_amount, type):
 	hp -= damage_amount

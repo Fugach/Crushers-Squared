@@ -118,10 +118,8 @@ region_enabled = true
 region_rect = Rect2(0, 14, 12, 12)
 
 [node name="Label" type="Label" parent="." unique_id=1242712241]
-offset_left = -8.0
-offset_top = -5.0
-offset_right = 8.0
-offset_bottom = 7.0
+offset_right = 16.0
+offset_bottom = 12.0
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -134,5 +132,8 @@ wait_time = 0.2
 
 [node name="shock" type="Timer" parent="." unique_id=483827531]
 one_shot = true
+
+[node name="FloorLookerLeft" type="RayCast2D" parent="." unique_id=1352449554]
+target_position = Vector2(-5, 5)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

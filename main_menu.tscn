@@ -247,6 +247,21 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_glbon")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_8qtwp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jix8l")
 
+[node name="Tries" type="Label" parent="." unique_id=794322043]
+modulate = Color(6.840123, 6.840123, 6.840123, 1)
+offset_left = 562.0
+offset_top = 348.5
+offset_right = 717.0
+offset_bottom = 371.5
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0.4627451, 0.25882354, 0.050980393, 1)
+theme_override_fonts/font = ExtResource("4_nlkkf")
+theme_override_font_sizes/font_size = 16
+text = "BUILD 7"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="mouse_entered" from="start" to="." method="_on_start_button_mouse_entered"]
 [connection signal="mouse_exited" from="start" to="." method="_on_start_button_mouse_exited"]
 [connection signal="pressed" from="start" to="." method="_on_start_button_pressed"]
