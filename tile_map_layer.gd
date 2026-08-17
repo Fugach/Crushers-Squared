@@ -4,7 +4,6 @@ extends TileMapLayer
 @onready var Table: Sprite2D = $"../Table"
 @onready var Elevator_fake: Node2D = $"../elevator_fake"
 const LIGHTS = preload("uid://cp0ivvdcjm3h4")
-@onready var player: CharacterBody2D = $"../Player"
 const DOOR = preload("uid://lf2qgrhjy7sd")
 const ROOM = preload("uid://cxn1pdnonmni6")
 
@@ -26,8 +25,10 @@ var total_lights : int = 0
 var total_rooms : int = 0
 var total_doors : int = 0
 var del_list = ["Enemy", "Rocket", "Bullet", "Light", "Door", "Room"]
+var player = CharacterBody2D
 
 func _ready() -> void:
+	player = GlobalVars.player
 	GlobalVars.passed_layers = 0
 	var rooms_amount = randi_range(3, 15)
 	gen_dungeon(rooms_amount, Vector2(3, 2))
@@ -38,7 +39,6 @@ func gen_dungeon(rooms_amount, start_pos):
 	total_lights = 0
 	total_doors = 0
 	clear()
-	print(get_children())
 	for body in get_children():
 		if body is RigidBody2D:
 			body.queue_free()
@@ -57,52 +57,48 @@ func gen_dungeon(rooms_amount, start_pos):
 	gen_direction.x = [-1, 1].pick_random()
 	print("Generating ", str(rooms_amount),  " rooms", " ||| Direction: ", gen_direction)
 	Table.reroll()
-	for x in range(30):
-		set_cell(Vector2(x, 15), 0, Vector2(8, 1))
-		if x % 3 == 0:
-			continue
-		set_cell(Vector2(x, 10), 0, Vector2(8, 1))
-	#generate_room(room_anchor, room_size, room_doors, doors_height, false)
+	generate_room(room_anchor, room_size, room_doors, doors_height, false)
 	Table.global_position = (room_anchor + room_size + Vector2(-5, -1)) * 16 + Vector2(8, 6)
 	Elevator_fake.global_position = (room_anchor + room_size + Vector2(-7, -1)) * 16 + Vector2(-8, 0)
 	GlobalVars.spawn_pos = Elevator_fake.global_position + Vector2(0, 12)
-	player.respawn()
+	player = GlobalVars.player
+	#player.respawn()
 	
-	#for o in range(rooms_amount):
-		#old_room_anchor = room_anchor
-		#old_room_size = room_size
-		#old_room_doors_height = doors_height
-		#
-		#room_size = Vector2(randi_range(10, 20), randi_range(8, 15))
-		#if gen_direction.x == 1:
-			#room_anchor += Vector2(old_room_size.x + 5, old_room_size.y - room_size.y)
-		#elif gen_direction.x == -1:
-			#room_anchor += Vector2(-5 + room_size.x * -1, old_room_size.y - room_size.y)
-		#
-		#if o != rooms_amount - 1:
-			#generate_room(room_anchor, room_size, "both", doors_height, true)
-			#if gen_direction.x == 1:
-				#hall_pos1 = old_room_anchor + old_room_size
-				#hall_pos2 = room_anchor + Vector2(0, room_size.y)
-				#generate_hall(hall_pos1, hall_pos2)
-			#elif gen_direction.x == -1:
-				#hall_pos1 = room_anchor + room_size
-				#hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
-				#generate_hall(hall_pos1, hall_pos2)
-		#else:
-			#if gen_direction.x == 1:
-				#Elevator.global_position = (room_anchor - Vector2(3, 1) + room_size) * Vector2(16, 16)
-				#generate_room(room_anchor, room_size, "left", doors_height, false)
-				#hall_pos1 = old_room_anchor + old_room_size
-				#hall_pos2 = room_anchor + Vector2(0, room_size.y)
-				#generate_hall(hall_pos1, hall_pos2)
-			#elif gen_direction.x == -1:
-				#Elevator.global_position = (room_anchor + Vector2(4, room_size.y - 1)) * Vector2(16, 16)
-				#generate_room(room_anchor, room_size, "right", doors_height, false)
-				#hall_pos1 = room_anchor + room_size
-				#hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
-				#generate_hall(hall_pos1, hall_pos2)
-	#
+	for o in range(rooms_amount):
+		old_room_anchor = room_anchor
+		old_room_size = room_size
+		old_room_doors_height = doors_height
+		
+		room_size = Vector2(randi_range(10, 20), randi_range(8, 15))
+		if gen_direction.x == 1:
+			room_anchor += Vector2(old_room_size.x + 5, old_room_size.y - room_size.y)
+		elif gen_direction.x == -1:
+			room_anchor += Vector2(-5 + room_size.x * -1, old_room_size.y - room_size.y)
+		
+		if o != rooms_amount - 1:
+			generate_room(room_anchor, room_size, "both", doors_height, true)
+			if gen_direction.x == 1:
+				hall_pos1 = old_room_anchor + old_room_size
+				hall_pos2 = room_anchor + Vector2(0, room_size.y)
+				generate_hall(hall_pos1, hall_pos2)
+			elif gen_direction.x == -1:
+				hall_pos1 = room_anchor + room_size
+				hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
+				generate_hall(hall_pos1, hall_pos2)
+		else:
+			if gen_direction.x == 1:
+				Elevator.global_position = (room_anchor - Vector2(3, 1) + room_size) * Vector2(16, 16)
+				generate_room(room_anchor, room_size, "left", doors_height, false)
+				hall_pos1 = old_room_anchor + old_room_size
+				hall_pos2 = room_anchor + Vector2(0, room_size.y)
+				generate_hall(hall_pos1, hall_pos2)
+			elif gen_direction.x == -1:
+				Elevator.global_position = (room_anchor + Vector2(4, room_size.y - 1)) * Vector2(16, 16)
+				generate_room(room_anchor, room_size, "right", doors_height, false)
+				hall_pos1 = room_anchor + room_size
+				hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
+				generate_hall(hall_pos1, hall_pos2)
+	
 	print("Generation is finished")
 	GlobalVars.time = 0.0
 	GlobalVars.is_time_running = true
@@ -263,6 +259,18 @@ func generate_hall(pos1, pos2):
 	new_light.name = "Light_" + str(total_lights)
 	total_lights += 1
 	add_child(new_light)
+
+func command():
+	#     ____________
+	#   /   П П П П    \
+	#  |    П П П П     |
+	#  |    П_П_П_П  Л  |
+	#  |   |=======~//  |
+	#   \  |========/  /
+	#     -------------
+	while true:
+		set_cell(Vector2(randi_range(-50, 50), randi_range(-50, 50)), 0, Vector2(7, 0))
+		await get_tree().process_frame
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "hide":

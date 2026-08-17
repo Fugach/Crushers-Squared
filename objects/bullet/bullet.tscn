@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://csr8w1qcnqlbd"]
+
+[ext_resource type="Script" uid="uid://c4lx4k1v2surv" path="res://objects/bullet/bullet.gd" id="1_awion"]
+[ext_resource type="AudioStream" uid="uid://c3g6t6qe5uhai" path="res://sounds/ricoshet.ogg" id="2_1mdu2"]
+[ext_resource type="Texture2D" uid="uid://lnybixvjunlq" path="res://textures/particles/dead_bullet.png" id="2_g1w5t"]
+
+[sub_resource type="Curve" id="Curve_sils6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7287234, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pofd3"]
+curve = SubResource("Curve_sils6")
+
+[sub_resource type="Curve" id="Curve_s8i05"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hurb3"]
+curve = SubResource("Curve_s8i05")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwob3"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_curve = SubResource("CurveTexture_hurb3")
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 198, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 54.869995
+alpha_curve = SubResource("CurveTexture_pofd3")
+collision_mode = 2
+
+[node name="Bullet" type="Node2D" unique_id=1568785125]
+script = ExtResource("1_awion")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1527437106]
+modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
+z_index = -1
+scale = Vector2(0.78846157, 1)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+default_color = Color(1, 0.6666667, 0, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1084103653]
+target_position = Vector2(0, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=990872079]
+emitting = false
+amount = 1
+texture = ExtResource("2_g1w5t")
+lifetime = 0.25
+one_shot = true
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_hwob3")
+
+[node name="Ricoshet" type="AudioStreamPlayer2D" parent="." unique_id=578761210]
+stream = ExtResource("2_1mdu2")

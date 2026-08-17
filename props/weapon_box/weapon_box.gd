@@ -2,11 +2,11 @@ extends RigidBody2D
 var PISTOL_PICKABLE = preload("uid://5j581geyyouk")
 var RL_PICKABLE = preload("uid://b6yunx8h1pcdi")
 var SHOTGUN_PICKABLE = preload("uid://dhjphrjas8n7d")
-var ENEMY = preload("uid://x2aibfdis1lc")
-
+const ENEMY = preload("uid://dacw07jts5j8n")
 
 var penetrable = true
 var hp : int = 25
+
 func damage(amount, type):
 	hp -= amount
 	$soft.pitch_scale = randf_range(0.7, 1.3)

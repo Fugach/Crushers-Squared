@@ -18,7 +18,14 @@ var grabbing = preload("res://textures/cursors/grabbing.png")
 var text = preload("res://textures/cursors/text.png")
 var no = preload("res://textures/cursors/no.png")
 
+const PLAYER = preload("uid://7pwfca8tanen")
+
 func _ready() -> void:
+	var player = PLAYER.instantiate()
+	player.name = 'Player'
+	add_child(player)
+	player = $Player
+	GlobalVars.player = player
 	GlobalVars.slots = {
 	"slot1": null,
 	"slot2": null,
@@ -29,7 +36,7 @@ func _ready() -> void:
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	load_config()
 	GlobalVars.main = self
-	GlobalVars.player.respawn()
+	player.respawn()
 	$SubViewport.use_hdr_2d = true
 	$UI/Pause/AnimationPlayer.play_backwards("appear")
 	
@@ -54,8 +61,10 @@ func _process(_delta: float) -> void:
 		get_tree().change_scene_to_file("res://main_menu.tscn")
 	if GlobalVars.player.global_position.y > 2000:
 		GlobalVars.player.respawn()
-		$UI/HUD/QuickVolume/lost.play()
+		if not $UI/HUD/QuickVolume/lost.playing:
+			$UI/HUD/QuickVolume/lost.play()
 		Input.set_custom_mouse_cursor(no)
+		$TileMapLayer.command()
 		
 	if Input.is_action_just_pressed("mmb"):
 		$TileMapLayer.gen_dungeon(1, Vector2(3, 2))

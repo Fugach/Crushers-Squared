@@ -74,7 +74,6 @@ func reroll():
 				if thing == rerolling_upgrade:
 					repeated = true
 			if not repeated:
-				print("ADDING ", rerolling_upgrade)
 				upgrades.append(rerolling_upgrade)
 				break
 	print("Current options: ", upgrades)

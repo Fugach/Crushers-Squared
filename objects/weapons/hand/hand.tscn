@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://bbxbw8j8ubuiv"]
+
+[ext_resource type="Script" uid="uid://de6hgt8vyw8vx" path="res://objects/weapons/hand/hand.gd" id="1_ror0l"]
+[ext_resource type="Texture2D" uid="uid://57p2npki1p7e" path="res://textures/hammer/hammer_0001.png" id="19_y38kr"]
+[ext_resource type="Texture2D" uid="uid://cqhw5y6pu5y1j" path="res://textures/hammer/hammer_0002.png" id="20_ho7na"]
+[ext_resource type="Texture2D" uid="uid://cug3mqxpc36id" path="res://textures/hammer/hammer_0003.png" id="21_1pmif"]
+[ext_resource type="Texture2D" uid="uid://0w0wtj487540" path="res://textures/hammer/hammer_0004.png" id="22_m3gm7"]
+[ext_resource type="Texture2D" uid="uid://dt6gpa0vl18nw" path="res://textures/hammer/hammer_0005.png" id="23_kowy6"]
+[ext_resource type="Texture2D" uid="uid://bbg454aynmts8" path="res://textures/hammer/hammer_0006.png" id="24_77l15"]
+[ext_resource type="Texture2D" uid="uid://ci4f1gifx5etb" path="res://textures/hammer/hammer_0007.png" id="25_rwmfu"]
+[ext_resource type="Texture2D" uid="uid://bn7tcopothm7d" path="res://textures/hammer/hammer_0008.png" id="26_rg2y4"]
+[ext_resource type="Texture2D" uid="uid://dhj8ao2dm0pdr" path="res://textures/hammer/hammer_0009.png" id="27_8swre"]
+[ext_resource type="Texture2D" uid="uid://qbycmwqrip40" path="res://textures/hammer/hammer_0010.png" id="28_lto1y"]
+[ext_resource type="Texture2D" uid="uid://cppymt0xn7atm" path="res://textures/hammer/hammer_0011.png" id="29_q5y87"]
+[ext_resource type="Texture2D" uid="uid://hax7i1ivcvqq" path="res://textures/hammer/hammer_0012.png" id="30_wv28s"]
+[ext_resource type="Texture2D" uid="uid://qgvvxo4sqntv" path="res://textures/hammer/hammer_0013.png" id="31_yuoqr"]
+[ext_resource type="Texture2D" uid="uid://q18qlh6oiios" path="res://textures/hammer/hammer_0014.png" id="32_firw5"]
+[ext_resource type="Texture2D" uid="uid://cj2t568hiy40s" path="res://textures/hammer/hammer_0015.png" id="33_4c2pu"]
+[ext_resource type="AudioStream" uid="uid://c0fpxhrtqt7r6" path="res://sounds/smash/smash_hammer.ogg" id="34_ho7na"]
+[ext_resource type="AudioStream" uid="uid://br7phr0u08hvl" path="res://sounds/smash/wall_hit.wav" id="35_1pmif"]
+[ext_resource type="AudioStream" uid="uid://cmh3r4j41xgh" path="res://sounds/smash/spin.wav" id="36_m3gm7"]
+[ext_resource type="AudioStream" uid="uid://rwxo8as1yi7g" path="res://sounds/smash/hammer_damage.ogg" id="37_kowy6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vbuvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_y38kr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ho7na")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_1pmif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_m3gm7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_kowy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_77l15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_rwmfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_rg2y4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_8swre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_lto1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_q5y87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_wv28s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_yuoqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_firw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_4c2pu")
+}],
+"loop": 1,
+"name": &"loop",
+"speed": 60.0
+}]
+
+[sub_resource type="Animation" id="Animation_qv15m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hammer:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Raycast:target_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("attack_sfx:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hammer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hammer:visibility_layer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_u7g5f"]
+resource_name = "hit"
+length = 0.15
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hammer:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Raycast:target_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(-24, 0), Vector2(-21, 0), Vector2(-18, 0), Vector2(-12, 0), Vector2(0, 0), Vector2(12, 0), Vector2(18, 0), Vector2(21, 0), Vector2(24, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("attack_sfx:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hammer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_4ynp4"]
+resource_name = "loop"
+length = 0.25
+loop_mode = 1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hammer:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Raycast:target_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667, 0.083333336, 0.1, 0.11666667, 0.13333334, 0.15, 0.16666667, 0.18333334, 0.2, 0.21666667, 0.23333333),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(-24, 0), Vector2(-21, 0), Vector2(-18, 0), Vector2(-12, 0), Vector2(0, 0), Vector2(12, 0), Vector2(18, 0), Vector2(21, 0), Vector2(24, 0), Vector2(21, 0), Vector2(12, 0), Vector2(0, 0), Vector2(-12, 0), Vector2(-18, 0), Vector2(-21, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hammer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hammer:visibility_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ynp4"]
+_data = {
+&"RESET": SubResource("Animation_qv15m"),
+&"hit": SubResource("Animation_u7g5f"),
+&"loop": SubResource("Animation_4ynp4")
+}
+
+[node name="Hammer" type="Node2D" unique_id=63557002]
+script = ExtResource("1_ror0l")
+
+[node name="Hammer" type="AnimatedSprite2D" parent="." unique_id=1603683193]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_vbuvb")
+animation = &"loop"
+
+[node name="Raycast" type="RayCast2D" parent="." unique_id=1026045911]
+target_position = Vector2(24, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1643966829]
+libraries/ = SubResource("AnimationLibrary_4ynp4")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1528279913]
+wait_time = 0.5
+one_shot = true
+
+[node name="DamageCooldown" type="Timer" parent="." unique_id=1526340920]
+wait_time = 0.25
+one_shot = true
+
+[node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=185630710]
+stream = ExtResource("34_ho7na")
+
+[node name="wall_hit_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1832745449]
+stream = ExtResource("35_1pmif")
+volume_db = -10.0
+
+[node name="spin_sfx" type="AudioStreamPlayer2D" parent="." unique_id=577130061]
+stream = ExtResource("36_m3gm7")
+bus = &"Sound"
+
+[node name="damage_sfx" type="AudioStreamPlayer2D" parent="." unique_id=459170253]
+stream = ExtResource("37_kowy6")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
