@@ -3,14 +3,12 @@
 [ext_resource type="Script" uid="uid://dkpuqxf15icc6" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Shader" uid="uid://dwmr157brsa3w" path="res://shaders/crt_OpenGL.gdshader" id="2_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://dhnhnqnk2f7ox" path="res://textures/console_background.png" id="2_7vrkn"]
-[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/UI/crt_noise.ogg" id="4_jix8l"]
-[ext_resource type="FontFile" uid="uid://bt6dalva50viv" path="res://fonts/cyrillic.tres" id="4_nlkkf"]
-[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/UI/choose.ogg" id="5_glbon"]
+[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/ui/crt_noise.ogg" id="4_jix8l"]
+[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/ui/choose.ogg" id="5_glbon"]
 [ext_resource type="Texture2D" uid="uid://b765v15wc134m" path="res://textures/UI/grabber.png" id="7_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://n764luyo8kt5" path="res://textures/UI/grabber_highlight.png" id="8_0k4wn"]
 [ext_resource type="Texture2D" uid="uid://dcnoxmmn1xfjq" path="res://textures/UI/grabber_disabled.png" id="9_j5v2v"]
 [ext_resource type="Texture2D" uid="uid://i7px4o5ricvf" path="res://textures/UI/tick.png" id="10_iotk1"]
-[ext_resource type="FontFile" uid="uid://b7t3o1ojv4rym" path="res://fonts/JetBrainsMono-Bold.ttf" id="11_0k4wn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_06t4h"]
 resource_local_to_scene = true
@@ -112,7 +110,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63671875, 0.3662476, 0.08705139, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_fonts/font = ExtResource("4_nlkkf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nlkkf")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_glbon")
@@ -135,7 +132,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63671875, 0.3662476, 0.08705139, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_fonts/font = ExtResource("4_nlkkf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nlkkf")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_glbon")
@@ -155,7 +151,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63671875, 0.3662476, 0.08705139, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_fonts/font = ExtResource("4_nlkkf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nlkkf")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_glbon")
@@ -241,7 +236,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63671875, 0.3662476, 0.08705139, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_fonts/font = ExtResource("4_nlkkf")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nlkkf")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_glbon")
@@ -256,7 +250,6 @@ offset_right = 717.0
 offset_bottom = 371.5
 scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0.4627451, 0.25882354, 0.050980393, 1)
-theme_override_fonts/font = ExtResource("11_0k4wn")
 theme_override_font_sizes/font_size = 16
 text = "BUILD 7"
 horizontal_alignment = 2
