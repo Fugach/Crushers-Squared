@@ -11,8 +11,8 @@ var weapon_owner : String = ""
 var current_angle = null
 var is_player_nearby : bool = false
 var is_player_colliding : bool = false
-var total_bullets : int = 0
 var my_name = "shotgun"
+var accuracy : float = 0.05 # default: 0.05 
 
 func _ready():
 	BULLET = preload("uid://csr8w1qcnqlbd")
@@ -69,9 +69,7 @@ func shoot(damage_amount, is_friendly):
 		new_bullet.damage_amount = damage_amount
 		new_bullet.is_friendly = is_friendly
 		new_bullet.global_position = Spawnpoint.global_position
-		new_bullet.global_rotation = Sprite.global_rotation + x * 0.05 - 2 * 0.05
-		new_bullet.name = "Bullet" + str(total_bullets)
-		total_bullets += 1
+		new_bullet.global_rotation = Sprite.global_rotation + x * accuracy - 2 * accuracy
 		get_node("/root/main").add_child(new_bullet)
 	can_shoot = false
 	Cooldown.start()

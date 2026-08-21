@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://f37ccxbgb04l" path="res://sounds/ui/table/paper2.ogg" id="15_ok6jj"]
 [ext_resource type="AudioStream" uid="uid://c73rscynw2ms" path="res://sounds/ui/table/paper3.ogg" id="16_facbu"]
 [ext_resource type="AudioStream" uid="uid://tfn46umjq7bd" path="res://sounds/ui/table/paper4.ogg" id="17_b1qrp"]
-[ext_resource type="AudioStream" uid="uid://b2bqsykegryfi" path="res://music/table1.ogg" id="17_ok6jj"]
+[ext_resource type="AudioStream" uid="uid://dr0k1v5c1rd35" path="res://music/table-demo.ogg" id="17_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://xcabiap7vul7" path="res://textures/UI/QuickVolume/volume1.png" id="19_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://dunvc7g4f8cym" path="res://textures/UI/window_buttons.png" id="19_rt5wr"]
 [ext_resource type="Texture2D" uid="uid://c4unfjjs0h0k5" path="res://textures/UI/X.png" id="19_ywjan"]

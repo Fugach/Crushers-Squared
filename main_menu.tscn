@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b765v15wc134m" path="res://textures/UI/grabber.png" id="7_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://n764luyo8kt5" path="res://textures/UI/grabber_highlight.png" id="8_0k4wn"]
 [ext_resource type="Texture2D" uid="uid://dcnoxmmn1xfjq" path="res://textures/UI/grabber_disabled.png" id="9_j5v2v"]
+[ext_resource type="AudioStream" uid="uid://0e3hwiyxqf3h" path="res://music/test_main_menu_sawer_5_notes_lol.ogg" id="10_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://i7px4o5ricvf" path="res://textures/UI/tick.png" id="10_iotk1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_06t4h"]
@@ -255,6 +256,12 @@ text = "BUILD 7"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=112214763]
+stream = ExtResource("10_0o4t1")
+bus = &"Music"
+playback_type = 1
+parameters/looping = true
 
 [connection signal="mouse_entered" from="start" to="." method="_on_start_button_mouse_entered"]
 [connection signal="mouse_exited" from="start" to="." method="_on_start_button_mouse_exited"]

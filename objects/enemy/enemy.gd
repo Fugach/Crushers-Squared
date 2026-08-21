@@ -103,13 +103,6 @@ func walk(delta, distance, direction):
 				await get_tree().process_frame
 	if not is_player_straight and "Enemy" in str(PlayerLooker.get_collider()):
 		jump()
-	
-	#if 100 < distance and distance < 400 and\
-	#((direction.x < 0 and floor[0]) or 
-	#(direction.x > 0 and floor[1])):
-		#velocity.x += (MAX_SPEED - abs(velocity.x)) * delta * direction.x * ACCELERATION
-	#elif ((velocity.x < 0 and not floor[0]) or (velocity.x > 0 and not floor[1])):
-		#velocity.x -= (MAX_SPEED - abs(velocity.x)) * delta * direction.x * ACCELERATION
 func kill():
 	GlobalVars.killed += 1
 	$Sprite2D.self_modulate = Color(1, 1, 1, 0)

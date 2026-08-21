@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 var SPEED : float = 165.0
 var SPEED_buffer : float = SPEED
@@ -135,6 +136,10 @@ func debug():
 		var new_pistol = PISTOL.instantiate()
 		new_pistol.global_position = get_global_mouse_position()
 		get_parent().add_child(new_pistol)
+	if Input.is_action_just_pressed('spawn_SHOTGUN'):
+		var new_shotgun = SHOTGUN.instantiate()
+		new_shotgun.global_position = get_global_mouse_position()
+		get_parent().add_child(new_shotgun)
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
 		velocity.y += JUMP_VELOCITY

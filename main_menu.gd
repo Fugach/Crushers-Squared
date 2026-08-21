@@ -74,6 +74,7 @@ func _ready() -> void:
 	for x in range(10):
 		text.text += "finishing up" + "\n"
 		await wait(0.01)
+	$music.play()
 	main_menu()
 
 func repeat(input, amount):

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bf1hvay56ii3f"]
 
-[ext_resource type="Texture2D" uid="uid://dgf538tfe2oq" path="res://textures/idk_just_use_that.png" id="1_g2tbl"]
 [ext_resource type="Script" uid="uid://d0np4lv53yxg0" path="res://props/box/box.gd" id="1_oq5cr"]
+[ext_resource type="Texture2D" uid="uid://cjf8k0rtk11j4" path="res://textures/box/break_0001.png" id="2_y5vrd"]
+[ext_resource type="Texture2D" uid="uid://cu233npspixtt" path="res://textures/box/break_0002.png" id="3_1s7sa"]
 [ext_resource type="AudioStream" uid="uid://if2ehhwsnpqf" path="res://sounds/physics/cardboard/cardboard_box_impact_soft1.ogg" id="3_ox3i3"]
+[ext_resource type="Texture2D" uid="uid://bxuhekdytocrm" path="res://textures/box/break_0003.png" id="4_7vqo8"]
 [ext_resource type="AudioStream" uid="uid://d21gdsjwie4cb" path="res://sounds/physics/cardboard/cardboard_box_impact_soft2.ogg" id="4_owd7c"]
 [ext_resource type="AudioStream" uid="uid://c2ydk5le5j1p3" path="res://sounds/physics/cardboard/cardboard_box_impact_soft3.ogg" id="5_y5vrd"]
 [ext_resource type="AudioStream" uid="uid://jlmulp2ydm3w" path="res://sounds/physics/cardboard/cardboard_box_impact_soft4.ogg" id="6_1s7sa"]
@@ -10,6 +12,33 @@
 [ext_resource type="AudioStream" uid="uid://bex2r2r4jec27" path="res://sounds/physics/cardboard/cardboard_box_impact_soft6.ogg" id="8_l8oj7"]
 [ext_resource type="AudioStream" uid="uid://rjrdvhnd8olf" path="res://sounds/physics/cardboard/cardboard_box_impact_soft7.ogg" id="9_3d76o"]
 [ext_resource type="AudioStream" uid="uid://bhs3lhbxu2caq" path="res://sounds/physics/cardboard/cardboard_box_break.ogg" id="10_sxx00"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0oal"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1s7sa")
+}],
+"loop": 1,
+"name": &"a_little_damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7vqo8")
+}],
+"loop": 1,
+"name": &"almost_broken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y5vrd")
+}],
+"loop": 0,
+"name": &"normal",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq5cr"]
 size = Vector2(12, 12)
@@ -30,18 +59,18 @@ stream_6/stream = ExtResource("9_3d76o")
 [node name="Box" type="RigidBody2D" unique_id=131966964]
 script = ExtResource("1_oq5cr")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1795546709]
-texture_filter = 1
-texture = ExtResource("1_g2tbl")
-region_enabled = true
-region_rect = Rect2(52, 0, 12, 12)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1311538343]
+sprite_frames = SubResource("SpriteFrames_m0oal")
+animation = &"a_little_damaged"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1479698425]
+visible = false
 shape = SubResource("RectangleShape2D_oq5cr")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1586263205]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1748985844]
+visible = false
 shape = SubResource("RectangleShape2D_bqn3j")
 
 [node name="soft" type="AudioStreamPlayer2D" parent="." unique_id=1626229196]
@@ -49,6 +78,21 @@ stream = SubResource("AudioStreamRandomizer_40wlt")
 
 [node name="break" type="AudioStreamPlayer2D" parent="." unique_id=364901227]
 stream = ExtResource("10_sxx00")
+
+[node name="CollisionPolygon2" type="CollisionPolygon2D" parent="." unique_id=425906828]
+visible = false
+polygon = PackedVector2Array(-6, -3, -4, -3, -4, -4, -3, -4, -3, -5, 5, -5, 5, -4, 6, -4, 6, 0, 5, 0, 5, 5, 0, 5, 0, 6, -4, 6, -4, 5, -5, 5, -5, 4, -6, 4)
+disabled = true
+
+[node name="CollisionPolygon1" type="CollisionPolygon2D" parent="." unique_id=534389830]
+visible = false
+polygon = PackedVector2Array(-6, -6, -3, -6, -3, -5, 3, -5, 3, -6, 6, -6, 6, 4, 5, 4, 5, 5, 0, 5, 0, 6, -6, 6)
+disabled = true
+
+[node name="CollisionPolygon0" type="CollisionPolygon2D" parent="." unique_id=1683608746]
+visible = false
+polygon = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+disabled = true
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
