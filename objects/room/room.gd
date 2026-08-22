@@ -59,8 +59,10 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == GlobalVars.player:
-		Camera.is_following = false
-		Camera.global_position = Camera_pos.global_position
+		if $Area2D/CollisionShape2D.shape.size.x < 300 and\
+		   $Area2D/CollisionShape2D.shape.size.y < 300:
+			Camera.is_following = false
+			Camera.global_position = Camera_pos.global_position
 		$Darkness.hide()
 		if GlobalVars.cleared_rooms.has(name) and GlobalVars.cleared_rooms[name] == false and my_enemies == []:
 			if door1.Collision.disabled == true:

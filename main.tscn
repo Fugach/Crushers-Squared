@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://o5jco35hc1te" path="res://fonts/Blocky.ttf" id="5_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://c4upfn1eecrgn" path="res://textures/UI/table/table.png" id="6_a6jrf"]
 [ext_resource type="Texture2D" uid="uid://od73v1s7mqk0" path="res://textures/HUD/hp_bar/hp_bar_white.png" id="6_come4"]
+[ext_resource type="FontFile" uid="uid://cjytqbpalpudt" path="res://fonts/Tall.ttf" id="6_k1udn"]
 [ext_resource type="Texture2D" uid="uid://4u0nd6rl015b" path="res://textures/2d_lights_and_shadows_neutral_point_light.webp" id="7_dg77c"]
 [ext_resource type="Texture2D" uid="uid://dhnhnqnk2f7ox" path="res://textures/console_background.png" id="7_ryguw"]
 [ext_resource type="Texture2D" uid="uid://de4xq5wbfud5r" path="res://textures/HUD/hp_bar/hp_bg.png" id="7_yaehf"]
@@ -194,7 +195,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("paper:position")
+tracks/4/path = NodePath("Table/paper:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -206,7 +207,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("paper:self_modulate")
+tracks/5/path = NodePath("Table/paper:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -222,7 +223,7 @@ length = 0.6667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("paper:position")
+tracks/0/path = NodePath("Table/paper:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -234,7 +235,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("paper:self_modulate")
+tracks/1/path = NodePath("Table/paper:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -250,7 +251,7 @@ length = 0.6667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("paper:position")
+tracks/0/path = NodePath("Table/paper:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -262,7 +263,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("paper:self_modulate")
+tracks/1/path = NodePath("Table/paper:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1422,17 +1423,20 @@ metadata/_edit_use_anchors_ = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.004504539
-anchor_top = 0.39473704
-anchor_right = 0.6811752
-anchor_bottom = 1.0789475
+anchor_left = 0.049549617
+anchor_top = 0.18421075
+anchor_right = 0.7982923
+anchor_bottom = 1.657895
 offset_left = 34.499996
 offset_top = -3.5000038
-offset_right = 74.5
-offset_bottom = 19.499996
-scale = Vector2(0.31, 0.313)
-theme_override_fonts/font = ExtResource("5_1u8w0")
-theme_override_font_sizes/font_size = 32
+offset_right = -38.61044
+offset_bottom = -15.500004
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("6_k1udn")
+theme_override_font_sizes/font_size = 16
 text = "0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -1444,6 +1448,28 @@ offset_bottom = 19.0
 texture_progress = ExtResource("6_come4")
 texture_progress_offset = Vector2(7, 4)
 tint_over = Color(0.9234164, 0.9234164, 0.9234164, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="label" type="Label" parent="UI/HUD/HPBar" unique_id=1197233026]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.13059
+anchor_top = 1.0027703
+anchor_right = 1.2848194
+anchor_bottom = 2.4764545
+offset_left = 69.49549
+offset_top = -4.0526357
+offset_right = -3.6149445
+offset_bottom = -16.052635
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = -1
+theme_override_fonts/font = ExtResource("6_k1udn")
+theme_override_font_sizes/font_size = 16
+text = "ЗАМЕНИТЬ"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Console" type="RichTextLabel" parent="UI/HUD" unique_id=1718393781]
@@ -1632,7 +1658,7 @@ autowrap_trim_flags = 0
 position = Vector2(-383, -135)
 stream = ExtResource("32_smeu8")
 
-[node name="paper" type="Sprite2D" parent="UI/HUD" unique_id=89602025]
+[node name="paper" type="Sprite2D" parent="UI/HUD/Table" unique_id=89602025]
 position = Vector2(320, 560)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_kq58d")
@@ -1641,6 +1667,9 @@ texture = ExtResource("11_kq58d")
 modulate = Color(1, 1, 1, 0)
 position = Vector2(326, -40)
 script = ExtResource("25_k1udn")
+
+[node name="Node2D" type="Node2D" parent="UI/HUD/QuickVolume" unique_id=2024757988]
+position = Vector2(-326, 40)
 
 [node name="Window" type="AnimatedSprite2D" parent="UI/HUD/QuickVolume" unique_id=1541534794]
 sprite_frames = SubResource("SpriteFrames_0n3wm")

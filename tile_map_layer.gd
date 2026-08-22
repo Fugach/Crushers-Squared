@@ -53,7 +53,7 @@ func gen_dungeon(rooms_amount, start_pos):
 	$bg.clear()
 	
 	room_anchor = start_pos
-	room_size = Vector2(15, 8)
+	room_size = Vector2(25, 80)
 	gen_direction.x = [-1, 1].pick_random()
 	print("Generating ", str(rooms_amount),  " rooms", " ||| Direction: ", gen_direction)
 	Table.reroll()
@@ -64,40 +64,40 @@ func gen_dungeon(rooms_amount, start_pos):
 	player = GlobalVars.player
 	#player.respawn()
 	
-	for o in range(rooms_amount):
-		old_room_anchor = room_anchor
-		old_room_size = room_size
-		old_room_doors_height = doors_height
-		
-		room_size = Vector2(randi_range(10, 20), randi_range(8, 15))
-		if gen_direction.x == 1:
-			room_anchor += Vector2(old_room_size.x + 5, old_room_size.y - room_size.y)
-		elif gen_direction.x == -1:
-			room_anchor += Vector2(-5 + room_size.x * -1, old_room_size.y - room_size.y)
-		
-		if o != rooms_amount - 1:
-			generate_room(room_anchor, room_size, "both", doors_height, true)
-			if gen_direction.x == 1:
-				hall_pos1 = old_room_anchor + old_room_size
-				hall_pos2 = room_anchor + Vector2(0, room_size.y)
-				generate_hall(hall_pos1, hall_pos2)
-			elif gen_direction.x == -1:
-				hall_pos1 = room_anchor + room_size
-				hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
-				generate_hall(hall_pos1, hall_pos2)
-		else:
-			if gen_direction.x == 1:
-				Elevator.global_position = (room_anchor - Vector2(3, 1) + room_size) * Vector2(16, 16)
-				generate_room(room_anchor, room_size, "left", doors_height, false)
-				hall_pos1 = old_room_anchor + old_room_size
-				hall_pos2 = room_anchor + Vector2(0, room_size.y)
-				generate_hall(hall_pos1, hall_pos2)
-			elif gen_direction.x == -1:
-				Elevator.global_position = (room_anchor + Vector2(4, room_size.y - 1)) * Vector2(16, 16)
-				generate_room(room_anchor, room_size, "right", doors_height, false)
-				hall_pos1 = room_anchor + room_size
-				hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
-				generate_hall(hall_pos1, hall_pos2)
+	#for o in range(rooms_amount):
+		#old_room_anchor = room_anchor
+		#old_room_size = room_size
+		#old_room_doors_height = doors_height
+		#
+		#room_size = Vector2(randi_range(10, 20), randi_range(8, 15))
+		#if gen_direction.x == 1:
+			#room_anchor += Vector2(old_room_size.x + 5, old_room_size.y - room_size.y)
+		#elif gen_direction.x == -1:
+			#room_anchor += Vector2(-5 + room_size.x * -1, old_room_size.y - room_size.y)
+		#
+		#if o != rooms_amount - 1:
+			#generate_room(room_anchor, room_size, "both", doors_height, true)
+			#if gen_direction.x == 1:
+				#hall_pos1 = old_room_anchor + old_room_size
+				#hall_pos2 = room_anchor + Vector2(0, room_size.y)
+				#generate_hall(hall_pos1, hall_pos2)
+			#elif gen_direction.x == -1:
+				#hall_pos1 = room_anchor + room_size
+				#hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
+				#generate_hall(hall_pos1, hall_pos2)
+		#else:
+			#if gen_direction.x == 1:
+				#Elevator.global_position = (room_anchor - Vector2(3, 1) + room_size) * Vector2(16, 16)
+				#generate_room(room_anchor, room_size, "left", doors_height, false)
+				#hall_pos1 = old_room_anchor + old_room_size
+				#hall_pos2 = room_anchor + Vector2(0, room_size.y)
+				#generate_hall(hall_pos1, hall_pos2)
+			#elif gen_direction.x == -1:
+				#Elevator.global_position = (room_anchor + Vector2(4, room_size.y - 1)) * Vector2(16, 16)
+				#generate_room(room_anchor, room_size, "right", doors_height, false)
+				#hall_pos1 = room_anchor + room_size
+				#hall_pos2 = old_room_anchor + Vector2(0, old_room_size.y)
+				#generate_hall(hall_pos1, hall_pos2)
 	
 	print("Generation is finished")
 	GlobalVars.time = 0.0
@@ -133,7 +133,7 @@ func generate_room(pos, size, doors, height, enemies):
 		GlobalVars.cleared_rooms["Room" + str(total_rooms)] = false
 	var new_light = LIGHTS.instantiate()
 	new_light.global_position = pos * 16 + Vector2(size.x / 2, 1) * 16
-	new_light.light_scale = size.y / 5
+	new_light.light_scale = size.y
 	new_light.name = "Light_" + str(total_lights)
 	total_lights += 1
 	add_child(new_light)
@@ -269,7 +269,7 @@ func command():
 	#   \  |========/  /
 	#     -------------
 	while true:
-		set_cell(Vector2(randi_range(-50, 50), randi_range(-50, 50)), 0, Vector2(7, 0))
+		set_cell(Vector2(randi_range(-150, 150), randi_range(-150, 150)), 0, Vector2(7, 0))
 		await get_tree().process_frame
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

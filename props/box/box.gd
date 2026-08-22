@@ -33,7 +33,6 @@ func _on_break_finished() -> void:
 	queue_free()
 
 func update():
-	print(max_hp / 1.1)
 	if hp > max_hp / 1.1:
 		$AnimatedSprite2D.play("normal")
 		$CollisionPolygon0.show()
@@ -49,4 +48,3 @@ func update():
 		$CollisionPolygon0.hide()
 		$CollisionPolygon1.hide()
 		$CollisionPolygon2.show()
-	print($AnimatedSprite2D.frame, " | ", hp)

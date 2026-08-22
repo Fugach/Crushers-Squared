@@ -12,7 +12,6 @@ var blacklist = []
 var SPEED = 3000
 
 func _ready() -> void:
-	print(name)
 	await get_tree().create_timer(60).timeout
 	kill()
 

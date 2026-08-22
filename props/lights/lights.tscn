@@ -12,6 +12,6 @@ script = ExtResource("2_jdkrr")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=137539234]
 texture_filter = 1
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 shadow_enabled = true
 texture = ExtResource("2_lxkvv")

@@ -38,7 +38,12 @@ var throw_power : Vector2 = Vector2(-10000, -10000)
 @onready var wall_slide_loop: AudioStreamPlayer2D = $wall_slide_loop
 @onready var wind: AudioStreamPlayer2D = $wind
 
+var is_debugging : bool = false
+var is_noclipping : bool = false
+
 func _ready() -> void:
+	if OS.is_debug_build():
+		is_debugging = true
 	var hand = HAND.instantiate()
 	add_child(hand)
 	GlobalVars.player = self
@@ -52,8 +57,10 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > WEIGHT:
 		falling_speed = velocity.y
 		is_falling_fast = true
+		if "slam_start" not in [Anims.current_animation, last_animation]:
+			Anims.play("slam_start")
 		
-	if is_falling_fast and velocity.y <= 0 and is_on_floor():
+	if is_falling_fast and is_on_floor():
 		Camera.shake(0.1, 5)
 		$fall.pitch_scale = randf_range(0.7, 1.3)
 		$fall.play()
@@ -63,17 +70,22 @@ func _physics_process(delta: float) -> void:
 		new_fall.global_position = global_position
 		get_parent().add_child(new_fall)
 		is_falling_fast = false
+		is_slamming = false
 		for body in get_parent().get_children():
-			if ("Enemy" in str(body) or body is RigidBody2D) and body.global_position.distance_to(global_position) < 100:
-				if not (body is RigidBody2D):
-					body.velocity.y += -150
-				else:
-					body.apply_impulse(Vector2(0, -150))
-				if body.global_position.distance_to(global_position) < 25:
-					if body.has_method("damage"):
-						body.damage(10, 'fall')
-	if is_on_wall_only() and (not is_on_floor()) and velocity.y > 0 and\
-	(Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+			if not (body is Enemy or body is RigidBody2D):
+				continue
+			if body.global_position.distance_to(global_position) > 200:
+				continue
+			if body is CharacterBody2D:
+				body.velocity.y += -150
+			elif body is RigidBody2D:
+				body.apply_impulse(Vector2(0, -150))
+			if body.global_position.distance_to(global_position) < 25 and\
+			body.has_method("damage"):
+				body.damage(10, 'fall')
+	if is_on_wall_only() and not is_on_floor() and velocity.y > 0 and\
+	( Input.is_action_pressed("move_left") and get_wall_normal().x > 0 or\
+	 Input.is_action_pressed("move_right") and get_wall_normal().x < 0 ):
 		is_sliding = true
 		$SlideCoyote.start()
 		if Input.is_action_pressed("move_left"):
@@ -105,6 +117,7 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVars.player_hp > 0:
 		get_input(delta)
+		jump()
 		fall()
 		move_and_slide()
 
@@ -114,14 +127,14 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider is RigidBody2D:
 			var normal = collision.get_normal()
-			if velocity.x + velocity.y > SPEED * 2:
+			if previous_velocity.x + previous_velocity.y > SPEED * 2:
 				collider.apply_impulse(previous_velocity * normal * -0.15)
 			else:
 				collider.apply_impulse(Vector2(SPEED, SPEED) * normal * -0.15)
 
 func _process(_delta: float) -> void:
-	jump()
-	debug()
+	if is_debugging:
+		debug()
 
 func debug():
 	if Input.is_action_just_pressed('spawn_ENEMY'):
@@ -132,14 +145,34 @@ func debug():
 		var new_box = BOX.instantiate()
 		new_box.global_position = get_global_mouse_position()
 		get_parent().add_child(new_box)
-	if Input.is_action_just_pressed('spawn_PISTOL'):
+	if Input.is_action_just_pressed("spawn_PISTOL"):
 		var new_pistol = PISTOL.instantiate()
 		new_pistol.global_position = get_global_mouse_position()
 		get_parent().add_child(new_pistol)
-	if Input.is_action_just_pressed('spawn_SHOTGUN'):
+	if Input.is_action_just_pressed("spawn_SHOTGUN"):
 		var new_shotgun = SHOTGUN.instantiate()
 		new_shotgun.global_position = get_global_mouse_position()
 		get_parent().add_child(new_shotgun)
+	if Input.is_action_just_pressed("spawn_RL"):
+		var new_RL = RL.instantiate()
+		new_RL.global_position = get_global_mouse_position()
+		get_parent().add_child(new_RL)
+	if Input.is_action_just_pressed("heal"):
+		GlobalVars.player_hp = 999
+	if Input.is_action_just_pressed('noclip'):
+		is_noclipping = !is_noclipping
+		set_physics_process(!is_noclipping)
+		$Collision.disabled = is_noclipping
+		if is_noclipping and randi_range(1, 25) == 1:
+			$degub.play()
+	
+	if is_noclipping:
+		var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		velocity = direction * 100
+		if Input.is_action_pressed("slam"):
+			velocity *= 4
+		move_and_slide()
+
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
 		velocity.y += JUMP_VELOCITY
@@ -208,9 +241,9 @@ func get_input(delta: float) -> void:
 				if "Light" in str(body):
 					body.queue_free()
 	
-	if Input.is_action_just_pressed("down") and is_on_floor():
+	if Input.is_action_just_pressed("move_down") and is_on_floor():
 		Anims.play("squish")
-	elif Input.is_action_just_released("down") and (Anims.current_animation == "squish" or last_animation == "squish"):
+	elif Input.is_action_just_released("move_down") and (Anims.current_animation == "squish" or last_animation == "squish"):
 		Anims.play("unsquish")
 	
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -231,7 +264,7 @@ func get_input(delta: float) -> void:
 		velocity.x = 0
 		is_slamming = true
 		$slam.emitting = true
-	elif is_slamming and is_on_floor():
+	elif (is_slamming or is_falling_fast or last_animation == 'slam_start') and is_on_floor():
 		Anims.play("slam_stop")
 		is_slamming = false
 		$slam.emitting = false
@@ -247,7 +280,7 @@ func get_input(delta: float) -> void:
 			velocity.x *= 0.8
 		else:
 			velocity.x *= 0.99
-	if Input.is_action_just_released("scroll_up"):
+	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
 		match GlobalVars.current_slot_num:
 			"slot1":
 				GlobalVars.current_slot_num = "slot2"
@@ -255,7 +288,7 @@ func get_input(delta: float) -> void:
 				GlobalVars.current_slot_num = "slot3"
 			"slot3":
 				GlobalVars.current_slot_num = "slot1"
-	elif Input.is_action_just_released("scroll_down"):
+	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
 		match GlobalVars.current_slot_num:
 			"slot1":
 				GlobalVars.current_slot_num = "slot3"
@@ -322,14 +355,12 @@ func show_damage():
 
 func animation_finished(anim_name: StringName) -> void:
 	last_animation = anim_name
-	if anim_name == "slam_start" and is_on_floor():
-		Anims.play("slam_stop")
 func _on_slide_coyote_timeout() -> void:
 	is_sliding = false
 	$Sprite2D.rotation = 0
 func goto_elevator():
 	for body in get_node("../TileMapLayer").get_children():
-		if "Bullet" in body.name or "Rocket" in body.name or "Enemy" in body.name or "Bullet" in body.name:
+		if body.name in ["Bullet", "Rocket", "Enemy"]:
 			body.free()
 	SPEED_buffer = SPEED
 	can_jump = false

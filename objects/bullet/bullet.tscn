@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://lnybixvjunlq" path="res://textures/particles/dead_bullet.png" id="2_g1w5t"]
 
 [sub_resource type="Curve" id="Curve_sils6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7287234, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.19148937, 1), 0.0749075, 0.0749075, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_pofd3"]
@@ -37,17 +37,17 @@ collision_mode = 2
 script = ExtResource("1_awion")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1527437106]
-modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 z_index = -1
 scale = Vector2(0.78846157, 1)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
-default_color = Color(1, 0.6666667, 0, 1)
+default_color = Color(6.840123, 4.661678, 0, 1)
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1084103653]
 target_position = Vector2(0, 0)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=990872079]
+modulate = Color(2.1168277, 2.1168277, 2.1168277, 1)
 emitting = false
 amount = 1
 texture = ExtResource("2_g1w5t")
