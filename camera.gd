@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if is_following:
-		global_position = lerp(GlobalVars.player.global_position, Vector2(delta, delta), Vector2(1, 1))
+		global_position = (GlobalVars.player.global_position + global_position) / 2
 	if is_shaking:
 		global_position += Vector2(randf_range(shake_power * -1, shake_power), randf_range(shake_power * -1, shake_power))
 	if Input.is_action_just_released("zoom_in"):
@@ -19,11 +19,13 @@ func _process(delta: float) -> void:
 		zoom.x = max(zoom.x - 1.5 * delta, 0.4)
 		zoom.y = max(zoom.y - 1.5 * delta, 0.4)
 func shake(time, power):
-	var last_pos = global_position
+	print(is_following)
+	#var last_pos = global_position
 	is_shaking = true
 	shake_power = power
 	position_smoothing_enabled = false
 	await get_tree().create_timer(time).timeout
 	position_smoothing_enabled = true
 	is_shaking = false
-	global_position = last_pos
+	print(is_following)
+	#global_position = last_pos

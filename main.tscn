@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://dhnhnqnk2f7ox" path="res://textures/console_background.png" id="7_ryguw"]
 [ext_resource type="Texture2D" uid="uid://de4xq5wbfud5r" path="res://textures/HUD/hp_bar/hp_bg.png" id="7_yaehf"]
 [ext_resource type="Texture2D" uid="uid://b3nvrfnmoup83" path="res://textures/HUD/hp_bar/hp_overlay.png" id="8_074og"]
-[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/ui/crt_noise.ogg" id="8_d13ii"]
+[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/UI/crt_noise.ogg" id="8_d13ii"]
 [ext_resource type="Texture2D" uid="uid://esdrwx1w02dr" path="res://textures/UI/table/paper.png" id="8_xuqvo"]
-[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/ui/choose.ogg" id="9_1u8w0"]
+[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/UI/choose.ogg" id="9_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://d0ssfxit4xgte" path="res://textures/HUD/hp_bar/hp_bar.png" id="9_cegan"]
 [ext_resource type="Texture2D" uid="uid://dwtl0kvue4k2t" path="res://textures/UI/table/printer_top.png" id="9_qsp4k"]
 [ext_resource type="Script" uid="uid://dvc3p8ct78t58" path="res://tile_map_layer.gd" id="10_efxa6"]
@@ -21,10 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://dqitohir4rtpm" path="res://textures/UI/table/pc_at_home.png" id="11_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cv33a8w6ljiag" path="res://textures/UI/table/micro_pc_at_home.png" id="12_seu75"]
 [ext_resource type="Texture2D" uid="uid://82wcjdgprt2i" path="res://textures/tiles/backgrounds.png" id="13_ycdy4"]
-[ext_resource type="AudioStream" uid="uid://brgpba8na3t76" path="res://sounds/ui/table/paper1.ogg" id="14_0rl1p"]
-[ext_resource type="AudioStream" uid="uid://f37ccxbgb04l" path="res://sounds/ui/table/paper2.ogg" id="15_ok6jj"]
-[ext_resource type="AudioStream" uid="uid://c73rscynw2ms" path="res://sounds/ui/table/paper3.ogg" id="16_facbu"]
-[ext_resource type="AudioStream" uid="uid://tfn46umjq7bd" path="res://sounds/ui/table/paper4.ogg" id="17_b1qrp"]
+[ext_resource type="AudioStream" uid="uid://brgpba8na3t76" path="res://sounds/UI/table/paper1.ogg" id="14_0rl1p"]
+[ext_resource type="AudioStream" uid="uid://f37ccxbgb04l" path="res://sounds/UI/table/paper2.ogg" id="15_ok6jj"]
+[ext_resource type="AudioStream" uid="uid://c73rscynw2ms" path="res://sounds/UI/table/paper3.ogg" id="16_facbu"]
+[ext_resource type="AudioStream" uid="uid://tfn46umjq7bd" path="res://sounds/UI/table/paper4.ogg" id="17_b1qrp"]
 [ext_resource type="AudioStream" uid="uid://dr0k1v5c1rd35" path="res://music/table-demo.ogg" id="17_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://xcabiap7vul7" path="res://textures/UI/QuickVolume/volume1.png" id="19_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://dunvc7g4f8cym" path="res://textures/UI/window_buttons.png" id="19_rt5wr"]
@@ -33,11 +33,11 @@
 [ext_resource type="Texture2D" uid="uid://btsihdgho6s3l" path="res://textures/UI/X_pressed.png" id="20_m74q3"]
 [ext_resource type="Texture2D" uid="uid://dixd5p4gofwpl" path="res://textures/UI/QuickVolume/volume3.png" id="21_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cfr0uyc8g23nq" path="res://textures/UI/QuickVolume/progress.png" id="22_d2t1y"]
-[ext_resource type="AudioStream" uid="uid://csxql5nmexjnu" path="res://sounds/ui/blip/blipSelect-8.wav" id="23_gngh3"]
+[ext_resource type="AudioStream" uid="uid://csxql5nmexjnu" path="res://sounds/UI/blip/blipSelect-8.wav" id="23_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cphoabg3r0xx2" path="res://textures/UI/QuickVolume/infinity.png" id="24_0n3wm"]
-[ext_resource type="AudioStream" uid="uid://citm056lggy6f" path="res://sounds/ui/close.ogg" id="24_htgcl"]
+[ext_resource type="AudioStream" uid="uid://citm056lggy6f" path="res://sounds/UI/close.ogg" id="24_htgcl"]
 [ext_resource type="Texture2D" uid="uid://dj576ntgm1cqk" path="res://textures/micro-table.png" id="25_0odxb"]
-[ext_resource type="AudioStream" uid="uid://bgnc62heiaiq5" path="res://sounds/ui/blip/blipSelect.wav" id="25_abqjc"]
+[ext_resource type="AudioStream" uid="uid://bgnc62heiaiq5" path="res://sounds/UI/blip/blipSelect.wav" id="25_abqjc"]
 [ext_resource type="Script" uid="uid://jokwl8y6beww" path="res://slots.gd" id="25_hrvbo"]
 [ext_resource type="Script" uid="uid://xf684jnb7bw" path="res://quick_volume.gd" id="25_k1udn"]
 [ext_resource type="Texture2D" uid="uid://vi7vl85k6lqa" path="res://textures/HUD/slots/main.png" id="25_wnkbs"]
@@ -45,11 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://bbdi21tlcwtsq" path="res://textures/UI/tips_mouse.png" id="26_lswn8"]
 [ext_resource type="Texture2D" uid="uid://bmgalag65n3bi" path="res://textures/HUD/slots/RL.png" id="28_uypp3"]
 [ext_resource type="Texture2D" uid="uid://3hj22n845p05" path="res://textures/HUD/slots/shotgun.png" id="29_blkrb"]
-[ext_resource type="AudioStream" uid="uid://baih33bdm7vwc" path="res://sounds/ui/table/choose/1.ogg" id="30_8dc3g"]
+[ext_resource type="AudioStream" uid="uid://baih33bdm7vwc" path="res://sounds/UI/table/choose/1.ogg" id="30_8dc3g"]
 [ext_resource type="Texture2D" uid="uid://jy5ugiej6ajn" path="res://textures/HUD/slots/current.png" id="30_uypp3"]
-[ext_resource type="AudioStream" uid="uid://ualniibtjdp1" path="res://sounds/ui/table/choose/2.ogg" id="31_htgcl"]
+[ext_resource type="AudioStream" uid="uid://ualniibtjdp1" path="res://sounds/UI/table/choose/2.ogg" id="31_htgcl"]
 [ext_resource type="Script" uid="uid://bim328jq0h2y3" path="res://restartUI.gd" id="32_pjuso"]
-[ext_resource type="AudioStream" uid="uid://b5jra77qyt6yd" path="res://sounds/ui/table/choose/3.ogg" id="32_smeu8"]
+[ext_resource type="AudioStream" uid="uid://b5jra77qyt6yd" path="res://sounds/UI/table/choose/3.ogg" id="32_smeu8"]
 [ext_resource type="AudioStream" uid="uid://r0hr5q2kouw7" path="res://sounds/elevator/bilep.wav" id="34_53bls"]
 [ext_resource type="Texture2D" uid="uid://djjmrmoaufyg2" path="res://textures/tiles/tile_main.png" id="35_h8e4i"]
 [ext_resource type="AudioStream" uid="uid://qwcl0hllj2ng" path="res://sounds/lost.ogg" id="41_htgcl"]
@@ -1415,7 +1415,15 @@ offset_bottom = 21.0
 texture_under = ExtResource("7_yaehf")
 texture_over = ExtResource("8_074og")
 texture_progress = ExtResource("9_cegan")
-texture_progress_offset = Vector2(7, 4)
+texture_progress_offset = Vector2(3, 4)
+metadata/_edit_use_anchors_ = true
+
+[node name="HPBar_smooth" type="TextureProgressBar" parent="UI/HUD/HPBar" unique_id=1160767728]
+layout_mode = 0
+offset_right = 111.0
+offset_bottom = 19.0
+texture_progress = ExtResource("6_come4")
+texture_progress_offset = Vector2(3, 3)
 tint_over = Color(0.9234164, 0.9234164, 0.9234164, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -1428,9 +1436,9 @@ anchor_top = 0.18421075
 anchor_right = 0.7982923
 anchor_bottom = 1.657895
 offset_left = 34.499996
-offset_top = -3.5000038
+offset_top = -3.5000043
 offset_right = -38.61044
-offset_bottom = -15.500004
+offset_bottom = -15.499989
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
@@ -1438,37 +1446,6 @@ theme_override_constants/shadow_outline_size = -1
 theme_override_fonts/font = ExtResource("6_k1udn")
 theme_override_font_sizes/font_size = 16
 text = "0"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HPBar_smooth" type="TextureProgressBar" parent="UI/HUD/HPBar" unique_id=1160767728]
-layout_mode = 0
-offset_right = 111.0
-offset_bottom = 19.0
-texture_progress = ExtResource("6_come4")
-texture_progress_offset = Vector2(7, 4)
-tint_over = Color(0.9234164, 0.9234164, 0.9234164, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="label" type="Label" parent="UI/HUD/HPBar" unique_id=1197233026]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.13059
-anchor_top = 1.0027703
-anchor_right = 1.2848194
-anchor_bottom = 2.4764545
-offset_left = 69.49549
-offset_top = -4.0526357
-offset_right = -3.6149445
-offset_bottom = -16.052635
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = -1
-theme_override_fonts/font = ExtResource("6_k1udn")
-theme_override_font_sizes/font_size = 16
-text = "ЗАМЕНИТЬ"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 

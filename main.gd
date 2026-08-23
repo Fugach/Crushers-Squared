@@ -53,7 +53,8 @@ func _input(_event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	HUD.scale = Camera.scale
-	HPLabel.text = str(GlobalVars.player_hp)
+	#HPLabel.text = str(GlobalVars.player_hp)
+	HPLabel.text = str((int(HPLabel.text) + int(GlobalVars.player_hp)) / 2)
 	HPBar.value = float(GlobalVars.player_hp)
 	if GlobalVars.passed_layers > 3:
 		get_tree().paused = false

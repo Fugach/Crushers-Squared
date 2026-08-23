@@ -41,7 +41,7 @@ func destroy():
 	$Babax/AnimationPlayer.play("explostion_increasing")
 	$Babax/AudioStreamPlayer2D.pitch_scale = randfn(1.0, 0.2)
 	$Babax/AudioStreamPlayer2D.play()
-	GlobalVars.player.Camera.shake(0.05, clamp((1 - (global_position.distance_to(GlobalVars.player.global_position) / 500)) * 3, 0.0, 1.0))
+	GlobalVars.player.Camera.shake(0.05, clamp((1 - (global_position.distance_to(GlobalVars.player.global_position) / 500)) * 4, 0.0, 1.0))
 
 func _on_distance_timeout():
 	queue_free()
