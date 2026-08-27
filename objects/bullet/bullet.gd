@@ -9,7 +9,7 @@ var flying : bool = true
 var damage_amount : int = 0
 var is_friendly : bool = false
 var blacklist = []
-var SPEED = 3000
+var SPEED = 4000
 
 func _ready() -> void:
 	await get_tree().create_timer(60).timeout
@@ -30,6 +30,8 @@ func _physics_process(delta: float) -> void:
 				return
 	if flying:
 		Line.set_point_position(1, Raycast.target_position)
+		if abs(Line.get_point_position(1).x - Line.get_point_position(0).x) > 200:
+			Line.set_point_position(0, Line.get_point_position(0) + Vector2.RIGHT * SPEED * delta)
 
 func hit(body):
 	Line.set_point_position(1, Line.to_local(Raycast.get_collision_point()))

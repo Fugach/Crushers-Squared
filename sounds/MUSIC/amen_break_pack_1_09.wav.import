@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bbw1i5mj8xyku"
-path="res://.godot/imported/amen_break_pack_1_09.wav-9e814c7ea191535fc6bc2e06dadb5b6a.sample"
+path="res://.godot/imported/amen_break_pack_1_09.wav-ed2cfab5d4166dc532710abacb5a2ed2.sample"
 
 [deps]
 
-source_file="res://sounds/MUSIC/amen_break_pack_1_09.wav"
-dest_files=["res://.godot/imported/amen_break_pack_1_09.wav-9e814c7ea191535fc6bc2e06dadb5b6a.sample"]
+source_file="res://sounds/music/amen_break_pack_1_09.wav"
+dest_files=["res://.godot/imported/amen_break_pack_1_09.wav-ed2cfab5d4166dc532710abacb5a2ed2.sample"]
 
 [params]
 

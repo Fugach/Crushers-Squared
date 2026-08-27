@@ -72,6 +72,8 @@ func shoot(damage_amount, is_friendly):
 		new_bullet.global_rotation = Sprite.global_rotation + x * accuracy - 2 * accuracy
 		get_node("/root/main").add_child(new_bullet)
 	can_shoot = false
+	if weapon_owner == 'Player':
+		GlobalVars.player.velocity += Vector2(-100, 0).rotated(rotation)
 	Cooldown.start()
 
 func _on_cooldown_timeout() -> void:

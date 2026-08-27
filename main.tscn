@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://dhnhnqnk2f7ox" path="res://textures/console_background.png" id="7_ryguw"]
 [ext_resource type="Texture2D" uid="uid://de4xq5wbfud5r" path="res://textures/HUD/hp_bar/hp_bg.png" id="7_yaehf"]
 [ext_resource type="Texture2D" uid="uid://b3nvrfnmoup83" path="res://textures/HUD/hp_bar/hp_overlay.png" id="8_074og"]
-[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/UI/crt_noise.ogg" id="8_d13ii"]
+[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://sounds/ui/crt_noise.ogg" id="8_d13ii"]
 [ext_resource type="Texture2D" uid="uid://esdrwx1w02dr" path="res://textures/UI/table/paper.png" id="8_xuqvo"]
-[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/UI/choose.ogg" id="9_1u8w0"]
+[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://sounds/ui/choose.ogg" id="9_1u8w0"]
 [ext_resource type="Texture2D" uid="uid://d0ssfxit4xgte" path="res://textures/HUD/hp_bar/hp_bar.png" id="9_cegan"]
 [ext_resource type="Texture2D" uid="uid://dwtl0kvue4k2t" path="res://textures/UI/table/printer_top.png" id="9_qsp4k"]
 [ext_resource type="Script" uid="uid://dvc3p8ct78t58" path="res://tile_map_layer.gd" id="10_efxa6"]
@@ -21,10 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://dqitohir4rtpm" path="res://textures/UI/table/pc_at_home.png" id="11_kq58d"]
 [ext_resource type="Texture2D" uid="uid://cv33a8w6ljiag" path="res://textures/UI/table/micro_pc_at_home.png" id="12_seu75"]
 [ext_resource type="Texture2D" uid="uid://82wcjdgprt2i" path="res://textures/tiles/backgrounds.png" id="13_ycdy4"]
-[ext_resource type="AudioStream" uid="uid://brgpba8na3t76" path="res://sounds/UI/table/paper1.ogg" id="14_0rl1p"]
-[ext_resource type="AudioStream" uid="uid://f37ccxbgb04l" path="res://sounds/UI/table/paper2.ogg" id="15_ok6jj"]
-[ext_resource type="AudioStream" uid="uid://c73rscynw2ms" path="res://sounds/UI/table/paper3.ogg" id="16_facbu"]
-[ext_resource type="AudioStream" uid="uid://tfn46umjq7bd" path="res://sounds/UI/table/paper4.ogg" id="17_b1qrp"]
+[ext_resource type="AudioStream" uid="uid://brgpba8na3t76" path="res://sounds/ui/table/paper1.ogg" id="14_0rl1p"]
+[ext_resource type="AudioStream" uid="uid://f37ccxbgb04l" path="res://sounds/ui/table/paper2.ogg" id="15_ok6jj"]
+[ext_resource type="AudioStream" uid="uid://c73rscynw2ms" path="res://sounds/ui/table/paper3.ogg" id="16_facbu"]
+[ext_resource type="AudioStream" uid="uid://tfn46umjq7bd" path="res://sounds/ui/table/paper4.ogg" id="17_b1qrp"]
 [ext_resource type="AudioStream" uid="uid://dr0k1v5c1rd35" path="res://music/table-demo.ogg" id="17_ok6jj"]
 [ext_resource type="Texture2D" uid="uid://xcabiap7vul7" path="res://textures/UI/QuickVolume/volume1.png" id="19_0cp0l"]
 [ext_resource type="Texture2D" uid="uid://dunvc7g4f8cym" path="res://textures/UI/window_buttons.png" id="19_rt5wr"]
@@ -33,11 +33,11 @@
 [ext_resource type="Texture2D" uid="uid://btsihdgho6s3l" path="res://textures/UI/X_pressed.png" id="20_m74q3"]
 [ext_resource type="Texture2D" uid="uid://dixd5p4gofwpl" path="res://textures/UI/QuickVolume/volume3.png" id="21_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cfr0uyc8g23nq" path="res://textures/UI/QuickVolume/progress.png" id="22_d2t1y"]
-[ext_resource type="AudioStream" uid="uid://csxql5nmexjnu" path="res://sounds/UI/blip/blipSelect-8.wav" id="23_gngh3"]
+[ext_resource type="AudioStream" uid="uid://csxql5nmexjnu" path="res://sounds/ui/blip/blipSelect-8.wav" id="23_gngh3"]
 [ext_resource type="Texture2D" uid="uid://cphoabg3r0xx2" path="res://textures/UI/QuickVolume/infinity.png" id="24_0n3wm"]
-[ext_resource type="AudioStream" uid="uid://citm056lggy6f" path="res://sounds/UI/close.ogg" id="24_htgcl"]
+[ext_resource type="AudioStream" uid="uid://citm056lggy6f" path="res://sounds/ui/close.ogg" id="24_htgcl"]
 [ext_resource type="Texture2D" uid="uid://dj576ntgm1cqk" path="res://textures/micro-table.png" id="25_0odxb"]
-[ext_resource type="AudioStream" uid="uid://bgnc62heiaiq5" path="res://sounds/UI/blip/blipSelect.wav" id="25_abqjc"]
+[ext_resource type="AudioStream" uid="uid://bgnc62heiaiq5" path="res://sounds/ui/blip/blipSelect.wav" id="25_abqjc"]
 [ext_resource type="Script" uid="uid://jokwl8y6beww" path="res://slots.gd" id="25_hrvbo"]
 [ext_resource type="Script" uid="uid://xf684jnb7bw" path="res://quick_volume.gd" id="25_k1udn"]
 [ext_resource type="Texture2D" uid="uid://vi7vl85k6lqa" path="res://textures/HUD/slots/main.png" id="25_wnkbs"]
@@ -45,11 +45,11 @@
 [ext_resource type="Texture2D" uid="uid://bbdi21tlcwtsq" path="res://textures/UI/tips_mouse.png" id="26_lswn8"]
 [ext_resource type="Texture2D" uid="uid://bmgalag65n3bi" path="res://textures/HUD/slots/RL.png" id="28_uypp3"]
 [ext_resource type="Texture2D" uid="uid://3hj22n845p05" path="res://textures/HUD/slots/shotgun.png" id="29_blkrb"]
-[ext_resource type="AudioStream" uid="uid://baih33bdm7vwc" path="res://sounds/UI/table/choose/1.ogg" id="30_8dc3g"]
+[ext_resource type="AudioStream" uid="uid://baih33bdm7vwc" path="res://sounds/ui/table/choose/1.ogg" id="30_8dc3g"]
 [ext_resource type="Texture2D" uid="uid://jy5ugiej6ajn" path="res://textures/HUD/slots/current.png" id="30_uypp3"]
-[ext_resource type="AudioStream" uid="uid://ualniibtjdp1" path="res://sounds/UI/table/choose/2.ogg" id="31_htgcl"]
+[ext_resource type="AudioStream" uid="uid://ualniibtjdp1" path="res://sounds/ui/table/choose/2.ogg" id="31_htgcl"]
 [ext_resource type="Script" uid="uid://bim328jq0h2y3" path="res://restartUI.gd" id="32_pjuso"]
-[ext_resource type="AudioStream" uid="uid://b5jra77qyt6yd" path="res://sounds/UI/table/choose/3.ogg" id="32_smeu8"]
+[ext_resource type="AudioStream" uid="uid://b5jra77qyt6yd" path="res://sounds/ui/table/choose/3.ogg" id="32_smeu8"]
 [ext_resource type="AudioStream" uid="uid://r0hr5q2kouw7" path="res://sounds/elevator/bilep.wav" id="34_53bls"]
 [ext_resource type="Texture2D" uid="uid://djjmrmoaufyg2" path="res://textures/tiles/tile_main.png" id="35_h8e4i"]
 [ext_resource type="AudioStream" uid="uid://qwcl0hllj2ng" path="res://sounds/lost.ogg" id="41_htgcl"]
@@ -106,6 +106,7 @@
 [ext_resource type="AudioStream" uid="uid://b42npuiu5j7wg" path="res://sounds/auf.ogg" id="92_k1udn"]
 [ext_resource type="AudioStream" uid="uid://cg5qplgq7skyv" path="res://sounds/elevator/noise_loop.ogg" id="92_smeu8"]
 [ext_resource type="AudioStream" uid="uid://eceg8rmatom1" path="res://sounds/plink.wav" id="93_f3y11"]
+[ext_resource type="AudioStream" uid="uid://dg2jbkv8gr5ji" path="res://sounds/unsorted/rotation.ogg" id="107_wat4s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0cbny"]
 animations = [{
@@ -770,14 +771,14 @@ polygon = PackedVector2Array(-8, -8, 3.9716053, -8, 4.040251, 8, -8, 8)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qnost"]
 polygon = PackedVector2Array(-4.023594, -8, 8, -8, 8, 8, -3.9968586, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wnkbs"]
-polygon = PackedVector2Array(-8, -4, 8, -4.001159, 8, 2.0078125, -8, 1.9806099)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wat4s"]
+polygon = PackedVector2Array(-8, -4, 8, -4, 8, 2, -8, 2)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8dc3g"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f6a44"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 4.0159836, -8, 4.0159836)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ywjan"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 4, -8, 4)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d2t1y"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -785,29 +786,65 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_htgcl"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0cbny"]
-polygon = PackedVector2Array(-8, -3.983492, 8, -3.9834914, 8, 8, -8, 8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m74q3"]
+polygon = PackedVector2Array(-8, -4, 8, -4, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_smeu8"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hrvbo"]
-polygon = PackedVector2Array(-8, -8, 3.9716053, -8, 4.040251, 8, -8, 8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tko6h"]
+polygon = PackedVector2Array(-8, -8, 4, -8, 4, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uypp3"]
-polygon = PackedVector2Array(-4.023594, -8, 8, -8, 8, 8, -3.9968586, 8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_am8a1"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_blkrb"]
-polygon = PackedVector2Array(-8, -8, 3.9882813, -8, 3.9960938, 3.9921875, -8, 4)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f3y11"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_abqjc"]
-polygon = PackedVector2Array(-8, -4, 3.9882813, -4, 4.0258064, 8, -8, 8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cpm2s"]
+polygon = PackedVector2Array(-4, -8, 8, -8, 8, 8, -4, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6iyjs"]
-polygon = PackedVector2Array(-3.9898658, -8, 8, -8, 8, 3.9807358, -4.008126, 4.0172563)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_u81y6"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4w656"]
-polygon = PackedVector2Array(-3.9960938, -4.0078125, 8, -3.9989958, 8, 8, -3.9854279, 8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rt5wr"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mnw77"]
+polygon = PackedVector2Array(-8, -8, 4, -8, 4, 4, -8, 4)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vjgyh"]
+polygon = PackedVector2Array(-8, -4, 4, -4, 4, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d5iia"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_asu84"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7mmqq"]
+polygon = PackedVector2Array(-4, -8, 8, -8, 8, 4, -4, 4)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3exxq"]
+polygon = PackedVector2Array(-4, -4, 8, -4, 8, 8, -4, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qwt6e"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_off2o"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tttfs"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1iygd"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g5xqc"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s4o1y"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e71vb"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 4.0159836, -8, 4.0159836)
@@ -820,7 +857,7 @@ texture = ExtResource("35_h8e4i")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
 1:0/0/terrain_set = 0
-1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wnkbs")
+1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wat4s")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 1.958662, -8, 1.9885416)
 2:0/0 = 0
 2:0/0/terrain_set = 0
@@ -854,7 +891,7 @@ texture = ExtResource("35_h8e4i")
 5:1/0 = 0
 5:1/0/terrain_set = 0
 5:1/0/terrain = 0
-5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_blkrb")
+5:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_mnw77")
 5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 5.0677776, 5.186186, 5.2098656, 4.9493713, 8, -8, 8)
 5:1/0/terrains_peering_bit/right_side = 0
 5:1/0/terrains_peering_bit/left_side = 0
@@ -864,7 +901,7 @@ texture = ExtResource("35_h8e4i")
 6:1/0 = 0
 6:1/0/terrain_set = 0
 6:1/0/terrain = 0
-6:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_6iyjs")
+6:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7mmqq")
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -4.9493732, 8, -4.9967346, 5.020416, -8, 5.067778)
 6:1/0/terrains_peering_bit/right_side = 0
 6:1/0/terrains_peering_bit/bottom_right_corner = 0
@@ -876,21 +913,21 @@ texture = ExtResource("35_h8e4i")
 0:2/0/terrain = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
-1:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f6a44")
+1:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ywjan")
 1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0 = 0
-2:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0cbny")
+2:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_m74q3")
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
-3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hrvbo")
+3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tko6h")
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:2/0 = 0
-4:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_uypp3")
+4:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_cpm2s")
 4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:2/0 = 0
 5:2/0/terrain_set = 0
 5:2/0/terrain = 0
-5:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_abqjc")
+5:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vjgyh")
 5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 4.9967346, -8, 5.044098, -5.1625032, 8, -4.925691, 8, 8, -8, 8)
 5:2/0/terrains_peering_bit/right_side = 0
 5:2/0/terrains_peering_bit/bottom_right_corner = 0
@@ -900,7 +937,7 @@ texture = ExtResource("35_h8e4i")
 6:2/0 = 0
 6:2/0/terrain_set = 0
 6:2/0/terrain = 0
-6:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4w656")
+6:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3exxq")
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4.973053, -5.0914593, -5.020416, -4.9967346, -8, 8, -8, 8, 8, -8, 8)
 6:2/0/terrains_peering_bit/bottom_side = 0
 6:2/0/terrains_peering_bit/bottom_left_corner = 0
@@ -914,15 +951,15 @@ texture = ExtResource("35_h8e4i")
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:3/0 = 0
-3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_am8a1")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:3/0 = 0
-4:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+4:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_u81y6")
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:3/0 = 0
 5:3/0/terrain_set = 0
 5:3/0/terrain = 0
-5:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+5:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d5iia")
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:3/0/terrains_peering_bit/right_side = 0
 5:3/0/terrains_peering_bit/bottom_right_corner = 0
@@ -930,7 +967,7 @@ texture = ExtResource("35_h8e4i")
 6:3/0 = 0
 6:3/0/terrain_set = 0
 6:3/0/terrain = 0
-6:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+6:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qwt6e")
 6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:3/0/terrains_peering_bit/bottom_side = 0
 6:3/0/terrains_peering_bit/bottom_left_corner = 0
@@ -942,15 +979,15 @@ texture = ExtResource("35_h8e4i")
 2:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
 2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:4/0 = 0
-3:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+3:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_f3y11")
 3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:4/0 = 0
-4:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+4:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_rt5wr")
 4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0 = 0
 5:4/0/terrain_set = 0
 5:4/0/terrain = 0
-5:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+5:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_asu84")
 5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0/terrains_peering_bit/right_side = 0
 5:4/0/terrains_peering_bit/top_side = 0
@@ -958,7 +995,7 @@ texture = ExtResource("35_h8e4i")
 6:4/0 = 0
 6:4/0/terrain_set = 0
 6:4/0/terrain = 0
-6:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+6:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_off2o")
 6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:4/0/terrains_peering_bit/left_side = 0
 6:4/0/terrains_peering_bit/top_left_corner = 0
@@ -984,16 +1021,16 @@ texture = ExtResource("35_h8e4i")
 7:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
 7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:3/0 = 0
-8:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+8:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g5xqc")
 8:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:3/0 = 0
-7:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+7:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tttfs")
 7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:4/0 = 0
-7:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+7:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_1iygd")
 7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:4/0 = 0
-8:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_d2t1y")
+8:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_s4o1y")
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:1/0 = 0
 9:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e71vb")
@@ -1407,24 +1444,30 @@ offset_bottom = 40.0
 [node name="HUD" type="CanvasLayer" parent="UI" unique_id=1956633857]
 script = ExtResource("2_h6isl")
 
+[node name="Sprite2D" type="Sprite2D" parent="UI/HUD" unique_id=873739486]
+position = Vector2(57, 12)
+texture = ExtResource("7_yaehf")
+
+[node name="HPBar_smooth" type="TextureProgressBar" parent="UI/HUD" unique_id=1160767728]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 113.0
+offset_bottom = 21.0
+value = 50.0
+texture_progress = ExtResource("6_come4")
+texture_progress_offset = Vector2(3, 3)
+tint_over = Color(0.9234164, 0.9234164, 0.9234164, 1)
+metadata/_edit_use_anchors_ = true
+
 [node name="HPBar" type="TextureProgressBar" parent="UI/HUD" unique_id=1735031832]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 113.0
 offset_bottom = 21.0
-texture_under = ExtResource("7_yaehf")
+value = 50.0
 texture_over = ExtResource("8_074og")
 texture_progress = ExtResource("9_cegan")
-texture_progress_offset = Vector2(3, 4)
-metadata/_edit_use_anchors_ = true
-
-[node name="HPBar_smooth" type="TextureProgressBar" parent="UI/HUD/HPBar" unique_id=1160767728]
-layout_mode = 0
-offset_right = 111.0
-offset_bottom = 19.0
-texture_progress = ExtResource("6_come4")
 texture_progress_offset = Vector2(3, 3)
-tint_over = Color(0.9234164, 0.9234164, 0.9234164, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="HPLabel" type="Label" parent="UI/HUD/HPBar" unique_id=857614475]
@@ -2082,9 +2125,15 @@ stream = ExtResource("93_f3y11")
 color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=562808154]
+ignore_rotation = false
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 8.0
 script = ExtResource("91_n5t1e")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Camera2D" unique_id=131555738]
+stream = ExtResource("107_wat4s")
 
 [connection signal="value_changed" from="UI/HUD/HPBar" to="." method="_on_hp_bar_value_changed"]
 [connection signal="pressed" from="UI/HUD/Table/table/TextureButton" to="Table" method="_on_texture_button_pressed"]

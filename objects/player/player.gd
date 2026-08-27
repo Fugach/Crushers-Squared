@@ -31,6 +31,7 @@ var is_slamming : bool = false
 var is_falling_fast : bool = false
 var can_jump : bool = true
 var falling_speed : float = 0.0
+var current_gravity := Vector2(0, 980)
 
 var throw_power : Vector2 = Vector2(-10000, -10000)
 @onready var main: Node2D = $".."
@@ -54,11 +55,16 @@ func _ready() -> void:
 	BOX = load("uid://bf1hvay56ii3f")
 
 func _physics_process(delta: float) -> void:
+	if current_gravity != Vector2.ZERO:
+		up_direction = -current_gravity.normalized()
+	
 	if velocity.y > WEIGHT:
 		falling_speed = velocity.y
 		is_falling_fast = true
-		if "slam_start" not in [Anims.current_animation, last_animation]:
-			Anims.play("slam_start")
+		$Sprite2D.scale = Vector2(clamp(500 / velocity.y * 1.5, 0.3, 1), clamp(velocity.y / 1000 * 1.5, 1, 5))
+	elif is_falling_fast and velocity.y < WEIGHT and not is_on_floor():
+		is_falling_fast = false
+		$Sprite2D.scale = Vector2(1, 1)
 		
 	if is_falling_fast and is_on_floor():
 		Camera.shake(0.1, 5)
@@ -69,6 +75,9 @@ func _physics_process(delta: float) -> void:
 		new_fall.max_vel = new_fall.min_vel * 1.25
 		new_fall.global_position = global_position
 		get_parent().add_child(new_fall)
+		$slam.emitting = false
+		$Sprite2D.scale = Vector2(1, 1)
+		Anims.play("slam_stop")
 		is_falling_fast = false
 		is_slamming = false
 		for body in get_parent().get_children():
@@ -86,6 +95,11 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall_only() and not is_on_floor() and velocity.y > 0 and\
 	( Input.is_action_pressed("move_left") and get_wall_normal().x > 0 or\
 	 Input.is_action_pressed("move_right") and get_wall_normal().x < 0 ):
+		
+		Anims.play('RESET')
+		is_slamming = false
+		$slam.emitting = false
+		
 		is_sliding = true
 		$SlideCoyote.start()
 		if Input.is_action_pressed("move_left"):
@@ -98,11 +112,11 @@ func _physics_process(delta: float) -> void:
 			$slide.amount = 5 + int(velocity.y / 100)
 			$slide.emitting = true
 		
-		velocity.y += get_gravity().y * delta * 0.1 # скользим по стенам
+		velocity += current_gravity * delta * 0.1 # скользим по стенам
 	elif not is_on_floor():
 		rotation = 0.0
 		$slide.emitting = false
-		velocity.y += get_gravity().y * delta # базовое падение
+		velocity += current_gravity * delta # базовое падение
 	else:
 		rotation = 0.0
 		$slide.emitting = false
@@ -158,7 +172,10 @@ func debug():
 		new_RL.global_position = get_global_mouse_position()
 		get_parent().add_child(new_RL)
 	if Input.is_action_just_pressed("heal"):
-		GlobalVars.player_hp = 999
+		if GlobalVars.player_hp < 100:
+			GlobalVars.player_hp = 100
+		else:
+			GlobalVars.player_hp = 999
 	if Input.is_action_just_pressed('noclip'):
 		is_noclipping = !is_noclipping
 		set_physics_process(!is_noclipping)
@@ -175,7 +192,8 @@ func debug():
 
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
-		velocity.y += JUMP_VELOCITY
+		velocity += sign(current_gravity) * JUMP_VELOCITY
+		print(current_gravity)
 		Anims.play("RESET")
 	elif $Coyote.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y += JUMP_VELOCITY
@@ -184,9 +202,8 @@ func jump():
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
 		velocity.y *= 0.6
 	elif Input.is_action_just_pressed("jump") and is_sliding and AVAILABLE_WALLJUMPS > 0:
-		if is_slamming:
-			is_slamming = false
-			Anims.stop()
+		Anims.stop()
+		is_slamming = false
 		velocity.x = sign(get_wall_normal().x) * 200
 		velocity.y = -350
 		AVAILABLE_WALLJUMPS -= 1
@@ -259,12 +276,12 @@ func get_input(delta: float) -> void:
 	if not steps.is_playing() and is_on_floor() and abs(round(velocity.x)) > 10:
 			steps.play()
 	if Input.is_action_just_pressed("slam") and not is_on_floor() and not Input.is_action_just_pressed("jump"):
-		Anims.play("slam_start")
+		#Anims.play("slam_start")
 		velocity.y = 750
 		velocity.x = 0
 		is_slamming = true
 		$slam.emitting = true
-	elif (is_slamming or is_falling_fast or last_animation == 'slam_start') and is_on_floor():
+	elif (is_slamming or is_falling_fast) and is_on_floor():
 		Anims.play("slam_stop")
 		is_slamming = false
 		$slam.emitting = false

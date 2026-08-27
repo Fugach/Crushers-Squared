@@ -52,10 +52,6 @@ func _input(_event: InputEvent) -> void:
 		get_tree().quit(0)
 
 func _process(_delta: float) -> void:
-	HUD.scale = Camera.scale
-	#HPLabel.text = str(GlobalVars.player_hp)
-	HPLabel.text = str((int(HPLabel.text) + int(GlobalVars.player_hp)) / 2)
-	HPBar.value = float(GlobalVars.player_hp)
 	if GlobalVars.passed_layers > 3:
 		get_tree().paused = false
 		get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
@@ -65,7 +61,6 @@ func _process(_delta: float) -> void:
 		if not $UI/HUD/QuickVolume/lost.playing:
 			$UI/HUD/QuickVolume/lost.play()
 		Input.set_custom_mouse_cursor(no)
-		$TileMapLayer.command()
 		
 	if Input.is_action_just_pressed("mmb"):
 		$TileMapLayer.gen_dungeon(1, Vector2(3, 2))

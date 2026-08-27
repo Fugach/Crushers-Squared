@@ -329,10 +329,10 @@ bus = &"Sound"
 [node name="slam" type="GPUParticles2D" parent="." unique_id=2064912982]
 position = Vector2(0, -3)
 emitting = false
+amount = 16
 texture = ExtResource("12_sx4ji")
 lifetime = 0.5
-explosiveness = 0.8
-randomness = 1.0
+randomness = 0.6
 process_material = SubResource("ParticleProcessMaterial_vk66s")
 
 [node name="damage_cooldown" type="Timer" parent="." unique_id=771856998]

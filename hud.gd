@@ -13,6 +13,9 @@ func repeat(text, amount):
 	for x in range(amount):
 		Console.text += text
 func _process(delta: float) -> void:
+	scale = Camera.scale
+	hpbar_update()
+	
 	if Input.is_action_just_pressed("lmb") and Console.text != "" and $"../MUSIC/results".playing:
 		$"../MUSIC/results".stop()
 		Console.clear()
@@ -67,6 +70,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		await wait(0.5)
 		Console.text += "              " + str(3 - GlobalVars.passed_layers)
 
+func hpbar_update():
+	#HPLabel.text = str(GlobalVars.player_hp)
+	$HPBar/HPLabel.text = str(GlobalVars.player_hp)
+	$HPBar.value = float(int(round(((float($HPBar/HPLabel.text) + $HPBar.value) / 2))))
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
