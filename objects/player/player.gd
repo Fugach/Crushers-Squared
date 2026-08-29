@@ -193,7 +193,6 @@ func debug():
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
 		velocity += sign(current_gravity) * JUMP_VELOCITY
-		print(current_gravity)
 		Anims.play("RESET")
 	elif $Coyote.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y += JUMP_VELOCITY
@@ -275,7 +274,7 @@ func get_input(delta: float) -> void:
 		velocity.x += (SPEED - abs(velocity.x)) * direction * delta * 10
 	if not steps.is_playing() and is_on_floor() and abs(round(velocity.x)) > 10:
 			steps.play()
-	if Input.is_action_just_pressed("slam") and not is_on_floor() and not Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("slam") and not is_on_floor() and not Input.is_action_just_pressed("jump") and not is_slamming:
 		#Anims.play("slam_start")
 		velocity.y = 750
 		velocity.x = 0

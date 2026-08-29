@@ -25,13 +25,11 @@ func _process(delta: float) -> void:
 		rotation -= PI / 2
 		GlobalVars.player.current_gravity = round(GlobalVars.player.current_gravity.rotated(PI / -2))
 		GlobalVars.player.global_rotation = round(rotation)
-		#print(GlobalVars.player.global_rotation)
 	elif Input.is_action_just_pressed("test2"):
 		$AudioStreamPlayer2D.play()
 		rotation += PI / 2
 		GlobalVars.player.current_gravity = round(GlobalVars.player.current_gravity.rotated(PI / 2))
 		GlobalVars.player.global_rotation = round(rotation)
-		#print(GlobalVars.player.global_rotation)
 func shake(time, power):
 	#var last_pos = global_position
 	is_shaking = true

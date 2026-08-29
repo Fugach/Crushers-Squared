@@ -11,7 +11,7 @@ var my_slot : String = ""
 var can_shoot: bool = true
 var current_angle: float = 0.0
 var weapon_owner : String = ""
-var is_friendly : bool = false
+
 var is_player_colliding : bool = false
 var total_rockets : int = 0
 var my_name = "RL"
