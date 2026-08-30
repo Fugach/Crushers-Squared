@@ -56,7 +56,7 @@ func _process(_delta: float) -> void:
 		get_tree().paused = false
 		get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 		get_tree().change_scene_to_file("res://main_menu.tscn")
-	if GlobalVars.player.global_position.y > 2000:
+	if GlobalVars.player.global_position.y > 10000:
 		GlobalVars.player.respawn()
 		if not $UI/HUD/QuickVolume/lost.playing:
 			$UI/HUD/QuickVolume/lost.play()

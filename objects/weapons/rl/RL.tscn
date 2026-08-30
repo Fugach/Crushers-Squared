@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brcehntt6lxn6"]
 
-[ext_resource type="Script" uid="uid://dril8mbc5mtsp" path="res://weapons/rl/RL.gd" id="1_bl5bl"]
+[ext_resource type="Script" uid="uid://cc3iy003vjkwe" path="res://objects/weapons/rl/RL.gd" id="1_bl5bl"]
 [ext_resource type="Texture2D" uid="uid://bwuja7l6uinke" path="res://textures/particles/cloud.png" id="2_1udmo"]
 [ext_resource type="Texture2D" uid="uid://dkfye82uw8lau" path="res://textures/RL_new.png" id="2_emrko"]
 [ext_resource type="Texture2D" uid="uid://bkg3t4dteu7eq" path="res://textures/particles/cloud_small.png" id="4_v5ddk"]

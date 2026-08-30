@@ -40,7 +40,7 @@ var throw_power : Vector2 = Vector2(-10000, -10000)
 @onready var wind: AudioStreamPlayer2D = $wind
 
 var is_debugging : bool = false
-var is_noclipping : bool = false
+var is_noclipping : bool = true
 
 func _ready() -> void:
 	if OS.is_debug_build():
@@ -184,6 +184,8 @@ func debug():
 			$degub.play()
 	
 	if is_noclipping:
+		set_physics_process(!is_noclipping)
+		$Collision.disabled = is_noclipping
 		var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		velocity = direction * 100
 		if Input.is_action_pressed("slam"):
