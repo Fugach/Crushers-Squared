@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if is_following:
 		#global_position = (GlobalVars.player.global_position + global_position) / 2
 		global_position = GlobalVars.player.global_position
-		position_smoothing_speed = 10
+		position_smoothing_speed = 15
 	if is_shaking:
 		global_position += Vector2(randf_range(shake_power * -1, shake_power), randf_range(shake_power * -1, shake_power))
 	if Input.is_action_just_released("zoom_in"):

@@ -58,12 +58,12 @@ func _process(_delta: float) -> void:
 		get_tree().change_scene_to_file("res://main_menu.tscn")
 	if GlobalVars.player.global_position.y > 10000:
 		GlobalVars.player.respawn()
-		if not $UI/HUD/QuickVolume/lost.playing:
-			$UI/HUD/QuickVolume/lost.play()
+		if not $UI/HUD/lost.playing:
+			$UI/HUD/lost.play()
 		Input.set_custom_mouse_cursor(no)
 		
 	if Input.is_action_just_pressed("mmb"):
-		$TileMapLayer.gen_dungeon(1, Vector2(3, 2))
+		$TileMapLayer.new_dungeon()
 		GlobalVars.player.respawn()
 		GlobalVars.time = 0.0
 	if Input.is_action_just_pressed("esc"):

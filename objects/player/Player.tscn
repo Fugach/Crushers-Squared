@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://n1irdk3ygua0" path="res://sounds/fall.wav" id="11_dnsx0"]
 [ext_resource type="Texture2D" uid="uid://c8h7vr4you8c5" path="res://textures/particles/slam_fall.png" id="12_sx4ji"]
 [ext_resource type="Texture2D" uid="uid://4u0nd6rl015b" path="res://textures/2d_lights_and_shadows_neutral_point_light.webp" id="13_ercwk"]
-[ext_resource type="AudioStream" uid="uid://b13wti4u0732m" path="res://sounds/unsorted/lublu_reznyu.ogg" id="14_ijwuf"]
 [ext_resource type="AudioStream" uid="uid://egcw8y738ggp" path="res://sounds/unsorted/turaga.ogg" id="15_iy4hj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
@@ -262,9 +261,8 @@ collision_friction = 0.0
 collision_bounce = 0.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oj3pq"]
-streams_count = 2
-stream_0/stream = ExtResource("14_ijwuf")
-stream_1/stream = ExtResource("15_iy4hj")
+streams_count = 1
+stream_0/stream = ExtResource("15_iy4hj")
 
 [node name="Player" type="CharacterBody2D" unique_id=121708023]
 process_mode = 1
@@ -344,7 +342,7 @@ visible = false
 shadow_enabled = true
 texture = ExtResource("13_ercwk")
 
-[node name="degub" type="AudioStreamPlayer2D" parent="." unique_id=2072967316]
+[node name="turaga" type="AudioStreamPlayer2D" parent="." unique_id=2072967316]
 stream = SubResource("AudioStreamRandomizer_oj3pq")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]

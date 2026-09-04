@@ -180,8 +180,8 @@ func debug():
 		is_noclipping = !is_noclipping
 		set_physics_process(!is_noclipping)
 		$Collision.disabled = is_noclipping
-		if is_noclipping and randi_range(1, 25) == 1:
-			$degub.play()
+		if is_noclipping and randi_range(1, 15) == 1:
+			$turaga.play()
 	
 	if is_noclipping:
 		set_physics_process(!is_noclipping)
@@ -220,12 +220,6 @@ func fall():
 		wind.volume_db = -80
 	if Input.is_action_just_pressed("debug_thingy"):
 		Engine.time_scale = 0.0
-	if position.y > 5000:
-		respawn()
-		is_sliding = false
-		is_slamming = false
-		Camera.reset_smoothing()
-		Anims.play("RESET")
 
 func push(pwr, _dir):
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
