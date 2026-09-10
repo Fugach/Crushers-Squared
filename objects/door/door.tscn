@@ -27,6 +27,14 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_5esjk")
+}],
+"loop": 1,
+"name": &"RESET",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_ejk4w")
 }, {
 "duration": 1.0,
@@ -56,7 +64,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_5esjk")
 }],
-"loop": false,
+"loop": 0,
 "name": &"close",
 "speed": 40.0
 }, {
@@ -91,7 +99,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_ejk4w")
 }],
-"loop": false,
+"loop": 0,
 "name": &"open",
 "speed": 40.0
 }]
@@ -103,6 +111,8 @@ polygon = PackedVector2Array(-2, -16, 1, -16, 1, 16, -2, 16)
 size = Vector2(7, 32)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j4pjp"]
+random_pitch = 1.122462
+random_volume_offset_db = 2.0
 streams_count = 9
 stream_0/stream = ExtResource("14_ll3j0")
 stream_1/stream = ExtResource("15_ylx8e")
@@ -124,7 +134,7 @@ script = ExtResource("1_1kubd")
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ys824")
-animation = &"open"
+animation = &"RESET"
 offset = Vector2(7, 0)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=400928302]

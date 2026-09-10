@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhjphrjas8n7d"]
 
-[ext_resource type="Script" uid="uid://dhjqolrlj8gwx" path="res://weapons/shotgun/shotgun_pickable.gd" id="1_8ar0q"]
+[ext_resource type="Script" uid="uid://dhjqolrlj8gwx" path="res://objects/weapons/shotgun/shotgun_pickable.gd" id="1_8ar0q"]
 [ext_resource type="Texture2D" uid="uid://ckpacdte3gvhm" path="res://textures/idk2.png" id="1_te55x"]
 [ext_resource type="AudioStream" uid="uid://cf855r3rihkdc" path="res://sounds/shotgun/pick_up.ogg" id="3_c6g6g"]
 

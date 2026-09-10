@@ -48,7 +48,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_6ci8y")
 }],
-"loop": false,
+"loop": 0,
 "name": &"1",
 "speed": 1.0
 }, {
@@ -56,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_srphd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"10",
 "speed": 5.0
 }, {
@@ -64,7 +64,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_hj0cj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"11",
 "speed": 5.0
 }, {
@@ -72,7 +72,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_s5m4i")
 }],
-"loop": true,
+"loop": 1,
 "name": &"12",
 "speed": 5.0
 }, {
@@ -80,7 +80,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_dddw3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"13",
 "speed": 5.0
 }, {
@@ -88,7 +88,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_c10fi")
 }],
-"loop": true,
+"loop": 1,
 "name": &"14",
 "speed": 5.0
 }, {
@@ -96,7 +96,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_lrrfp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"15",
 "speed": 5.0
 }, {
@@ -104,7 +104,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_7ek3h")
 }],
-"loop": true,
+"loop": 1,
 "name": &"16",
 "speed": 5.0
 }, {
@@ -112,7 +112,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("10_3kr52")
 }],
-"loop": true,
+"loop": 1,
 "name": &"17",
 "speed": 5.0
 }, {
@@ -120,7 +120,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_offu7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"18",
 "speed": 5.0
 }, {
@@ -128,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_lfvfs")
 }],
-"loop": true,
+"loop": 1,
 "name": &"19",
 "speed": 5.0
 }, {
@@ -136,7 +136,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_eqfwh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"2",
 "speed": 5.0
 }, {
@@ -144,7 +144,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("14_tr3cg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"20",
 "speed": 5.0
 }, {
@@ -152,7 +152,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("15_h53w0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"3",
 "speed": 5.0
 }, {
@@ -160,7 +160,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("16_c72kk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"4",
 "speed": 5.0
 }, {
@@ -168,7 +168,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_3amhj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"5",
 "speed": 5.0
 }, {
@@ -176,7 +176,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("18_ic1eb")
 }],
-"loop": true,
+"loop": 1,
 "name": &"6",
 "speed": 5.0
 }, {
@@ -184,7 +184,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("19_w1yf4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"7",
 "speed": 5.0
 }, {
@@ -192,7 +192,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("20_qlre4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"8",
 "speed": 5.0
 }, {
@@ -200,7 +200,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_8uh21")
 }],
-"loop": true,
+"loop": 1,
 "name": &"9",
 "speed": 5.0
 }]
@@ -254,7 +254,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("22_8uh21")
 }],
-"loop": true,
+"loop": 1,
 "name": &"1",
 "speed": 5.0
 }, {
@@ -262,7 +262,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("23_aumfc")
 }],
-"loop": true,
+"loop": 1,
 "name": &"10",
 "speed": 5.0
 }, {
@@ -270,7 +270,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("24_f1m5q")
 }],
-"loop": true,
+"loop": 1,
 "name": &"11",
 "speed": 5.0
 }, {
@@ -278,7 +278,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_glior")
 }],
-"loop": true,
+"loop": 1,
 "name": &"12",
 "speed": 5.0
 }, {
@@ -286,7 +286,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("26_ajvbn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"13",
 "speed": 5.0
 }, {
@@ -294,7 +294,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("27_fbd3l")
 }],
-"loop": true,
+"loop": 1,
 "name": &"14",
 "speed": 5.0
 }, {
@@ -302,7 +302,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("28_g5h81")
 }],
-"loop": true,
+"loop": 1,
 "name": &"15",
 "speed": 5.0
 }, {
@@ -310,7 +310,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("29_i8gy1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"16",
 "speed": 5.0
 }, {
@@ -318,7 +318,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("30_5kv7o")
 }],
-"loop": true,
+"loop": 1,
 "name": &"17",
 "speed": 5.0
 }, {
@@ -326,7 +326,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("31_0rbgd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"18",
 "speed": 5.0
 }, {
@@ -334,7 +334,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("32_dx5xo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"19",
 "speed": 5.0
 }, {
@@ -342,7 +342,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("33_cwlvp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"2",
 "speed": 5.0
 }, {
@@ -350,7 +350,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("34_fxcqy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"20",
 "speed": 5.0
 }, {
@@ -358,7 +358,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("35_5u86e")
 }],
-"loop": true,
+"loop": 1,
 "name": &"3",
 "speed": 5.0
 }, {
@@ -366,7 +366,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("36_tpte0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"4",
 "speed": 5.0
 }, {
@@ -374,7 +374,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("37_1b84q")
 }],
-"loop": true,
+"loop": 1,
 "name": &"5",
 "speed": 5.0
 }, {
@@ -382,7 +382,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("38_e12o4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"6",
 "speed": 5.0
 }, {
@@ -390,7 +390,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("39_84ngx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"7",
 "speed": 5.0
 }, {
@@ -398,7 +398,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("40_v216d")
 }],
-"loop": true,
+"loop": 1,
 "name": &"8",
 "speed": 5.0
 }, {
@@ -406,7 +406,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("41_p25ka")
 }],
-"loop": true,
+"loop": 1,
 "name": &"9",
 "speed": 5.0
 }]

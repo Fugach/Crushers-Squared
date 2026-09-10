@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsecy8dw60b21"]
 
-[ext_resource type="Script" uid="uid://bvfh321h5rhem" path="res://weapons/shotgun/shotgun.gd" id="1_hwrt3"]
+[ext_resource type="Script" uid="uid://bvfh321h5rhem" path="res://objects/weapons/shotgun/shotgun.gd" id="1_hwrt3"]
 [ext_resource type="Texture2D" uid="uid://ckpacdte3gvhm" path="res://textures/idk2.png" id="2_okyed"]
 [ext_resource type="AudioStream" uid="uid://dgbmjh6wm6g2i" path="res://sounds/shotgun/shotgun_shoot.ogg" id="3_apfrx"]
 [ext_resource type="Texture2D" uid="uid://8n022y3ipke3" path="res://textures/particles/ammo/shotgun.png" id="4_ggjqm"]

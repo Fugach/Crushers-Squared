@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3jklnx6aump3"]
 
-[ext_resource type="Script" uid="uid://c42xk2ikr2uik" path="res://particles/fall/fall_particles.gd" id="1_bcehd"]
+[ext_resource type="Script" uid="uid://c42xk2ikr2uik" path="res://objects/particles/fall/fall_particles.gd" id="1_bcehd"]
 [ext_resource type="Texture2D" uid="uid://bkg3t4dteu7eq" path="res://textures/particles/cloud_small.png" id="1_dm6ve"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbvwl"]

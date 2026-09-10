@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b6yunx8h1pcdi"]
 
 [ext_resource type="Texture2D" uid="uid://dkfye82uw8lau" path="res://textures/RL_new.png" id="2_avh8d"]
-[ext_resource type="AudioStream" uid="uid://v8umdbsao3x3" path="res://sounds/RL/pick_up.ogg" id="3_avh8d"]
-[ext_resource type="Script" uid="uid://ci2twp37kfhsl" path="res://weapons/rl/rl_pickable.gd" id="3_hyole"]
+[ext_resource type="AudioStream" uid="uid://v8umdbsao3x3" path="res://sounds/rl/pick_up.ogg" id="3_avh8d"]
+[ext_resource type="Script" uid="uid://ci2twp37kfhsl" path="res://objects/weapons/rl/rl_pickable.gd" id="3_hyole"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vrrnw"]
 size = Vector2(24, 14)

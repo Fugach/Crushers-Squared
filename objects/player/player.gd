@@ -2,10 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 var SPEED : float = 165.0
-var SPEED_buffer : float = SPEED
 var JUMP_VELOCITY : float = -300.0
-var JUMP_VELOCITY_buffer : float = JUMP_VELOCITY
-var WEIGHT : float = 500
+var WEIGHT : float = 650
 var WALLJUMPS : int = 3
 var AVAILABLE_WALLJUMPS : int = 3
 var direction : int = 1
@@ -29,6 +27,7 @@ var is_going_to_elevator : bool = false
 var is_sliding : bool = false
 var is_slamming : bool = false
 var is_falling_fast : bool = false
+var is_sprinting : bool = false
 var can_jump : bool = true
 var falling_speed : float = 0.0
 var current_gravity := Vector2(0, 980)
@@ -102,10 +101,7 @@ func _physics_process(delta: float) -> void:
 		
 		is_sliding = true
 		$SlideCoyote.start()
-		if Input.is_action_pressed("move_left"):
-			rotation = 0.2
-		elif Input.is_action_pressed("move_right"):
-			rotation = -0.2
+		rotation = -0.2 * direction
 		if randi_range(1, 8) == 6:
 			$slide.global_position = global_position + Vector2(5 * direction, 5)
 			$slide.scale.x = direction * -1
@@ -237,41 +233,26 @@ func damage(amount, type):
 		else:
 			GlobalVars.player_hp = 0
 			main.death()
-		show_damage()
 		$damage_cooldown.start()
 
 func get_input(delta: float) -> void:
-	if is_going_to_elevator:
-		if abs(global_position.x - Elevator.global_position.x) > 0.1:
-			velocity.x += 10 * (Elevator.global_position.x - global_position.x)
-		else:
-			Anims.play("hide")
-			$"../Elevator/Outside/Elevator".play("close")
-			is_going_to_elevator = false
-			$"../TileMapLayer/AnimationPlayer".play("hide")
-			for body in get_parent().get_children():
-				if "Light" in str(body):
-					body.queue_free()
-	
 	if Input.is_action_just_pressed("move_down") and is_on_floor():
 		Anims.play("squish")
 	elif Input.is_action_just_released("move_down") and (Anims.current_animation == "squish" or last_animation == "squish"):
 		Anims.play("unsquish")
-	
-	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+	if Input.is_action_just_pressed("move_left") or\
+	(Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left")):
 		direction = -1
-		if sign(velocity.x) != direction:
-			velocity.x *= 0.8
-		velocity.x += (SPEED - abs(velocity.x)) * direction * delta * 5
-	if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+	elif Input.is_action_just_pressed("move_right") or\
+	(Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right")):
 		direction = 1
-		if sign(velocity.x) != direction:
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+		velocity.x += (SPEED - abs(velocity.x)) * direction * delta * 5
+		if sign(velocity.x) != direction and velocity.x != 0:
 			velocity.x *= 0.8
-		velocity.x += (SPEED - abs(velocity.x)) * direction * delta * 10
 	if not steps.is_playing() and is_on_floor() and abs(round(velocity.x)) > 10:
 			steps.play()
 	if Input.is_action_just_pressed("slam") and not is_on_floor() and not Input.is_action_just_pressed("jump") and not is_slamming:
-		#Anims.play("slam_start")
 		velocity.y = 750
 		velocity.x = 0
 		is_slamming = true
@@ -287,7 +268,7 @@ func get_input(delta: float) -> void:
 	if Anims.current_animation == "slam_stop" and Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y += JUMP_VELOCITY * 0.3
 	
-	if int(Input.is_action_pressed("move_left")) == int(Input.is_action_pressed("move_right")):
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_on_floor():
 			velocity.x *= 0.8
 		else:
@@ -346,11 +327,6 @@ func get_input(delta: float) -> void:
 func respawn():
 	if Camera == null:
 		Camera = $"../Camera2D"
-		Anims = $AnimationPlayer
-
-	for body in get_node("../TileMapLayer").get_children():
-		if "Bullet" in body.name or "Rocket" in body.name or "Enemy" in body.name or "Bullet" in body.name:
-			body.free()
 	is_slamming = false
 	is_sliding = false
 	$slam.emitting = false
@@ -360,23 +336,11 @@ func respawn():
 	Camera.reset_smoothing()
 	Anims.play("RESET")
 	GlobalVars.player_hp = 100
-func show_damage():
-	$damage.play()
-	#$blood.emitting = true
-	pass
 
 func animation_finished(anim_name: StringName) -> void:
 	last_animation = anim_name
 func _on_slide_coyote_timeout() -> void:
 	is_sliding = false
 	$Sprite2D.rotation = 0
-func goto_elevator():
-	for body in get_node("../TileMapLayer").get_children():
-		if body.name in ["Bullet", "Rocket", "Enemy"]:
-			body.free()
-	SPEED_buffer = SPEED
-	can_jump = false
-	SPEED = 0
-	is_going_to_elevator = true
 func camera_impact(amount, dir):
 	Camera.global_position += amount * dir

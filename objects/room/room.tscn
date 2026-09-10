@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cxn1pdnonmni6"]
 
-[ext_resource type="Script" uid="uid://cu0dqi5qkcj2g" path="res://particles/room.gd" id="1_lo83i"]
+[ext_resource type="Script" uid="uid://cu0dqi5qkcj2g" path="res://objects/room/room.gd" id="1_lo83i"]
 [ext_resource type="Shader" uid="uid://d4dvg73lkf3jf" path="res://shaders/warped_noise.gdshader" id="2_hki8l"]
 [ext_resource type="FontFile" uid="uid://o5jco35hc1te" path="res://fonts/Blocky.ttf" id="3_m5ciy"]
-[ext_resource type="AudioStream" uid="uid://d3fm20triww15" path="res://sounds/UI/remind.ogg" id="4_yppk4"]
+[ext_resource type="AudioStream" uid="uid://d3fm20triww15" path="res://sounds/ui/remind.ogg" id="4_yppk4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hki8l"]
 resource_local_to_scene = true

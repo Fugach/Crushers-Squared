@@ -74,6 +74,9 @@ func hpbar_update():
 	#HPLabel.text = str(GlobalVars.player_hp)
 	$HPBar/HPLabel.text = str(GlobalVars.player_hp)
 	$HPBar.value = float(int(round(((float($HPBar/HPLabel.text) + $HPBar.value) / 2))))
+	if $HPBar_smooth.value != $HPBar.value:
+		$HPBar_smooth.value += ($HPBar.value - $HPBar_smooth.value) * 0.25
+	#$HPBar_smooth.value = float(int(round((($HPBar.value + $HPBar_smooth.value) / 1.9)))) - 1
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
