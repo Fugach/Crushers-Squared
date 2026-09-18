@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://n1irdk3ygua0" path="res://sounds/fall.wav" id="11_dnsx0"]
 [ext_resource type="Texture2D" uid="uid://c8h7vr4you8c5" path="res://textures/particles/slam_fall.png" id="12_sx4ji"]
 [ext_resource type="Texture2D" uid="uid://4u0nd6rl015b" path="res://textures/2d_lights_and_shadows_neutral_point_light.webp" id="13_ercwk"]
-[ext_resource type="AudioStream" uid="uid://egcw8y738ggp" path="res://sounds/unsorted/turaga.ogg" id="15_iy4hj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
 size = Vector2(8, 8)
@@ -107,6 +106,34 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ijwuf"]
+resource_name = "slam_stop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333343, 0.13333334, 0.19996668),
+"transitions": PackedFloat32Array(1, 2, 2, 0.5),
+"update": 0,
+"values": [Vector2(0.7, 1.3), Vector2(1.7, 0.5), Vector2(0.7, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 2, 2, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, -1), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_8dc3g"]
 resource_name = "squish"
 length = 0.1
@@ -118,7 +145,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.5, 2),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 2)]
 }
@@ -130,7 +157,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(0.5, 0),
+"transitions": PackedFloat32Array(0.5, 2),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 0.5)]
 }
@@ -168,6 +195,7 @@ _data = {
 &"RESET": SubResource("Animation_epypp"),
 &"hide": SubResource("Animation_23xmf"),
 &"show": SubResource("Animation_swlj1"),
+&"slam_stop": SubResource("Animation_ijwuf"),
 &"squish": SubResource("Animation_8dc3g"),
 &"unsquish": SubResource("Animation_htgcl")
 }
@@ -213,10 +241,6 @@ alpha_curve = SubResource("CurveTexture_sn1fb")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oj3pq"]
-streams_count = 1
-stream_0/stream = ExtResource("15_iy4hj")
 
 [node name="Player" type="CharacterBody2D" unique_id=121708023]
 process_mode = 1
@@ -296,8 +320,9 @@ visible = false
 shadow_enabled = true
 texture = ExtResource("13_ercwk")
 
-[node name="turaga" type="AudioStreamPlayer2D" parent="." unique_id=2072967316]
-stream = SubResource("AudioStreamRandomizer_oj3pq")
+[node name="RunTiming" type="Timer" parent="." unique_id=622724295]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]
 [connection signal="timeout" from="BoostTime" to="." method="_on_boost_time_timeout"]

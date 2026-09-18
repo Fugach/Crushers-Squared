@@ -1,11 +1,11 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
-var SPEED : float = 165.0
-var JUMP_VELOCITY : float = -300.0
-var WEIGHT : float = 650
-var WALLJUMPS : int = 3
-var AVAILABLE_WALLJUMPS : int = 3
+var max_speed : float = 165.0
+var jump_power : float = -300.0
+var weight : float = 650
+var max_walljumps : int = 3
+var available_walljumps : int = 3
 var direction : int = 1
 var last_animation : String = ""
 
@@ -15,31 +15,30 @@ var PISTOL : PackedScene
 var ENEMY : PackedScene
 var BOX : PackedScene
 
-@onready var HAND = preload("uid://bbxbw8j8ubuiv")
-@onready var FALL_PARTICLES = preload("uid://3jklnx6aump3")
-
-@onready var Camera: Camera2D = $"../Camera2D"
-@onready var SlotsHUD: Node2D = $"../UI/HUD/Slots"
-@onready var Elevator: Area2D = $"../Elevator"
-@onready var Anims: AnimationPlayer = $AnimationPlayer
-
 var is_going_to_elevator : bool = false
 var is_sliding : bool = false
 var is_slamming : bool = false
 var is_falling_fast : bool = false
-var is_sprinting : bool = false
+var is_running : bool = false
 var can_jump : bool = true
 var falling_speed : float = 0.0
 var current_gravity := Vector2(0, 980)
-
 var throw_power : Vector2 = Vector2(-10000, -10000)
+var is_debugging : bool = false
+var is_noclipping : bool = true
+
 @onready var main: Node2D = $".."
+@onready var HAND = preload("uid://bbxbw8j8ubuiv")
+@onready var FALL_PARTICLES = preload("uid://3jklnx6aump3")
+@onready var Camera: Camera2D = $"../Camera2D"
+@onready var SlotsHUD: Node2D = $"../UI/HUD/Slots"
+@onready var Elevator: Area2D = $"../Elevator"
+@onready var Anims: AnimationPlayer = $AnimationPlayer
+@onready var RunTiming: Timer = $RunTiming
 @onready var steps: AudioStreamPlayer2D = $steps
 @onready var wall_slide_loop: AudioStreamPlayer2D = $wall_slide_loop
 @onready var wind: AudioStreamPlayer2D = $wind
 
-var is_debugging : bool = false
-var is_noclipping : bool = true
 
 func _ready() -> void:
 	if OS.is_debug_build():
@@ -137,10 +136,10 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider is RigidBody2D:
 			var normal = collision.get_normal()
-			if previous_velocity.x + previous_velocity.y > SPEED * 2:
+			if previous_velocity.x + previous_velocity.y > max_speed * 2:
 				collider.apply_impulse(previous_velocity * normal * -0.15)
 			else:
-				collider.apply_impulse(Vector2(SPEED, SPEED) * normal * -0.15)
+				collider.apply_impulse(Vector2(max_speed, max_speed) * normal * -0.15)
 
 func _process(_delta: float) -> void:
 	if is_debugging:
@@ -176,8 +175,6 @@ func debug():
 		is_noclipping = !is_noclipping
 		set_physics_process(!is_noclipping)
 		$Collision.disabled = is_noclipping
-		if is_noclipping and randi_range(1, 15) == 1:
-			$turaga.play()
 	
 	if is_noclipping:
 		set_physics_process(!is_noclipping)
@@ -190,10 +187,10 @@ func debug():
 
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
-		velocity += sign(current_gravity) * JUMP_VELOCITY
+		velocity += sign(current_gravity) * jump_power
 		Anims.play("RESET")
 	elif $Coyote.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += JUMP_VELOCITY
+		velocity.y += jump_power
 		if Anims.current_animation == "slam_stop":
 			Anims.play("RESET")
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
@@ -238,16 +235,35 @@ func damage(amount, type):
 func get_input(delta: float) -> void:
 	if Input.is_action_just_pressed("move_down") and is_on_floor():
 		Anims.play("squish")
-	elif Input.is_action_just_released("move_down") and (Anims.current_animation == "squish" or last_animation == "squish"):
+	elif( Input.is_action_just_released("move_down") or not is_on_floor()) and\
+		 (Anims.current_animation == "squish" or last_animation == "squish"):
 		Anims.play("unsquish")
-	if Input.is_action_just_pressed("move_left") or\
-	(Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left")):
+	if Input.is_action_just_pressed("move_left"):
 		direction = -1
-	elif Input.is_action_just_pressed("move_right") or\
-	(Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right")):
+		if RunTiming.time_left > 0 and not is_running:
+			is_running = true
+			velocity.x += 500 * direction
+			print(is_running)
+		else:
+			RunTiming.start()
+	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
+		direction = -1
+	elif Input.is_action_just_pressed("move_right"):
 		direction = 1
+		if RunTiming.time_left > 0 and not is_running:
+			is_running = true
+			velocity.x += 500 * direction
+			print(is_running)
+		else:
+			RunTiming.start()
+	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
+		direction = 1
+	elif Input.is_action_just_released("move_left") and direction == -1 or\
+		 Input.is_action_just_released("move_right") and direction == 1:
+			is_running = false
+			print(is_running)
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		velocity.x += (SPEED - abs(velocity.x)) * direction * delta * 5
+		velocity.x += (max_speed - abs(velocity.x)) * direction * delta * 5
 		if sign(velocity.x) != direction and velocity.x != 0:
 			velocity.x *= 0.8
 	if not steps.is_playing() and is_on_floor() and abs(round(velocity.x)) > 10:
@@ -266,7 +282,7 @@ func get_input(delta: float) -> void:
 		$slam.emitting = false
 		is_slamming = false
 	if Anims.current_animation == "slam_stop" and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += JUMP_VELOCITY * 0.3
+		velocity.y += jump_power * 0.3
 	
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_on_floor():
