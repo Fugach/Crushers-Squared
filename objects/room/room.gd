@@ -32,7 +32,7 @@ func _ready() -> void:
 			new_BOX.global_position = global_position + Vector2((activation_range.x / 2) + randi_range(activation_range.x / (-0.3 * x), activation_range.x / (0.3 * x)), activation_range.y - 20)
 			$"..".add_child(new_BOX)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	while pending_enemies > 0:
 		var new_enemy = ENEMY.instantiate()
 		new_enemy.name = "Enemy" + str(total_enemies)

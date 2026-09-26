@@ -103,12 +103,7 @@ func _on_continue_pressed() -> void:
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 
 
-func _on_hp_bar_value_changed(value: float) -> void:
-	if not HPBar.value > 0:
-		HPBar.value = 0
-		HPLabel.text = "0"
-		GlobalVars.player_hp = 0
-		death()
+
 
 func _on_lost_finished() -> void:
 	get_tree().quit(-1)

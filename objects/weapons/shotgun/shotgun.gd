@@ -6,39 +6,44 @@ extends Node2D
 
 var BULLET : PackedScene
 var my_slot : String = ""
+var my_owner
 var can_shoot : bool = true
-var weapon_owner : String = ""
 var current_angle = null
 var is_player_nearby : bool = false
 var is_player_colliding : bool = false
 var my_name = "shotgun"
-var accuracy : float = 0.05 # default: 0.05 
+var accuracy : float = 0.05 # default: 0.05
+var slots_ui
 
 func _ready():
 	BULLET = preload("uid://csr8w1qcnqlbd")
 	GlobalVars.slots[str(my_slot)] = self
-	get_node("/root/main/UI/HUD/Slots").update()
+	slots_ui = get_node("/root/main/UI/HUD/Slots")
+	if slots_ui:
+		slots_ui.update()
+	else:
+		push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
-	match weapon_owner:
-		"Player":
-			if GlobalVars.current_slot_num == my_slot:
-				visible = true
-				logic(delta)
-			else:
-				visible = false
-		"Enemy":
-			if is_player_colliding and can_shoot:
-				is_player_nearby = true
-			else:
-				is_player_nearby = false
-			logic(delta)
+	if my_owner is Player:
+		if GlobalVars.current_slot_num == my_slot:
+			slots_ui.update()
+			visible = true
+			logic()
+		else:
+			visible = false
+	elif my_owner is Enemy:
+		if is_player_colliding and can_shoot:
+			is_player_nearby = true
+		else:
+			is_player_nearby = false
+		logic()
 
-func logic(delta):
-	if weapon_owner == "Player":
+func logic():
+	if my_owner is Player:
 		look_at(get_global_mouse_position())
 		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
-	elif weapon_owner == "Enemy":
+	elif my_owner is Enemy:
 		look_at(GlobalVars.player.global_position)
 		current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
 	
@@ -51,10 +56,10 @@ func logic(delta):
 		Spawnpoint.position.y = 2
 		$Sprite2D/Area2D.position.y = 3
 	
-	if Input.is_action_pressed("lmb") and can_shoot and weapon_owner == "Player":
-		shoot(7, true)
+	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
+		shoot(7)
 
-func shoot(damage_amount, is_friendly):
+func shoot(damage_amount):
 	$shoot.pitch_scale = randf_range(0.8, 1.2)
 	$shoot.play()
 	if Sprite.flip_v == false:
@@ -67,12 +72,12 @@ func shoot(damage_amount, is_friendly):
 	for x in range(5):
 		var new_bullet = BULLET.instantiate()
 		new_bullet.damage_amount = damage_amount
-		new_bullet.is_friendly = is_friendly
+		new_bullet.my_owner = my_owner
 		new_bullet.global_position = Spawnpoint.global_position
 		new_bullet.global_rotation = Sprite.global_rotation + x * accuracy - 2 * accuracy
 		get_node("/root/main").add_child(new_bullet)
 	can_shoot = false
-	if weapon_owner == 'Player':
+	if my_owner is Player:
 		GlobalVars.player.velocity += Vector2(-100, 0).rotated(rotation)
 	Cooldown.start()
 

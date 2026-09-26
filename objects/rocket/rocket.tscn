@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfex0tmkaj6q4"]
 
-[ext_resource type="Texture2D" uid="uid://dkfye82uw8lau" path="res://textures/RL_new.png" id="1_ass76"]
+[ext_resource type="Texture2D" uid="uid://b02miirbt1nk0" path="res://textures/rocket.png" id="1_o1ycu"]
 [ext_resource type="Script" uid="uid://dvmlped4la704" path="res://objects/rocket/rocket.gd" id="1_qxf0c"]
 [ext_resource type="Texture2D" uid="uid://b2tvfl8cqi60j" path="res://textures/babax.png" id="3_r2l15"]
 [ext_resource type="Texture2D" uid="uid://4w8n4a1oaxy3" path="res://textures/rocket_fire/1.png" id="3_ulohn"]
@@ -155,19 +155,24 @@ stream_0/stream = ExtResource("5_7htxx")
 [node name="Rocket" type="Sprite2D" unique_id=263301545]
 z_index = -1
 texture_filter = 1
-position = Vector2(0.15384626, 0.33333334)
-texture = ExtResource("1_ass76")
-region_enabled = true
+position = Vector2(-7, -2)
+texture = ExtResource("1_o1ycu")
+centered = false
 region_rect = Rect2(10, 13, 11, 3)
 script = ExtResource("1_qxf0c")
 
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1120221242]
+position = Vector2(0, 2)
+target_position = Vector2(12, 0)
+
 [node name="fire" type="AnimatedSprite2D" parent="." unique_id=1271622328]
 modulate = Color(2.844042, 2.844042, 2.844042, 1)
-position = Vector2(-7.1538463, -0.33333334)
+position = Vector2(-1, 2)
 sprite_frames = SubResource("SpriteFrames_5cysr")
 autoplay = "default"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1573539878]
+position = Vector2(-1, 2)
 emitting = false
 amount = 20
 lifetime = 10.0
@@ -191,13 +196,10 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=264126511]
-position = Vector2(-3, 0)
-target_position = Vector2(9, 0)
-hit_from_inside = true
-
 [node name="Babax" type="Sprite2D" parent="." unique_id=755670359]
+visible = false
 z_index = 1
+position = Vector2(-1, 2)
 texture = ExtResource("3_r2l15")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Babax" unique_id=1971321318]

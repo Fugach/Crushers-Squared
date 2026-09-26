@@ -21,7 +21,7 @@ func _ready() -> void:
 	GlobalVars.passed_layers = 0
 	new_dungeon()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if generation_thread.is_started() and not generation_thread.is_alive():
 		var plan = generation_thread.wait_to_finish()
 		print("Generation is finished")
@@ -149,6 +149,7 @@ func build(cells : Array):
 
 func room_to_map(room_position : Vector2i) -> Vector2i:
 	return room_position * ROOM_SIZE + room_position
+
 func map_to_room(map_position : Vector2) -> Vector2i:
 	return Vector2i(
 		floori(map_position.x / ROOM_SIZE.x),
@@ -162,4 +163,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		$bg.clear()
 		Elevator.results()
 func _exit_tree() -> void:
-	generation_thread.wait_to_finish()
+	if generation_thread.is_started():
+		generation_thread.wait_to_finish()

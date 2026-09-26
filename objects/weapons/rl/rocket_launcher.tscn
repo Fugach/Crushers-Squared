@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://brcehntt6lxn6"]
 
-[ext_resource type="Script" uid="uid://dril8mbc5mtsp" path="res://objects/weapons/rl/RL.gd" id="1_bl5bl"]
+[ext_resource type="Script" uid="uid://cc3iy003vjkwe" path="res://objects/weapons/rl/rocket_launcher.gd" id="1_bl5bl"]
 [ext_resource type="Texture2D" uid="uid://bwuja7l6uinke" path="res://textures/particles/cloud.png" id="2_1udmo"]
-[ext_resource type="Texture2D" uid="uid://dkfye82uw8lau" path="res://textures/RL_new.png" id="2_emrko"]
+[ext_resource type="Texture2D" uid="uid://bqa8r40mpt7m5" path="res://textures/rocket_launcher.png" id="2_5mrk5"]
 [ext_resource type="Texture2D" uid="uid://bkg3t4dteu7eq" path="res://textures/particles/cloud_small.png" id="4_v5ddk"]
 [ext_resource type="AudioStream" uid="uid://char6b2mjlfie" path="res://sounds/rl/shoot.ogg" id="5_ce8r7"]
 
@@ -44,7 +44,7 @@ _data = {
 &"shoot": SubResource("Animation_ce8r7")
 }
 
-[node name="RL" type="Node2D" unique_id=234800380]
+[node name="Rocket_launcher" type="Node2D" unique_id=234800380]
 script = ExtResource("1_bl5bl")
 
 [node name="cooldown" type="Timer" parent="." unique_id=1693399810]
@@ -53,13 +53,13 @@ one_shot = true
 
 [node name="RL_sprite" type="Sprite2D" parent="." unique_id=1986036035]
 texture_filter = 1
-texture = ExtResource("2_emrko")
+texture = ExtResource("2_5mrk5")
 offset = Vector2(0, -2)
 region_enabled = true
 region_rect = Rect2(0, 0, 21, 11)
 
 [node name="shoot_pos" type="Marker2D" parent="RL_sprite" unique_id=427160559]
-position = Vector2(4, -3)
+position = Vector2(0, -3)
 
 [node name="Area2D" type="Area2D" parent="RL_sprite" unique_id=816954710]
 

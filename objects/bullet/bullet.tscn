@@ -58,3 +58,5 @@ process_material = SubResource("ParticleProcessMaterial_hwob3")
 
 [node name="Ricoshet" type="AudioStreamPlayer2D" parent="." unique_id=578761210]
 stream = ExtResource("2_1mdu2")
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://d18mm0obf3dqi"]
+
+[ext_resource type="Texture2D" uid="uid://vbens2wqotc3" path="res://textures/pistol.png" id="1_34jsm"]
+[ext_resource type="Script" uid="uid://dwydvjr74lbm" path="res://props/pickable_weapon/pickable_weapon.gd" id="1_ymmnh"]
+[ext_resource type="Texture2D" uid="uid://bqa8r40mpt7m5" path="res://textures/rocket_launcher.png" id="2_ymmnh"]
+[ext_resource type="Texture2D" uid="uid://ve4u1mrpqwys" path="res://textures/shotgun.png" id="3_eg10d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0oal"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6w6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_34jsm")
+}],
+"loop": 0,
+"name": &"pistol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ymmnh")
+}],
+"loop": 1,
+"name": &"rocket_launcher",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eg10d")
+}],
+"loop": 1,
+"name": &"shotgun",
+"speed": 5.0
+}]
+
+[node name="PickableWeapon" type="RigidBody2D" unique_id=1742118944]
+collision_layer = 2
+collision_mask = 2
+can_sleep = false
+script = ExtResource("1_ymmnh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1778871623]
+visible = false
+
+[node name="Area2DCollision" type="CollisionShape2D" parent="Area2D" unique_id=1584751605]
+visible = false
+shape = SubResource("RectangleShape2D_m0oal")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=730688961]
+sprite_frames = SubResource("SpriteFrames_m6w6x")
+animation = &"shotgun"
+
+[node name="Collision_pistol" type="CollisionPolygon2D" parent="." unique_id=478574751]
+visible = false
+polygon = PackedVector2Array(-4, -5, -2, -5, -2, -4, 7, -4, 7, 1, 0, 1, 0, 2, -1, 3, -3, 3, -3, 5, -7, 5, -7, 1, -6, 1, -6.0268655, -0.94627047, -5, -1, -5, -3)
+
+[node name="Collision_rocket_launcher" type="CollisionPolygon2D" parent="." unique_id=476446112]
+visible = false
+polygon = PackedVector2Array(-10, -5, -7, -5, -7, -4, 8, -4, 11, -5, 11, 3, 8, 3, 8, 2, 6, 2, 6, 4, 5, 6, 2, 6, 2, 2, -2, 2, -2, 4, -5, 4, -7, 3, -10, 3)
+
+[node name="Collision_shotgun" type="CollisionPolygon2D" parent="." unique_id=949501171]
+visible = false
+polygon = PackedVector2Array(-6, -3, 10, -3, 10, 1, 8, 1, 8, 2, 5, 2, 5, 1, 0, 1, 0, 2, -1, 3, -4, 3, -4, 2, -7, 4, -10, 4, -10, 1)
+
+[node name="SpawnCooldown" type="Timer" parent="." unique_id=2025854813]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="SpawnCooldown" to="." method="_on_spawn_cooldown_timeout"]

@@ -111,6 +111,7 @@ offset = Vector2(7, 0)
 position = Vector2(4, -2)
 
 [node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1009109331]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1835458610]
 shape = SubResource("ConvexPolygonShape2D_duhoc")

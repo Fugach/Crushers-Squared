@@ -10,36 +10,40 @@ var is_player_nearby : bool = false
 var my_slot : String = ""
 var can_shoot: bool = true
 var current_angle: float = 0.0
-var weapon_owner : String = ""
-
+var my_owner
+var slots_ui
 var is_player_colliding : bool = false
 var total_rockets : int = 0
-var my_name = "RL"
+var my_name = "rocket_launcher"
 
 func _ready():
 	GlobalVars.slots[str(my_slot)] = self
-	get_node("/root/main/UI/HUD/Slots").update()
+	slots_ui = get_node("/root/main/UI/HUD/Slots")
+	if slots_ui:
+		slots_ui.update()
+	else:
+		push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
-	match weapon_owner:
-		"Player":
-			if GlobalVars.current_slot_num == my_slot:
-				visible = true
-				RL_logic(delta)
-			else:
-				visible = false
-		"Enemy":
-			if is_player_colliding and can_shoot:
-				is_player_nearby = true
-			else:
-				is_player_nearby = false
-			RL_logic(delta)
+	if my_owner is Player:
+		if GlobalVars.current_slot_num == my_slot:
+			slots_ui.update()
+			visible = true
+			logic()
+		else:
+			visible = false
+	elif my_owner is Enemy:
+		if is_player_colliding and can_shoot:
+			is_player_nearby = true
+		else:
+			is_player_nearby = false
+		logic()
 
-func RL_logic(delta):
-	if weapon_owner == "Player":
+func logic():
+	if my_owner is Player:
 		look_at(get_global_mouse_position())
 		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
-	elif weapon_owner == "Enemy":
+	elif my_owner is Enemy:
 		look_at(GlobalVars.player.global_position)
 		current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
 	
@@ -48,7 +52,7 @@ func RL_logic(delta):
 	else:
 		Sprite.scale.y = -1
 
-	if Input.is_action_pressed("lmb") and can_shoot and weapon_owner == "Player":
+	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
 		shoot(25, true)
 
 func shoot(damage_amount, is_friendly):
@@ -63,12 +67,12 @@ func shoot(damage_amount, is_friendly):
 	new_rocket.name = "Rocket" + str(total_rockets)
 	total_rockets += 1
 	get_node("/root/main").add_child(new_rocket)
-	$RL_sprite/Clouds_small.amount = randi_range(1, 3)
 	$RL_sprite/Cloud.initial_velocity_max += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
 	$RL_sprite/Cloud.initial_velocity_min += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
+	$RL_sprite/Cloud.emitting = true
+	$RL_sprite/Clouds_small.amount = randi_range(1, 3)
 	$RL_sprite/Clouds_small.initial_velocity_max += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
 	$RL_sprite/Clouds_small.initial_velocity_min += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
-	$RL_sprite/Cloud.emitting = true
 	$RL_sprite/Clouds_small.emitting = true
 	
 	can_shoot = false

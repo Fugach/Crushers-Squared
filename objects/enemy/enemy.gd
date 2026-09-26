@@ -80,21 +80,21 @@ func _physics_process(delta: float) -> void:
 				collider.velocity += Vector2(MAX_SPEED, MAX_SPEED) * normal * -0.3
 
 func walk(delta, distance, direction):
-	var floor = [FloorLookerLeft.get_collider() != null, FloorLookerRight.get_collider() != null]
+	var is_floor = [FloorLookerLeft.get_collider() != null, FloorLookerRight.get_collider() != null]
 	if is_player_straight and abs(player.global_position.y - global_position.y) < 75 and\
 	distance > 50:
 		velocity.x += (MAX_SPEED - abs(velocity.x)) * delta * direction.x * ACCELERATION
-		if (floor[0] == false and direction.x < 0) or\
-		(floor[1] == false and direction.x > 0) and is_on_floor():
+		if (is_floor[0] == false and direction.x < 0) or\
+		(is_floor[1] == false and direction.x > 0) and is_on_floor():
 			jump()
 			while not is_on_floor():
 				
 				FloorLookerLeft.target_position = Vector2(0, 50)
 				FloorLookerRight.target_position = Vector2(0, 50)
-				if velocity.y > 0 and not (floor[0] == true and floor[1] == true):
-					if floor[1] == true:
+				if velocity.y > 0 and not (is_floor[0] == true and is_floor[1] == true):
+					if is_floor[1] == true:
 						velocity.x += (MAX_SPEED - abs(velocity.x)) * delta * 1 * ACCELERATION
-					elif floor[0] == true:
+					elif is_floor[0] == true:
 						velocity.x += (MAX_SPEED - abs(velocity.x)) * delta * -1 * ACCELERATION
 					else:
 						velocity.x += (MAX_SPEED - abs(velocity.x)) * delta * sign(velocity.x) * -1 * ACCELERATION

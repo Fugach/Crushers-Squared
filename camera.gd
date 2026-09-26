@@ -16,8 +16,8 @@ func _process(delta: float) -> void:
 	else:
 		offset = Vector2.ZERO
 	if Input.is_action_just_released("zoom_in"):
-		zoom.x = min(zoom.x + 1.5 * delta, 1.0)
-		zoom.y = min(zoom.y + 1.5 * delta, 1.0)
+		zoom.x = min(zoom.x + 1.5 * delta, 15.0)
+		zoom.y = min(zoom.y + 1.5 * delta, 15.0)
 	elif Input.is_action_just_released("zoom_out"):
 		zoom.x = max(zoom.x - 1.5 * delta, 0.4)
 		zoom.y = max(zoom.y - 1.5 * delta, 0.4)

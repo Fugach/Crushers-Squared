@@ -7,7 +7,8 @@ extends Node2D
 @onready var Camera: Camera2D = $"../../../Camera2D"
 
 func _ready() -> void:
-	pass
+	update()
+
 func _process(delta: float) -> void:
 	match GlobalVars.current_slot_num:
 		"slot1":
@@ -16,6 +17,7 @@ func _process(delta: float) -> void:
 			Current.global_position = lerp(Current.global_position, Slot2.global_position, 15 * delta)
 		"slot3":
 			Current.global_position = lerp(Current.global_position, Slot3.global_position, 15 * delta)
+
 func update():
 	GlobalVars.current_slot_node = GlobalVars.slots[GlobalVars.current_slot_num]
 	if GlobalVars.current_slot_node == null:
@@ -26,15 +28,24 @@ func update():
 	
 	if GlobalVars.slots["slot1"] != null:
 		Slot1.play(GlobalVars.slots["slot1"].my_name)
-	else:
+	elif GlobalVars.slots["slot1"] == null:
 		Slot1.play("empty")
+	else:
+		Slot1.play("unknown")
+		push_error('unkown thing in slot 1: ', GlobalVars.slots["slot1"])
 	
 	if GlobalVars.slots["slot2"] != null:
 		Slot2.play(GlobalVars.slots["slot2"].my_name)
-	else:
+	elif GlobalVars.slots["slot2"] == null:
 		Slot2.play("empty")
+	else:
+		Slot2.play("unknown")
+		push_error('unkown thing in slot 2: ', GlobalVars.slots["slot2"])
 	
 	if GlobalVars.slots["slot3"] != null:
 		Slot3.play(GlobalVars.slots["slot3"].my_name)
-	else:
+	elif GlobalVars.slots["slot3"] == null:
 		Slot3.play("empty")
+	else:
+		Slot3.play("unknown")
+		push_error('unkown thing in slot 3: ', GlobalVars.slots["slot3"])

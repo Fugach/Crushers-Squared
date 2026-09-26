@@ -26,6 +26,7 @@ var current_gravity := Vector2(0, 980)
 var throw_power : Vector2 = Vector2(-10000, -10000)
 var is_debugging : bool = false
 var is_noclipping : bool = true
+var is_picking_up_weapon : bool = false
 
 @onready var main: Node2D = $".."
 @onready var HAND = preload("uid://bbxbw8j8ubuiv")
@@ -38,6 +39,7 @@ var is_noclipping : bool = true
 @onready var steps: AudioStreamPlayer2D = $steps
 @onready var wall_slide_loop: AudioStreamPlayer2D = $wall_slide_loop
 @onready var wind: AudioStreamPlayer2D = $wind
+@onready var PICKABLE_WEAPON = preload("uid://d18mm0obf3dqi")
 
 
 func _ready() -> void:
@@ -46,9 +48,6 @@ func _ready() -> void:
 	var hand = HAND.instantiate()
 	add_child(hand)
 	GlobalVars.player = self
-	RL = load("uid://b6yunx8h1pcdi")
-	SHOTGUN = load("uid://dhjphrjas8n7d")
-	PISTOL = load("uid://5j581geyyouk")
 	ENEMY = load("uid://dacw07jts5j8n")
 	BOX = load("uid://bf1hvay56ii3f")
 
@@ -56,11 +55,14 @@ func _physics_process(delta: float) -> void:
 	if current_gravity != Vector2.ZERO:
 		up_direction = -current_gravity.normalized()
 	
-	if velocity.y > WEIGHT:
+	if velocity.y > weight:
 		falling_speed = velocity.y
 		is_falling_fast = true
-		$Sprite2D.scale = Vector2(clamp(500 / velocity.y * 1.5, 0.3, 1), clamp(velocity.y / 1000 * 1.5, 1, 5))
-	elif is_falling_fast and velocity.y < WEIGHT and not is_on_floor():
+		$Sprite2D.scale = Vector2(
+			clamp(500 / velocity.y * 1.5, 0.3, 1),
+			clamp(velocity.y / 1000 * 1.5, 1, 5)
+			)
+	elif is_falling_fast and velocity.y <= weight and not is_on_floor():
 		is_falling_fast = false
 		$Sprite2D.scale = Vector2(1, 1)
 		
@@ -155,17 +157,22 @@ func debug():
 		new_box.global_position = get_global_mouse_position()
 		get_parent().add_child(new_box)
 	if Input.is_action_just_pressed("spawn_PISTOL"):
-		var new_pistol = PISTOL.instantiate()
+		var new_pistol = PICKABLE_WEAPON.instantiate()
+		new_pistol.weapon = ['pistol', 'shotgun', 'rocket_launcher'].pick_random()
 		new_pistol.global_position = get_global_mouse_position()
 		get_parent().add_child(new_pistol)
-	if Input.is_action_just_pressed("spawn_SHOTGUN"):
-		var new_shotgun = SHOTGUN.instantiate()
-		new_shotgun.global_position = get_global_mouse_position()
-		get_parent().add_child(new_shotgun)
-	if Input.is_action_just_pressed("spawn_RL"):
-		var new_RL = RL.instantiate()
-		new_RL.global_position = get_global_mouse_position()
-		get_parent().add_child(new_RL)
+	#if Input.is_action_just_pressed("spawn_PISTOL"):
+		#var new_pistol = PISTOL.instantiate()
+		#new_pistol.global_position = get_global_mouse_position()
+		#get_parent().add_child(new_pistol)
+	#if Input.is_action_just_pressed("spawn_SHOTGUN"):
+		#var new_shotgun = SHOTGUN.instantiate()
+		#new_shotgun.global_position = get_global_mouse_position()
+		#get_parent().add_child(new_shotgun)
+	#if Input.is_action_just_pressed("spawn_RL"):
+		#var new_RL = RL.instantiate()
+		#new_RL.global_position = get_global_mouse_position()
+		#get_parent().add_child(new_RL)
 	if Input.is_action_just_pressed("heal"):
 		if GlobalVars.player_hp < 100:
 			GlobalVars.player_hp = 100
@@ -179,8 +186,7 @@ func debug():
 	if is_noclipping:
 		set_physics_process(!is_noclipping)
 		$Collision.disabled = is_noclipping
-		var direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		velocity = direction * 100
+		velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * 100
 		if Input.is_action_pressed("slam"):
 			velocity *= 4
 		move_and_slide()
@@ -195,14 +201,14 @@ func jump():
 			Anims.play("RESET")
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
 		velocity.y *= 0.6
-	elif Input.is_action_just_pressed("jump") and is_sliding and AVAILABLE_WALLJUMPS > 0:
+	elif Input.is_action_just_pressed("jump") and is_sliding and available_walljumps > 0:
 		Anims.stop()
 		is_slamming = false
 		velocity.x = sign(get_wall_normal().x) * 200
 		velocity.y = -350
-		AVAILABLE_WALLJUMPS -= 1
+		available_walljumps -= 1
 	if is_on_floor():
-		AVAILABLE_WALLJUMPS = WALLJUMPS
+		available_walljumps = max_walljumps
 		$Coyote.start()
 
 func fall():
@@ -243,7 +249,6 @@ func get_input(delta: float) -> void:
 		if RunTiming.time_left > 0 and not is_running:
 			is_running = true
 			velocity.x += 500 * direction
-			print(is_running)
 		else:
 			RunTiming.start()
 	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
@@ -253,7 +258,6 @@ func get_input(delta: float) -> void:
 		if RunTiming.time_left > 0 and not is_running:
 			is_running = true
 			velocity.x += 500 * direction
-			print(is_running)
 		else:
 			RunTiming.start()
 	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
@@ -261,14 +265,14 @@ func get_input(delta: float) -> void:
 	elif Input.is_action_just_released("move_left") and direction == -1 or\
 		 Input.is_action_just_released("move_right") and direction == 1:
 			is_running = false
-			print(is_running)
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		velocity.x += (max_speed - abs(velocity.x)) * direction * delta * 5
 		if sign(velocity.x) != direction and velocity.x != 0:
 			velocity.x *= 0.8
 	if not steps.is_playing() and is_on_floor() and abs(round(velocity.x)) > 10:
 			steps.play()
-	if Input.is_action_just_pressed("slam") and not is_on_floor() and not Input.is_action_just_pressed("jump") and not is_slamming:
+	if Input.is_action_just_pressed("slam") and not is_on_floor() and\
+	not Input.is_action_just_pressed("jump") and not is_slamming:
 		velocity.y = 750
 		velocity.x = 0
 		is_slamming = true
@@ -315,29 +319,18 @@ func get_input(delta: float) -> void:
 		GlobalVars.current_slot_num = "slot3"
 		SlotsHUD.update()
 	
-	if Input.is_action_just_pressed("throw_item"):
+	if Input.is_action_just_pressed("drop"):
 		var item : Node2D = GlobalVars.slots[GlobalVars.current_slot_num]
 		if item != null:
+			print(item.my_name)
 			$throw.play()
-			match item.name.left(-6):
-				"Shotgun":
-					var new_shogun = SHOTGUN.instantiate()
-					new_shogun.global_position = global_position + Vector2(0, -15)
-					new_shogun.apply_force(throw_power * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
-					get_parent().add_child(new_shogun)
-				"RL":
-					var new_RL = RL.instantiate()
-					new_RL.global_position = global_position + Vector2(0, -15)
-					new_RL.apply_force(throw_power * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
-					get_parent().add_child(new_RL)
-				"Pistol":
-					var new_pistol = PISTOL.instantiate()
-					new_pistol.global_position = global_position + Vector2(0, -15)
-					new_pistol.apply_force(throw_power * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
-					get_parent().add_child(new_pistol)
-			item.queue_free()
 			GlobalVars.slots[GlobalVars.current_slot_num] = null
-			Camera.position_smoothing_speed = 2
+			var result = PICKABLE_WEAPON.instantiate()
+			result.weapon = item.my_name
+			item.queue_free()
+			result.global_position = global_position + Vector2(sign(global_position.x - get_global_mouse_position().x) * -10, -5)
+			result.apply_force(throw_power * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
+			get_parent().add_child(result)
 			SlotsHUD.update()
 
 func respawn():
@@ -360,3 +353,10 @@ func _on_slide_coyote_timeout() -> void:
 	$Sprite2D.rotation = 0
 func camera_impact(amount, dir):
 	Camera.global_position += amount * dir
+
+
+func _on_pick_up_area_entered(body: Node2D) -> void:
+	if body.has_method("pick_up") and not is_picking_up_weapon and GlobalVars.slots.values().has(null):
+		is_picking_up_weapon = true
+		body.pick_up(self)
+		set_deferred("is_picking_up_weapon", false)

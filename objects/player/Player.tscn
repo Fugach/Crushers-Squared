@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://c8h7vr4you8c5" path="res://textures/particles/slam_fall.png" id="12_sx4ji"]
 [ext_resource type="Texture2D" uid="uid://4u0nd6rl015b" path="res://textures/2d_lights_and_shadows_neutral_point_light.webp" id="13_ercwk"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0oal"]
+size = Vector2(15, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
 size = Vector2(8, 8)
 
@@ -246,6 +249,13 @@ collision_bounce = 0.0
 process_mode = 1
 script = ExtResource("1_cq43t")
 
+[node name="PickUpArea2D" type="Area2D" parent="." unique_id=1539794394]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea2D" unique_id=495832546]
+shape = SubResource("RectangleShape2D_m0oal")
+
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1382299090]
 shape = SubResource("RectangleShape2D_7wy8b")
 
@@ -324,6 +334,7 @@ texture = ExtResource("13_ercwk")
 wait_time = 0.5
 one_shot = true
 
+[connection signal="body_entered" from="PickUpArea2D" to="." method="_on_pick_up_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]
 [connection signal="timeout" from="BoostTime" to="." method="_on_boost_time_timeout"]
 [connection signal="timeout" from="SlideCoyote" to="." method="_on_slide_coyote_timeout"]

@@ -19,6 +19,7 @@ func _ready():
 	Particles.emitting = false
 	ExplosionPos.hide()
 func _physics_process(delta: float):
+	RayCast.force_raycast_update()
 	if not is_emitting:
 		if RayCast.is_colliding():
 			destroy()

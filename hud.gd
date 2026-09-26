@@ -71,12 +71,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		Console.text += "              " + str(3 - GlobalVars.passed_layers)
 
 func hpbar_update():
-	#HPLabel.text = str(GlobalVars.player_hp)
-	$HPBar/HPLabel.text = str(GlobalVars.player_hp)
-	$HPBar.value = float(int(round(((float($HPBar/HPLabel.text) + $HPBar.value) / 2))))
-	if $HPBar_smooth.value != $HPBar.value:
-		$HPBar_smooth.value += ($HPBar.value - $HPBar_smooth.value) * 0.25
-	#$HPBar_smooth.value = float(int(round((($HPBar.value + $HPBar_smooth.value) / 1.9)))) - 1
+	var lab = $HPBar/HPLabel
+	var bar = $HPBar
+	var bar_sm = $HPBar_smooth
+	var hp = GlobalVars.player_hp
+	lab.text = str(hp)
+	bar.value = lerp(bar.value, float(hp), 0.5)
+	bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
@@ -87,3 +88,12 @@ func _on_upgrade_2_mouse_entered() -> void:
 func _on_upgrade_3_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
 		$Table/Upgrade3/choose.play()
+
+
+func _on_hp_bar_value_changed(value: float) -> void:
+	$HPBar/Timer.start()
+	if $HPBar.value <= 0:
+		$HPBar.value = 0
+		$HPBar/HPLabel.text = "0"
+		GlobalVars.player_hp = 0
+		get_parent().get_parent().death()

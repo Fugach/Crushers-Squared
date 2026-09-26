@@ -7,7 +7,7 @@ class_name Bullet
 
 var flying : bool = true
 var damage_amount : int = 0
-var is_friendly : bool = false
+var my_owner
 var blacklist = []
 var SPEED = 4000
 
@@ -34,9 +34,11 @@ func _physics_process(delta: float) -> void:
 			Line.set_point_position(0, Line.get_point_position(0) + Vector2.RIGHT * SPEED * delta)
 
 func hit(body):
+	if body == my_owner:
+		return
 	Line.set_point_position(1, Line.to_local(Raycast.get_collision_point()))
-	if body == GlobalVars.player and not is_friendly:
-		GlobalVars.player.damage(damage_amount, "bullet")
+	if body is Player:
+		body.damage(damage_amount, "bullet")
 		kill()
 	elif body is TileMapLayer or body is StaticBody2D:
 		flying = false
