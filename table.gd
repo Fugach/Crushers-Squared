@@ -1,7 +1,7 @@
 extends Sprite2D
 
 @onready var Tip : Sprite2D = $tip
-@onready var Table : Node2D = $"../UI/HUD/Table"
+@onready var Table : Control = $"../UI/HUD/Table"
 @onready var Paper_button : TextureButton = $"../UI/HUD/Table/paper_button"
 @onready var Anim : AnimationPlayer = $"../UI/HUD/Table/animations"
 @onready var Upgrade1 : Button = $"../UI/HUD/Table/Upgrade1"

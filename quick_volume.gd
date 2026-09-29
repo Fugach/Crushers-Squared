@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var Percent: ProgressBar = $percent
 @onready var Progress: TextureProgressBar = $progress

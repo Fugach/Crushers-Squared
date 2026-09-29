@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var Slot1 : AnimatedSprite2D = $Slot1
 @onready var Slot2 : AnimatedSprite2D = $Slot2

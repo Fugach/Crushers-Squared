@@ -28,17 +28,17 @@ var is_debugging : bool = false
 var is_noclipping : bool = true
 var is_picking_up_weapon : bool = false
 
-@onready var main: Node2D = $".."
+@onready var main : Node2D = $".."
 @onready var HAND = preload("uid://bbxbw8j8ubuiv")
 @onready var FALL_PARTICLES = preload("uid://3jklnx6aump3")
-@onready var Camera: Camera2D = $"../Camera2D"
-@onready var SlotsHUD: Node2D = $"../UI/HUD/Slots"
-@onready var Elevator: Area2D = $"../Elevator"
-@onready var Anims: AnimationPlayer = $AnimationPlayer
-@onready var RunTiming: Timer = $RunTiming
-@onready var steps: AudioStreamPlayer2D = $steps
-@onready var wall_slide_loop: AudioStreamPlayer2D = $wall_slide_loop
-@onready var wind: AudioStreamPlayer2D = $wind
+@onready var Camera : Camera2D = $"../Camera2D"
+@onready var SlotsHUD : Control = $"../UI/HUD/Slots"
+@onready var Elevator : Area2D = $"../Elevator"
+@onready var Anims : AnimationPlayer = $AnimationPlayer
+@onready var RunTiming : Timer = $RunTiming
+@onready var steps : AudioStreamPlayer2D = $steps
+@onready var wall_slide_loop : AudioStreamPlayer2D = $wall_slide_loop
+@onready var wind : AudioStreamPlayer2D = $wind
 @onready var PICKABLE_WEAPON = preload("uid://d18mm0obf3dqi")
 
 

@@ -3,6 +3,13 @@
 [ext_resource type="Script" uid="uid://c42xk2ikr2uik" path="res://objects/particles/fall/fall_particles.gd" id="1_bcehd"]
 [ext_resource type="Texture2D" uid="uid://bkg3t4dteu7eq" path="res://textures/particles/cloud_small.png" id="1_dm6ve"]
 
+[sub_resource type="Curve" id="Curve_431fr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.49999997, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ut4wj"]
+curve = SubResource("Curve_431fr")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbvwl"]
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
@@ -10,13 +17,14 @@ spread = 15.0
 initial_velocity_min = 202.64
 initial_velocity_max = 286.33
 gravity = Vector3(0, 598, 0)
+alpha_curve = SubResource("CurveTexture_ut4wj")
 collision_mode = 2
 
 [node name="fall_particles" type="GPUParticles2D" unique_id=376903328]
-position = Vector2(0, 4)
+emitting = false
 amount = 3
 texture = ExtResource("1_dm6ve")
-lifetime = 3.0
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 0.35

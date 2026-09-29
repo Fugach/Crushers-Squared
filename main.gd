@@ -8,9 +8,9 @@ extends Node2D
 @onready var HPBar : TextureProgressBar = $UI/HUD/HPBar
 @onready var HPLabel : Label = $UI/HUD/HPBar/HPLabel
 
-@onready var Table: Node2D = $UI/HUD/Table
+@onready var Table : Control = $UI/HUD/Table
 
-@onready var Camera: Camera2D = $Camera2D
+@onready var Camera : Camera2D = $Camera2D
 
 var default = preload("res://textures/cursors/default.png")
 var pointer = preload("res://textures/cursors/pointer.png")

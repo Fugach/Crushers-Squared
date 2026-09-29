@@ -76,8 +76,18 @@ func hpbar_update():
 	var bar_sm = $HPBar_smooth
 	var hp = GlobalVars.player_hp
 	lab.text = str(hp)
-	bar.value = lerp(bar.value, float(hp), 0.5)
-	bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
+	if bar.value != float(hp):
+		bar.value = lerp(bar.value, float(hp), 0.5)
+		print(bar.value - float(hp))
+
+func _on_timer_timeout() -> void:
+	print('exec')
+	var bar = $HPBar
+	var bar_sm = $HPBar_smooth
+	while bar_sm.value != bar.value:
+		bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
+		await get_tree().process_frame
+		print('update')
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
@@ -92,6 +102,7 @@ func _on_upgrade_3_mouse_entered() -> void:
 
 func _on_hp_bar_value_changed(value: float) -> void:
 	$HPBar/Timer.start()
+	print('start')
 	if $HPBar.value <= 0:
 		$HPBar.value = 0
 		$HPBar/HPLabel.text = "0"

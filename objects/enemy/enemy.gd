@@ -28,7 +28,7 @@ func _ready() -> void:
 	var Pistol = load("uid://cdavqdqek4rr5")
 	
 	var my_weapon = [Shotgun, RL, Pistol].pick_random().instantiate()
-	my_weapon.weapon_owner = "Enemy"
+	my_weapon.my_owner = self
 	add_child(my_weapon)
 	WEAPON = my_weapon.get_child(1).get_parent() 
 	#WEAPON.hide()
