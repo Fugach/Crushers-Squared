@@ -28,6 +28,7 @@ lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 0.35
+fixed_fps = 60
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_jbvwl")
 script = ExtResource("1_bcehd")

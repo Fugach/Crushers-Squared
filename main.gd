@@ -35,7 +35,7 @@ func _ready() -> void:
 	GlobalVars.current_slot_num = "slot1"
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	load_config()
-	GlobalVars.main = self
+	GlobalVars.main_node = self
 	player.respawn()
 	$SubViewport.use_hdr_2d = true
 	$UI/Pause/AnimationPlayer.play_backwards("appear")
@@ -52,10 +52,6 @@ func _input(_event: InputEvent) -> void:
 		get_tree().quit(0)
 
 func _process(_delta: float) -> void:
-	if GlobalVars.passed_layers > 3:
-		get_tree().paused = false
-		get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
-		get_tree().change_scene_to_file("res://main_menu.tscn")
 	if GlobalVars.player.global_position.y > 10000:
 		GlobalVars.player.respawn()
 		if not $UI/HUD/lost.playing:

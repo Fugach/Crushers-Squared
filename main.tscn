@@ -58,7 +58,6 @@
 [ext_resource type="Texture2D" uid="uid://bqbmvf2c61nyu" path="res://textures/HUD/ammo/bag.png" id="43_8dc3g"]
 [ext_resource type="Script" uid="uid://bo53c62y7a207" path="res://elevator.gd" id="44_23xmf"]
 [ext_resource type="FontFile" uid="uid://bmqgkldwr7tqm" path="res://fonts/LCD.ttf" id="44_htgcl"]
-[ext_resource type="AudioStream" uid="uid://bwsufio7vmb7u" path="res://music/cw_amen_deeptouch.wav" id="47_u81y6"]
 [ext_resource type="Texture2D" uid="uid://bg6u1yluf7c10" path="res://textures/home_tip.png" id="51_cpm2s"]
 [ext_resource type="Texture2D" uid="uid://bv2hxdygufa4q" path="res://textures/elevator/elevator_bg.png" id="53_5yh34"]
 [ext_resource type="Texture2D" uid="uid://cskyoqckiu85p" path="res://textures/tiles/outside.png" id="54_m74q3"]
@@ -2118,7 +2117,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_font_sizes/font_size = 1
 text = "ПЕРЕЗАПУСК"
 flat = true
 autowrap_mode = 3
@@ -2135,7 +2133,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_font_sizes/font_size = 1
 text = "ВЫХОД"
 flat = true
 autowrap_mode = 3
@@ -2152,7 +2149,6 @@ theme_override_colors/font_focus_color = Color(0.56078434, 0.31764707, 0.0666666
 theme_override_colors/font_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
 theme_override_colors/font_hover_color = Color(0.56078434, 0.31764707, 0.06666667, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.63529414, 0.3647059, 0.08627451, 1)
-theme_override_font_sizes/font_size = 1
 text = "ПРОДОЛЖИТЬ"
 flat = true
 
@@ -2166,13 +2162,6 @@ mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Pause" unique_id=496117258]
 libraries/ = SubResource("AnimationLibrary_1u8w0")
-
-[node name="MUSIC" type="CanvasLayer" parent="UI" unique_id=171340128]
-
-[node name="results" type="AudioStreamPlayer2D" parent="UI/MUSIC" unique_id=469365092]
-stream = ExtResource("47_u81y6")
-volume_db = -5.0
-bus = &"Music"
 
 [node name="Table" type="Sprite2D" parent="." unique_id=1000341196]
 visible = false

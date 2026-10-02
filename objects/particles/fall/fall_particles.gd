@@ -1,6 +1,6 @@
 extends GPUParticles2D
-var max_vel : float = 0.0
-var min_vel : float = 0.0
+var max_vel : float
+var min_vel : float
 func _ready() -> void:
 	process_material.initial_velocity_min = min_vel
 	process_material.initial_velocity_max = max_vel

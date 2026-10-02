@@ -15,17 +15,6 @@ func repeat(text, amount):
 func _process(delta: float) -> void:
 	scale = Camera.scale
 	hpbar_update()
-	
-	if Input.is_action_just_pressed("lmb") and Console.text != "" and $"../MUSIC/results".playing:
-		$"../MUSIC/results".stop()
-		Console.clear()
-		Camera.is_following = true
-		await wait(1)
-		await Tiles.gen_dungeon(randi_range(3, 15), Elevator.global_position / 16 + Vector2(-7, -7))
-		TilesAnim.play("show")
-		Anim.play("show_hud")
-		Elevator.outside()
-		$"../..".get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 func results():
 	$"../MUSIC/results".play()
 	$"../..".get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
@@ -74,20 +63,18 @@ func hpbar_update():
 	var lab = $HPBar/HPLabel
 	var bar = $HPBar
 	var bar_sm = $HPBar_smooth
-	var hp = GlobalVars.player_hp
+	var hp = GlobalVars.player.my_stats['hp']
 	lab.text = str(hp)
 	if bar.value != float(hp):
 		bar.value = lerp(bar.value, float(hp), 0.5)
 		print(bar.value - float(hp))
 
 func _on_timer_timeout() -> void:
-	print('exec')
 	var bar = $HPBar
 	var bar_sm = $HPBar_smooth
 	while bar_sm.value != bar.value:
 		bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
 		await get_tree().process_frame
-		print('update')
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
@@ -102,7 +89,6 @@ func _on_upgrade_3_mouse_entered() -> void:
 
 func _on_hp_bar_value_changed(value: float) -> void:
 	$HPBar/Timer.start()
-	print('start')
 	if $HPBar.value <= 0:
 		$HPBar.value = 0
 		$HPBar/HPLabel.text = "0"

@@ -104,7 +104,7 @@ func walk(delta, distance, direction):
 	if not is_player_straight and "Enemy" in str(PlayerLooker.get_collider()):
 		jump()
 func kill():
-	GlobalVars.killed += 1
+	GlobalVars.stats['kills'] += 1
 	$Sprite2D.self_modulate = Color(1, 1, 1, 0)
 	$EnemyCollision.disabled = true
 	$Label.add_theme_color_override("font_color", Color(1.535, 0.325, 0.325, 6.5))

@@ -1,38 +1,25 @@
 extends Node
 
-@onready var main : Node2D = null
-@onready var player : CharacterBody2D = null
-@onready var player_hp : int = 100
-@onready var lifes : int = 3
-@onready var spawn_pos : Vector2 = Vector2(0, 0)
-
+var player : CharacterBody2D
+var main_node : Node2D
+var WEAPON = preload("uid://d18mm0obf3dqi")
 var cleared_rooms : Dictionary = {}
 
-var passed_layers : int = 0
 var current_slot_num = "slot1"
 var current_slot_node : Node2D = null
+
 var slots : Dictionary[String, Node2D] = {
 	"slot1": null,
 	"slot2": null,
 	"slot3": null
 }
-var hand_slot : Node2D = null
-var is_time_running : bool = false
-var time : float = 0.0
 
-var player_velocity = Vector2(0, 0)
-var player_pos = Vector2(0, 0)
-var killed : int = 0
-
-func _process(delta: float) -> void:
-	if is_time_running:
-		time += delta
-
-func heal(amount : int):
-	if player_hp + amount < 100:
-		player_hp += amount
-	else:
-		player_hp = 100
+var stats : Dictionary = {
+	'time' = 0.0,
+	'kills' = 0,
+	'passed_layers' = 0,
+	'lifes' = 3
+}
 
 func apply_CRT(body_material):
 	if str(RenderingServer.get_current_rendering_method()) == "gl_compatibility":

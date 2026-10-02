@@ -25,12 +25,12 @@ buses/default_bus_layout="uid://d3p6onew80nrs"
 
 GlobalVars="*res://global_vars.gd"
 GlobalConfig="*uid://cbfqridi3qseq"
+Debug="*uid://td2c1ajcb0nv"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=2

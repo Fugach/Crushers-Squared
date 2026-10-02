@@ -18,7 +18,7 @@ const ROOM_SIZE = Vector2i(12, 12)
 
 func _ready() -> void:
 	player = GlobalVars.player
-	GlobalVars.passed_layers = 0
+	GlobalVars.stats['passed_layers'] = 0
 	new_dungeon()
 
 func _process(_delta: float) -> void:
