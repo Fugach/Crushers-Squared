@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dpyw2wrkrp64a"]
+
+[ext_resource type="Script" uid="uid://bfcfkek134vnu" path="res://objects/weapons/flamethrower/flamethrower.gd" id="1_0i2ke"]
+[ext_resource type="Texture2D" uid="uid://d050nwkxl0jm0" path="res://textures/weapon_placeholder.png" id="2_ly848"]
+
+[node name="Flamethrower" type="Node2D" unique_id=2045389321]
+script = ExtResource("1_0i2ke")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=715864770]
+position = Vector2(3, 1)
+texture = ExtResource("2_ly848")

@@ -53,9 +53,9 @@ func logic():
 		Sprite.scale.y = -1
 
 	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
-		shoot(25, true)
+		shoot(25)
 
-func shoot(damage_amount, is_friendly):
+func shoot(damage_amount):
 	$AnimationPlayer.play("shoot")
 	$shoot.pitch_scale = randf_range(0.8, 1.2)
 	$shoot.play()
@@ -63,7 +63,7 @@ func shoot(damage_amount, is_friendly):
 	new_rocket.global_position = ShootPos.global_position
 	new_rocket.global_rotation = ShootPos.global_rotation
 	new_rocket.damage_amount = damage_amount
-	new_rocket.is_friendly = is_friendly
+	new_rocket.my_owner = my_owner
 	new_rocket.name = "Rocket" + str(total_rockets)
 	total_rockets += 1
 	get_node("/root/main").add_child(new_rocket)

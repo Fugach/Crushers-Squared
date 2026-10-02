@@ -11,7 +11,7 @@ var speed = 100
 var direction = 1
 var is_emitting : bool = false
 const SPEED: float = 500.0
-var is_friendly : bool = false
+var my_owner
 var targets = []
 
 func _ready():
@@ -21,7 +21,7 @@ func _ready():
 func _physics_process(delta: float):
 	RayCast.force_raycast_update()
 	if not is_emitting:
-		if RayCast.is_colliding():
+		if RayCast.is_colliding() and RayCast.get_collider() != my_owner:
 			destroy()
 		else:
 			global_position += Vector2(1, 0).rotated(rotation) * SPEED * delta
@@ -54,7 +54,7 @@ func _on_collision_body_entered(body: Node2D):
 	if ((body is CharacterBody2D) or (body is RigidBody2D) or ("Bullet" in body.name) or body is StaticBody2D or "Door" in str(body)) and can_push:
 		if body.has_method("damage") and body not in targets:
 			targets.append(body)
-			if body == GlobalVars.player and is_friendly:
+			if body == my_owner:
 				body.damage(8, "explosion")
 			else:
 				body.damage(25, "explosion")

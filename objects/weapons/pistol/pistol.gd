@@ -9,7 +9,7 @@ var my_slot : String = ""
 var my_owner
 var slots_ui
 var can_shoot : bool = true
-var current_angle = null
+var current_angle : float
 var is_player_nearby : bool = false
 var is_player_colliding : bool = false
 var total_bullets : int = 0
@@ -44,12 +44,13 @@ func _process(delta: float) -> void:
 		logic()
 
 func logic():
+	#if my_owner is Enemy:
+		#current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
+	#elif my_owner is Player:
+		#current_angle = 
 	if my_owner is Player:
-		look_at(get_global_mouse_position())
-		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
-	elif my_owner is Enemy:
-		look_at(GlobalVars.player.global_position)
-		current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
+		current_angle = int(rotation) % 360
+		print(current_angle)
 	
 	if -1.5 <= current_angle and current_angle <= 1.5:
 		Sprite.flip_v = false

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b031wyq3p3dvw"]
+
+[ext_resource type="Script" uid="uid://d3ad4m1t5rpjy" path="res://objects/flame/flame.gd" id="1_xunbo"]
+[ext_resource type="Texture2D" uid="uid://bge1w88d76pd5" path="res://textures/fire.png" id="2_66a4o"]
+[ext_resource type="AudioStream" uid="uid://xm1fi8ch0x6" path="res://sounds/fire/1.ogg" id="3_xwb8m"]
+[ext_resource type="AudioStream" uid="uid://dqlngcqqko0xm" path="res://sounds/fire/2.ogg" id="4_2ko2w"]
+[ext_resource type="AudioStream" uid="uid://dla8gla712nox" path="res://sounds/fire/3.ogg" id="5_6tlyl"]
+[ext_resource type="AudioStream" uid="uid://ctc42blyr8s" path="res://sounds/fire/4.ogg" id="6_tt1cr"]
+[ext_resource type="AudioStream" uid="uid://pwefcqvoyj43" path="res://sounds/fire/5.ogg" id="7_3tvxc"]
+[ext_resource type="AudioStream" uid="uid://bjrgeu4dlar0x" path="res://sounds/fire/6.ogg" id="8_t0mau"]
+[ext_resource type="AudioStream" uid="uid://bjs5ls32pw306" path="res://sounds/fire/7.ogg" id="9_frwr5"]
+[ext_resource type="AudioStream" uid="uid://ccyfmluhxe26p" path="res://sounds/fire/8.ogg" id="10_gg6ux"]
+[ext_resource type="AudioStream" uid="uid://rb05rcfcxqd7" path="res://sounds/fire/9.ogg" id="11_6cml2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0oal"]
+radius = 4.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_m0oal"]
+streams_count = 9
+stream_0/stream = ExtResource("3_xwb8m")
+stream_1/stream = ExtResource("4_2ko2w")
+stream_2/stream = ExtResource("5_6tlyl")
+stream_3/stream = ExtResource("6_tt1cr")
+stream_4/stream = ExtResource("7_3tvxc")
+stream_5/stream = ExtResource("8_t0mau")
+stream_6/stream = ExtResource("9_frwr5")
+stream_7/stream = ExtResource("10_gg6ux")
+stream_8/stream = ExtResource("11_6cml2")
+
+[node name="Flame" type="Area2D" unique_id=2112876108]
+script = ExtResource("1_xunbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=543445848]
+texture = ExtResource("2_66a4o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=421426379]
+shape = SubResource("CircleShape2D_m0oal")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1824147587]
+stream = SubResource("AudioStreamRandomizer_m0oal")
+volume_db = -5.0
+autoplay = true
+bus = &"Sound"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
