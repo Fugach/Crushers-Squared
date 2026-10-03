@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	var previous_velocity = velocity
 	
 	if my_stats['hp'] > 0:
-		get_input(delta)
+		walk(delta)
 		slide(delta)
 		jump()
 		fall()
@@ -90,9 +90,17 @@ func debug():
 		else:
 			my_stats['hp'] = 999
 	if Input.is_action_just_pressed('noclip'):
+		rotation = 0.0
+		is_sliding = false
+		is_slamming = false
+		is_falling_fast = false
+		$slide.emitting = false
+		$slam.emitting = false
+		$Sprite2D.scale = Vector2.ONE
 		set_physics_process(is_noclipping)
-		print(is_noclipping)
 		is_noclipping = not is_noclipping
+		$Sprite2D.self_modulate.a = 0.3 if is_noclipping else 1
+		$Sprite2D.material.set('shader_parameter/intensity', 0.5 if is_noclipping else 0.0)
 		$Collision.disabled = is_noclipping
 	
 	if is_noclipping:
@@ -100,6 +108,35 @@ func debug():
 		if Input.is_action_pressed("slam"):
 			velocity *= 4
 		move_and_slide()
+
+func walk(delta : float):
+	if Input.is_action_just_pressed("move_down") and is_on_floor():
+		Anims.play("squish")
+	elif (Input.is_action_just_released("move_down") or not is_on_floor()) and\
+		 (Anims.current_animation == "squish" or last_animation == "squish"):
+		Anims.play("unsquish")
+	if Input.is_action_just_pressed("move_left"):
+		direction = -1
+		velocity.x += 500 * direction
+	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
+		direction = -1
+	elif Input.is_action_just_pressed("move_right"):
+		direction = 1
+		velocity.x += 500 * direction
+	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
+		direction = 1
+	elif Input.is_action_just_released("move_left") and direction == -1 or\
+		 Input.is_action_just_released("move_right") and direction == 1:
+			is_running = false
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+		velocity.x += (my_stats['max_speed'] - abs(velocity.x)) * direction * delta * 5
+		if sign(velocity.x) != direction and velocity.x != 0:
+			velocity.x *= 0.8
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+		if is_on_floor():
+			velocity.x *= 0.8
+		else:
+			velocity.x *= 0.99
 
 func slide(delta : float):
 	if is_on_wall_only() and velocity.y > 0 and\
@@ -205,31 +242,10 @@ func damage(amount, type):
 			my_stats['hp'] = 0
 			main.death()
 
-func get_input(delta: float) -> void:
-	if Input.is_action_just_pressed("move_down") and is_on_floor():
-		Anims.play("squish")
-	elif (Input.is_action_just_released("move_down") or not is_on_floor()) and\
-		 (Anims.current_animation == "squish" or last_animation == "squish"):
-		Anims.play("unsquish")
-	if Input.is_action_just_pressed("move_left"):
-		direction = -1
-		velocity.x += 500 * direction
-	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
-		direction = -1
-	elif Input.is_action_just_pressed("move_right"):
-		direction = 1
-		velocity.x += 500 * direction
-	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
-		direction = 1
-	elif Input.is_action_just_released("move_left") and direction == -1 or\
-		 Input.is_action_just_released("move_right") and direction == 1:
-			is_running = false
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		velocity.x += (my_stats['max_speed'] - abs(velocity.x)) * direction * delta * 5
-		if sign(velocity.x) != direction and velocity.x != 0:
-			velocity.x *= 0.8
+func _input(event: InputEvent) -> void:
+	var text = event.as_text()
 	if Input.is_action_just_pressed("slam") and not is_on_floor() and\
-	not Input.is_action_just_pressed("jump") and not is_slamming:
+	not Input.is_action_just_pressed("jump") and not is_slamming and not is_noclipping:
 		velocity.y = 750
 		velocity.x = 0
 		is_slamming = true
@@ -245,36 +261,34 @@ func get_input(delta: float) -> void:
 	if Anims.current_animation == "slam_stop" and Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y += my_stats['jump_power'] * 0.3
 	
-	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		if is_on_floor():
-			velocity.x *= 0.8
-		else:
-			velocity.x *= 0.99
 	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
-		match GlobalVars.current_slot_num:
-			"slot1":
-				GlobalVars.current_slot_num = "slot2"
-			"slot2":
-				GlobalVars.current_slot_num = "slot3"
-			"slot3":
-				GlobalVars.current_slot_num = "slot1"
+		# TODO
+		GlobalVars.current_slot_num = (GlobalVars.current_slot_num + 1) % len(GlobalVars.slots)
+		SlotsHUD.update()
+		#match GlobalVars.current_slot_num:
+			#"slot1":
+				#GlobalVars.current_slot_num = "slot2"
+			#"slot2":
+				#GlobalVars.current_slot_num = "slot3"
+			#"slot3":
+				#GlobalVars.current_slot_num = "slot1"
 	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
-		match GlobalVars.current_slot_num:
-			"slot1":
-				GlobalVars.current_slot_num = "slot3"
-			"slot2":
-				GlobalVars.current_slot_num = "slot1"
-			"slot3":
-				GlobalVars.current_slot_num = "slot2"
-	if Input.is_action_just_pressed("slot1"):
-		GlobalVars.current_slot_num = "slot1"
+		GlobalVars.current_slot_num = (GlobalVars.current_slot_num - 1 if\
+		GlobalVars.current_slot_num - 1 >= 0 else len(GlobalVars.slots) - 1) %\
+		len(GlobalVars.slots)
 		SlotsHUD.update()
-	elif Input.is_action_just_pressed("slot2"):
-		GlobalVars.current_slot_num = "slot2"
-		SlotsHUD.update()
-	elif Input.is_action_just_pressed("slot3"):
-		GlobalVars.current_slot_num = "slot3"
-		SlotsHUD.update()
+		#match GlobalVars.current_slot_num:
+			#"slot1":
+				#GlobalVars.current_slot_num = "slot3"
+			#"slot2":
+				#GlobalVars.current_slot_num = "slot1"
+			#"slot3":
+				#GlobalVars.current_slot_num = "slot2"
+	if text.is_valid_int():
+		var num = int(text)
+		if num <= 9 and num > 0:
+			GlobalVars.current_slot_num = num - 1
+			SlotsHUD.update()
 	
 	if Input.is_action_just_pressed("drop"):
 		var item : Node2D = GlobalVars.slots[GlobalVars.current_slot_num]

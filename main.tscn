@@ -1723,16 +1723,16 @@ offset_right = 299.0
 offset_bottom = 11.0
 script = ExtResource("25_hrvbo")
 
-[node name="Slot1" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1459428169]
+[node name="Slot0" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1459428169]
 sprite_frames = SubResource("SpriteFrames_0cbny")
 animation = &"empty"
 
-[node name="Slot2" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1966987736]
+[node name="Slot1" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1966987736]
 position = Vector2(21, 0)
 sprite_frames = SubResource("SpriteFrames_0cbny")
 animation = &"empty"
 
-[node name="Slot3" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1891834754]
+[node name="Slot2" type="AnimatedSprite2D" parent="UI/HUD/Slots" unique_id=1891834754]
 position = Vector2(43, 0)
 sprite_frames = SubResource("SpriteFrames_0cbny")
 animation = &"empty"

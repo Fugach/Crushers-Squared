@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://do5lfpq2dysdi" path="res://objects/player/player.gd" id="1_cq43t"]
 [ext_resource type="Texture2D" uid="uid://ckpacdte3gvhm" path="res://textures/idk2.png" id="2_ercwk"]
+[ext_resource type="Shader" uid="uid://ctlgygb5jr3sl" path="res://shaders/dithering_transparency.gdshader" id="2_n1h8g"]
 [ext_resource type="AudioStream" uid="uid://b7rod44b0q0dn" path="res://sounds/wall_slide_loop.mp3" id="3_ijwuf"]
 [ext_resource type="AudioStream" uid="uid://bqktfabsbcg42" path="res://sounds/WindLoop.ogg" id="4_iy4hj"]
 [ext_resource type="Texture2D" uid="uid://b73eakvkvyx8r" path="res://textures/particles/slide/4.png" id="7_x2mbb"]
@@ -15,6 +16,10 @@ size = Vector2(15, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
 size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0oal"]
+shader = ExtResource("2_n1h8g")
+shader_parameter/intensity = 0.0
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -240,6 +245,7 @@ process_mode = 1
 script = ExtResource("1_cq43t")
 
 [node name="PickUpArea2D" type="Area2D" parent="." unique_id=1539794394]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -247,9 +253,11 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_m0oal")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1382299090]
+visible = false
 shape = SubResource("RectangleShape2D_7wy8b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=108929468]
+material = SubResource("ShaderMaterial_m0oal")
 texture = ExtResource("2_ercwk")
 region_enabled = true
 region_rect = Rect2(12, 14, 12, 12)

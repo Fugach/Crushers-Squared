@@ -27,12 +27,12 @@ func _ready() -> void:
 	player = $Player
 	GlobalVars.player = player
 	GlobalVars.slots = {
-	"slot1": null,
-	"slot2": null,
-	"slot3": null
+	1: null,
+	2: null,
+	3: null
 	}
 	GlobalVars.current_slot_node = null
-	GlobalVars.current_slot_num = "slot1"
+	GlobalVars.current_slot_num = 1
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	load_config()
 	GlobalVars.main_node = self
