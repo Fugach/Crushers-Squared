@@ -140,9 +140,10 @@ func walk(delta : float):
 
 func slide(delta : float):
 	if is_on_wall_only() and velocity.y > 0 and\
-	Input.get_axis('move_left', 'move_right') == get_wall_normal().x * -1:
+	Input.get_axis('move_left', 'move_right') == sign(get_wall_normal().x) * -1:
 		is_sliding = true
 		Anims.play('RESET')
+		is_slamming = false
 		$slam.emitting = false
 		$SlideCoyoteTime.start()
 		rotation = -0.2 * direction#* get_wall_normal().x
@@ -153,6 +154,7 @@ func slide(delta : float):
 		wall_slide_loop.volume_db = 0.0
 		wall_slide_loop.pitch_scale = 1.0 + abs(velocity.y) / 100
 	else:
+		print(get_wall_normal().x)
 		rotation = 0.0
 		$slide.emitting = false
 		wall_slide_loop.volume_db = -80.0
@@ -173,7 +175,7 @@ func jump():
 		is_slamming = false
 		velocity.x = sign(get_wall_normal().x) * 200
 		velocity.y = -350
-		my_stats['walljumps']
+		my_stats['walljumps'] -= 1
 	if is_on_floor():
 		my_stats['walljumps'] = my_stats['max_walljumps']
 		$JumpCoyoteTime.start()

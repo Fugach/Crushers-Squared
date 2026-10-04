@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://biw2ws4aiws52"
-path="res://.godot/imported/crt_noise.ogg-4f8209f1f1f2b3264cd67abca79988c4.oggvorbisstr"
+path="res://.godot/imported/crt_noise.ogg-e764c20397333fdaf2073cdbf194ce77.oggvorbisstr"
 
 [deps]
 
-source_file="res://sounds/UI/crt_noise.ogg"
-dest_files=["res://.godot/imported/crt_noise.ogg-4f8209f1f1f2b3264cd67abca79988c4.oggvorbisstr"]
+source_file="res://sounds/ui/crt_noise.ogg"
+dest_files=["res://.godot/imported/crt_noise.ogg-e764c20397333fdaf2073cdbf194ce77.oggvorbisstr"]
 
 [params]
 
