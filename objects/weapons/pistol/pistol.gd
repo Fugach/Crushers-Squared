@@ -5,7 +5,7 @@ extends Node2D
 @onready var Cooldown : Timer = $Cooldown
 
 var BULLET : PackedScene
-var my_slot : String = ""
+var my_slot : int
 var my_owner
 var slots_ui
 var can_shoot : bool = true
@@ -21,7 +21,7 @@ func _ready():
 		$Sprite2D/Area2D.hide()
 		$Sprite2D/Area2D.monitoring = false
 		$Sprite2D/Area2D.monitorable = false
-		GlobalVars.slots[my_slot] = self
+		GlobalVars.slots.set(my_slot, self)
 		slots_ui = get_node("/root/main/UI/HUD/Slots")
 		if slots_ui:
 			slots_ui.update()

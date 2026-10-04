@@ -5,7 +5,7 @@ extends Node2D
 @onready var Cooldown : Timer = $cooldown
 
 var BULLET : PackedScene
-var my_slot : String = ""
+var my_slot : int
 var my_owner
 var can_shoot : bool = true
 var current_angle = null
@@ -17,7 +17,7 @@ var slots_ui
 
 func _ready():
 	BULLET = preload("uid://csr8w1qcnqlbd")
-	GlobalVars.slots[str(my_slot)] = self
+	GlobalVars.slots.set(my_slot, self)
 	slots_ui = get_node("/root/main/UI/HUD/Slots")
 	if slots_ui:
 		slots_ui.update()

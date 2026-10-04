@@ -122,14 +122,14 @@ func jump():
 
 func damage(damage_amount, type):
 	hp -= damage_amount
-	match type:
-		"bullet":
-			GlobalVars.heal(int(damage_amount * 0.25))
-		"explosion":
-			if hp <= 0:
-				GlobalVars.heal(int(damage_amount * 1.25))
-		"hammer":
-			GlobalVars.heal(damage_amount * 0.8)
+	#match type:
+		#"bullet":
+			#GlobalVars.heal(int(damage_amount * 0.25))
+		#"explosion":
+			#if hp <= 0:
+				#GlobalVars.heal(int(damage_amount * 1.25))
+		#"hammer":
+			#GlobalVars.heal(damage_amount * 0.8)
 	var new_splatter = Sprite2D.new()
 	new_splatter.texture = load("res://textures/particles/enemy_parts/splash" +\
 	str(randi_range(1, 41)) + ".png")

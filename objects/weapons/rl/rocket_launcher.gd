@@ -7,7 +7,7 @@ const ROCKET = preload("uid://cfex0tmkaj6q4")
 @onready var Cooldown : Timer = $cooldown
 
 var is_player_nearby : bool = false
-var my_slot : String = ""
+var my_slot : int
 var can_shoot: bool = true
 var current_angle: float = 0.0
 var my_owner
@@ -17,7 +17,7 @@ var total_rockets : int = 0
 var my_name = "rocket_launcher"
 
 func _ready():
-	GlobalVars.slots[str(my_slot)] = self
+	GlobalVars.slots.set(my_slot, self)
 	slots_ui = get_node("/root/main/UI/HUD/Slots")
 	if slots_ui:
 		slots_ui.update()
@@ -67,13 +67,13 @@ func shoot(damage_amount):
 	new_rocket.name = "Rocket" + str(total_rockets)
 	total_rockets += 1
 	get_node("/root/main").add_child(new_rocket)
-	$RL_sprite/Cloud.initial_velocity_max += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
-	$RL_sprite/Cloud.initial_velocity_min += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
-	$RL_sprite/Cloud.emitting = true
-	$RL_sprite/Clouds_small.amount = randi_range(1, 3)
-	$RL_sprite/Clouds_small.initial_velocity_max += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
-	$RL_sprite/Clouds_small.initial_velocity_min += (GlobalVars.player_velocity.x + GlobalVars.player_velocity.y) * 1.25
-	$RL_sprite/Clouds_small.emitting = true
+	#$RL_sprite/Cloud.initial_velocity_max += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
+	#$RL_sprite/Cloud.initial_velocity_min += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
+	#$RL_sprite/Cloud.emitting = true
+	#$RL_sprite/Clouds_small.amount = randi_range(1, 3)
+	#$RL_sprite/Clouds_small.initial_velocity_max += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
+	#$RL_sprite/Clouds_small.initial_velocity_min += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
+	#$RL_sprite/Clouds_small.emitting = true
 	
 	can_shoot = false
 	Cooldown.start()
