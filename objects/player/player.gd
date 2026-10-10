@@ -146,7 +146,7 @@ func slide(delta : float):
 		is_slamming = false
 		$slam.emitting = false
 		$SlideCoyoteTime.start()
-		rotation = -0.2 * direction#* get_wall_normal().x
+		rotation = 0.2 * sign(get_wall_normal().x)
 		
 		$slide.emitting = true
 		$slide.scale.x = direction * -1
@@ -154,7 +154,6 @@ func slide(delta : float):
 		wall_slide_loop.volume_db = 0.0
 		wall_slide_loop.pitch_scale = 1.0 + abs(velocity.y) / 100
 	else:
-		print(get_wall_normal().x)
 		rotation = 0.0
 		$slide.emitting = false
 		wall_slide_loop.volume_db = -80.0

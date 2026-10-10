@@ -1,15 +1,30 @@
 [gd_scene format=3 uid="uid://7pwfca8tanen"]
 
 [ext_resource type="Script" uid="uid://do5lfpq2dysdi" path="res://objects/player/player.gd" id="1_cq43t"]
-[ext_resource type="Texture2D" uid="uid://ckpacdte3gvhm" path="res://textures/idk2.png" id="2_ercwk"]
 [ext_resource type="Shader" uid="uid://ctlgygb5jr3sl" path="res://shaders/dithering_transparency.gdshader" id="2_n1h8g"]
 [ext_resource type="AudioStream" uid="uid://b7rod44b0q0dn" path="res://sounds/wall_slide_loop.mp3" id="3_ijwuf"]
+[ext_resource type="Texture2D" uid="uid://j3oxb8nvthhm" path="res://textures/player/default.png" id="3_rpetc"]
+[ext_resource type="Texture2D" uid="uid://d2f07p6yiudnv" path="res://textures/player/spin_right/spin_right_0001.png" id="4_0dqnc"]
 [ext_resource type="AudioStream" uid="uid://bqktfabsbcg42" path="res://sounds/WindLoop.ogg" id="4_iy4hj"]
+[ext_resource type="Texture2D" uid="uid://c6q603wwqj7s6" path="res://textures/player/spin_right/spin_right_0002.png" id="5_muiv1"]
+[ext_resource type="Texture2D" uid="uid://dpw6sh2wed4v2" path="res://textures/player/spin_right/spin_right_0003.png" id="6_j4sky"]
+[ext_resource type="Texture2D" uid="uid://7kqf1qxdkvaa" path="res://textures/player/spin_right/spin_right_0004.png" id="7_3hcdt"]
 [ext_resource type="Texture2D" uid="uid://b73eakvkvyx8r" path="res://textures/particles/slide/4.png" id="7_x2mbb"]
 [ext_resource type="Texture2D" uid="uid://b3ivou6ton8fs" path="res://textures/particles/slide/6.png" id="8_o85vh"]
+[ext_resource type="Texture2D" uid="uid://b1y48twnjt0w7" path="res://textures/player/spin_right/spin_right_0005.png" id="8_xy1i2"]
+[ext_resource type="Texture2D" uid="uid://dgek3pdeym6pq" path="res://textures/player/spin_right/spin_right_0006.png" id="9_vk66s"]
+[ext_resource type="Texture2D" uid="uid://c7mr3h0lya3y1" path="res://textures/player/spin_right/spin_right_0007.png" id="10_j6ljv"]
+[ext_resource type="Texture2D" uid="uid://b2vjuhia2h6xn" path="res://textures/player/spin_right/spin_right_0008.png" id="11_dd7c0"]
 [ext_resource type="AudioStream" uid="uid://n1irdk3ygua0" path="res://sounds/fall.wav" id="11_dnsx0"]
+[ext_resource type="Texture2D" uid="uid://vgilqdryniwi" path="res://textures/player/spin_right/spin_right_0009.png" id="12_k2evt"]
 [ext_resource type="Texture2D" uid="uid://c8h7vr4you8c5" path="res://textures/particles/slam_fall.png" id="12_sx4ji"]
 [ext_resource type="Texture2D" uid="uid://4u0nd6rl015b" path="res://textures/2d_lights_and_shadows_neutral_point_light.webp" id="13_ercwk"]
+[ext_resource type="Texture2D" uid="uid://d114mlc1vlb13" path="res://textures/player/spin_right/spin_right_0010.png" id="13_tnn5f"]
+[ext_resource type="Texture2D" uid="uid://cohqyryd77jr0" path="res://textures/player/spin_right/spin_right_0011.png" id="14_tvhsm"]
+[ext_resource type="Texture2D" uid="uid://dike2jku3rlrx" path="res://textures/player/spin_right/spin_right_0012.png" id="15_3mhlj"]
+[ext_resource type="Texture2D" uid="uid://ck6wy77bijggg" path="res://textures/player/spin_right/spin_right_0013.png" id="16_26mmu"]
+[ext_resource type="Texture2D" uid="uid://c6bpbk45ag7m5" path="res://textures/player/spin_right/spin_right_0014.png" id="17_5myuk"]
+[ext_resource type="Texture2D" uid="uid://cjrka8jtpsmmi" path="res://textures/player/spin_right/spin_right_0015.png" id="18_f17kx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m0oal"]
 size = Vector2(15, 15)
@@ -20,6 +35,104 @@ size = Vector2(8, 8)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0oal"]
 shader = ExtResource("2_n1h8g")
 shader_parameter/intensity = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0oal"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rpetc")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0dqnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_muiv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4sky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3hcdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xy1i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vk66s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j6ljv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dd7c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k2evt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tnn5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tvhsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3mhlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_26mmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5myuk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f17kx")
+}],
+"loop": 1,
+"name": &"spin_right",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_k2evt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dd7c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j6ljv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vk66s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xy1i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3hcdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4sky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_muiv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0dqnc")
+}],
+"loop": 0,
+"name": &"turn_left",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"turn_right",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
@@ -256,12 +369,10 @@ shape = SubResource("RectangleShape2D_m0oal")
 visible = false
 shape = SubResource("RectangleShape2D_7wy8b")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=108929468]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=117064103]
 material = SubResource("ShaderMaterial_m0oal")
-texture = ExtResource("2_ercwk")
-region_enabled = true
-region_rect = Rect2(12, 14, 12, 12)
-region_filter_clip_enabled = true
+sprite_frames = SubResource("SpriteFrames_m0oal")
+animation = &"spin_right"
 
 [node name="wall_slide_loop" type="AudioStreamPlayer2D" parent="." unique_id=366827242]
 stream = ExtResource("3_ijwuf")
