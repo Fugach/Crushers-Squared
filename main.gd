@@ -5,8 +5,8 @@ extends Node2D
 @onready var RestartUI : CanvasLayer = $UI/Restart
 @onready var PauseUI : CanvasLayer = $UI/Pause
 @onready var HUD : CanvasLayer = $UI/HUD
-@onready var HPBar : TextureProgressBar = $UI/HUD/HPBar
-@onready var HPLabel : Label = $UI/HUD/HPBar/HPLabel
+@onready var HPBar : TextureProgressBar = $UI/HUD/HP/HPBar
+@onready var HPLabel : Label = $UI/HUD/HP/HPBar/HPLabel
 
 @onready var Table : Control = $UI/HUD/Table
 
@@ -26,13 +26,6 @@ func _ready() -> void:
 	add_child(player)
 	player = $Player
 	GlobalVars.player = player
-	GlobalVars.slots = {
-	1: null,
-	2: null,
-	3: null
-	}
-	GlobalVars.current_slot_node = null
-	GlobalVars.current_slot_num = 1
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	load_config()
 	GlobalVars.main_node = self

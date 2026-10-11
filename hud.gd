@@ -60,18 +60,18 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		Console.text += "              " + str(3 - GlobalVars.passed_layers)
 
 func hpbar_update():
-	var lab = $HPBar/HPLabel
-	var bar = $HPBar
-	var bar_sm = $HPBar_smooth
-	var hp = GlobalVars.player.my_stats['hp']
+	var lab = $HP/HPBar/HPLabel
+	var bar = $HP/HPBar
+	var bar_sm = $HP/HPBar_smooth
+	var hp = GlobalVars.player.my_stats['HP']
 	lab.text = str(hp)
 	if bar.value != float(hp):
 		bar.value = lerp(bar.value, float(hp), 0.5)
 		print(bar.value - float(hp))
 
 func _on_timer_timeout() -> void:
-	var bar = $HPBar
-	var bar_sm = $HPBar_smooth
+	var bar = $HP/HPBar
+	var bar_sm = $HP/HPBar_smooth
 	while bar_sm.value != bar.value:
 		bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
 		await get_tree().process_frame
@@ -88,9 +88,9 @@ func _on_upgrade_3_mouse_entered() -> void:
 
 
 func _on_hp_bar_value_changed(value: float) -> void:
-	$HPBar/Timer.start()
-	if $HPBar.value <= 0:
-		$HPBar.value = 0
-		$HPBar/HPLabel.text = "0"
+	$HP/HPBar/Timer.start()
+	if $HP/HPBar.value <= 0:
+		$HP/HPBar.value = 0
+		$HP/HPBar/HPLabel.text = "0"
 		GlobalVars.player_hp = 0
 		get_parent().get_parent().death()

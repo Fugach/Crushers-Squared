@@ -1,6 +1,6 @@
 extends Node2D
 
-const ROCKET = preload("uid://cfex0tmkaj6q4")
+var ROCKET = GlobalVars.ROCKET
 
 @onready var Sprite : Node2D = $RL_sprite
 @onready var ShootPos : Marker2D = $RL_sprite/shoot_pos

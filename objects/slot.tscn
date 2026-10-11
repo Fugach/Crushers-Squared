@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c3qxg2ahr7shg"]
+
+[ext_resource type="Texture2D" uid="uid://d0lihokvpkx2s" path="res://textures/HUD/slots/empty.png" id="1_1eg4w"]
+[ext_resource type="Texture2D" uid="uid://cchgved8conpv" path="res://textures/HUD/slots/pistol.png" id="2_xhuvf"]
+[ext_resource type="Texture2D" uid="uid://cdah5x13dmpmc" path="res://textures/HUD/slots/rocket_launcher.png" id="3_cwqae"]
+[ext_resource type="Texture2D" uid="uid://3hj22n845p05" path="res://textures/HUD/slots/shotgun.png" id="4_kybjj"]
+[ext_resource type="Texture2D" uid="uid://b1uji6gi8lyat" path="res://textures/HUD/slots/unknown.png" id="5_cbeh3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cbny"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1eg4w")
+}],
+"loop": 0,
+"name": &"empty",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xhuvf")
+}],
+"loop": 1,
+"name": &"pistol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cwqae")
+}],
+"loop": 1,
+"name": &"rocket_launcher",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_kybjj")
+}],
+"loop": 1,
+"name": &"shotgun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cbeh3")
+}],
+"loop": 1,
+"name": &"unknown",
+"speed": 5.0
+}]
+
+[node name="0" type="AnimatedSprite2D" unique_id=803647498]
+sprite_frames = SubResource("SpriteFrames_0cbny")
+animation = &"empty"

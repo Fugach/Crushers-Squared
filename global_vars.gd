@@ -3,15 +3,14 @@ extends Node
 var player : CharacterBody2D
 var main_node : Node2D
 var WEAPON = preload("uid://d18mm0obf3dqi")
+var ROCKET = preload("uid://cfex0tmkaj6q4")
 var cleared_rooms : Dictionary = {}
 
-var current_slot_num : int = 1
+var current_slot_num : int = 0
 var current_slot_node : Node2D = null
 
 var slots : Dictionary[int, Node2D] = {
 	0: null,
-	1: null,
-	2: null
 }
 
 var stats : Dictionary = {

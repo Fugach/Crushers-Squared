@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://d3fm20triww15"
-path="res://.godot/imported/remind.ogg-908a5df64c5db74dbc00fa5dd77b86b3.oggvorbisstr"
+path="res://.godot/imported/remind.ogg-2a0b02a0045da39212758f7db27317e2.oggvorbisstr"
 
 [deps]
 
-source_file="res://sounds/ui/remind.ogg"
-dest_files=["res://.godot/imported/remind.ogg-908a5df64c5db74dbc00fa5dd77b86b3.oggvorbisstr"]
+source_file="res://sounds/UI/remind.ogg"
+dest_files=["res://.godot/imported/remind.ogg-2a0b02a0045da39212758f7db27317e2.oggvorbisstr"]
 
 [params]
 

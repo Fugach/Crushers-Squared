@@ -2,13 +2,13 @@ class_name Player
 extends CharacterBody2D
 
 var my_stats : Dictionary = {
-	'max_speed' = 165.0,
-	'jump_power' = -300.0,
-	'weight' = 650,
-	'max_walljumps' = 3,
-	'walljumps' = 3,
-	'max_hp' = 100,
-	'hp' = 100
+	'MAX_SPEED' = 165.0,
+	'JUMP_POWER' = -300.0,
+	'WEIGHT' = 650.0,
+	'MAX_WALLJUMPS' = 3,
+	'WALLJUMPS' = 3,
+	'MAX_HP' = 100,
+	'HP' = 100
 }
 
 var direction : int = 1
@@ -21,7 +21,6 @@ var is_running : bool = false
 var can_jump : bool = true
 var falling_speed : float = 0.0
 var current_gravity := Vector2(0, 980)
-var throw_power : Vector2 = Vector2(-10000, -10000)
 var is_debugging : bool = false
 var is_noclipping : bool = false
 var is_picking_up_weapon : bool = false
@@ -45,7 +44,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var previous_velocity = velocity
 	
-	if my_stats['hp'] > 0:
+	if my_stats['HP'] > 0:
 		walk(delta)
 		slide(delta)
 		jump()
@@ -58,10 +57,10 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider is RigidBody2D:
 			var normal = collision.get_normal()
-			if previous_velocity.x + previous_velocity.y > my_stats['max_speed'] * 2:
+			if previous_velocity.x + previous_velocity.y > my_stats['MAX_SPEED'] * 2:
 				collider.apply_impulse(previous_velocity * normal * -0.15)
 			else:
-				collider.apply_impulse(Vector2(my_stats['max_speed'], my_stats['max_speed']) * normal * -0.15)
+				collider.apply_impulse(Vector2(my_stats['max_speed'], my_stats['MAX_SPEED']) * normal * -0.15)
 
 func _process(_delta: float) -> void:
 	if is_debugging:
@@ -85,10 +84,10 @@ func debug():
 	if Input.is_action_just_pressed("debug_thingy"):
 		Engine.time_scale = 0.0
 	if Input.is_action_just_pressed("heal"):
-		if my_stats['hp'] < 100:
-			my_stats['hp'] = 100
+		if my_stats['HP'] < 100:
+			my_stats['HP'] = 100
 		else:
-			my_stats['hp'] = 999
+			my_stats['HP'] = 999
 	if Input.is_action_just_pressed('noclip'):
 		rotation = 0.0
 		is_sliding = false
@@ -117,19 +116,19 @@ func walk(delta : float):
 		Anims.play("unsquish")
 	if Input.is_action_just_pressed("move_left"):
 		direction = -1
-		velocity.x += 500 * direction
+		velocity.x += my_stats["MAX_SPEED"] * direction
 	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
 		direction = -1
 	elif Input.is_action_just_pressed("move_right"):
 		direction = 1
-		velocity.x += 500 * direction
+		velocity.x += my_stats.MAX_SPEED * direction
 	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
 		direction = 1
 	elif Input.is_action_just_released("move_left") and direction == -1 or\
 		 Input.is_action_just_released("move_right") and direction == 1:
 			is_running = false
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		velocity.x += (my_stats['max_speed'] - abs(velocity.x)) * direction * delta * 5
+		velocity.x += (my_stats['MAX_SPEED'] - abs(velocity.x)) * direction * delta * 5
 		if sign(velocity.x) != direction and velocity.x != 0:
 			velocity.x *= 0.8
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -161,27 +160,27 @@ func slide(delta : float):
 
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
-		velocity += sign(current_gravity) * my_stats['jump_power']
+		velocity += sign(current_gravity) * my_stats['JUMP_POWER']
 		Anims.play("RESET")
 	elif $JumpCoyoteTime.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += my_stats['jump_power']
+		velocity.y += my_stats['JUMP_POWER']
 		if Anims.current_animation == "slam_stop":
 			Anims.play("RESET")
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
 		velocity.y *= 0.6
-	elif Input.is_action_just_pressed("jump") and is_sliding and my_stats['walljumps'] > 0:
+	elif Input.is_action_just_pressed("jump") and is_sliding and my_stats['WALLJUMPS'] > 0:
 		Anims.stop()
 		is_slamming = false
 		velocity.x = sign(get_wall_normal().x) * 200
 		velocity.y = -350
-		my_stats['walljumps'] -= 1
+		my_stats['WALLJUMPS'] -= 1
 	if is_on_floor():
-		my_stats['walljumps'] = my_stats['max_walljumps']
+		my_stats['WALLJUMPS'] = my_stats['MAX_WALLJUMPS']
 		$JumpCoyoteTime.start()
 
 func fall():
 	# мультяшый эффект падения и свист воздуха
-	if velocity.y > my_stats['weight']:
+	if velocity.y > my_stats['WEIGHT']:
 		falling_speed = velocity.y
 		is_falling_fast = true
 		$Sprite2D.scale = Vector2(
@@ -190,7 +189,7 @@ func fall():
 			)
 		$wind.volume_db = min((abs(velocity.x) + abs(velocity.y)) * 0.025 - 35, 7.5)
 		$wind.pitch_scale = (abs(velocity.x) + abs(velocity.y)) * 0.0001 + 1.0
-	elif is_falling_fast and velocity.y <= my_stats['weight'] and not is_on_floor():
+	elif is_falling_fast and velocity.y <= my_stats['WEIGHT'] and not is_on_floor():
 		is_falling_fast = false
 		$Sprite2D.scale = Vector2(1, 1)
 		$wind.volume_db = -80
@@ -236,11 +235,11 @@ func push(pwr, _dir):
 func damage(amount, type):
 	if $damage_cooldown.is_stopped():
 		$damage_cooldown.start()
-		my_stats['hp'] -= amount
-		if my_stats['hp'] - amount > 0:
-			my_stats['hp'] -= amount
+		my_stats['HP'] -= amount
+		if my_stats['HP'] - amount > 0:
+			my_stats['HP'] -= amount
 		else:
-			my_stats['hp'] = 0
+			my_stats['HP'] = 0
 			main.death()
 
 func _input(event: InputEvent) -> void:
@@ -260,48 +259,32 @@ func _input(event: InputEvent) -> void:
 		$slam.emitting = false
 		is_slamming = false
 	if Anims.current_animation == "slam_stop" and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += my_stats['jump_power'] * 0.3
+		velocity.y += my_stats['JUMP_POWER'] * 0.3
 	
 	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
-		# TODO
 		GlobalVars.current_slot_num = (GlobalVars.current_slot_num + 1) % len(GlobalVars.slots)
 		SlotsHUD.update()
-		#match GlobalVars.current_slot_num:
-			#"slot1":
-				#GlobalVars.current_slot_num = "slot2"
-			#"slot2":
-				#GlobalVars.current_slot_num = "slot3"
-			#"slot3":
-				#GlobalVars.current_slot_num = "slot1"
 	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
 		GlobalVars.current_slot_num = (GlobalVars.current_slot_num - 1 if\
-		GlobalVars.current_slot_num - 1 >= 0 else len(GlobalVars.slots) - 1) %\
-		len(GlobalVars.slots)
+		GlobalVars.current_slot_num - 1 >= 0 else len(GlobalVars.slots) - 1)
 		SlotsHUD.update()
-		#match GlobalVars.current_slot_num:
-			#"slot1":
-				#GlobalVars.current_slot_num = "slot3"
-			#"slot2":
-				#GlobalVars.current_slot_num = "slot1"
-			#"slot3":
-				#GlobalVars.current_slot_num = "slot2"
 	if text.is_valid_int():
 		var num = int(text)
-		if num <= 9 and num > 0:
-			GlobalVars.current_slot_num = num - 1
+		if num <= 9 and num > 0 and num <= len(GlobalVars.slots):
+			GlobalVars.current_slot_num = num % (len(GlobalVars.slots) + 1) - 1
 			SlotsHUD.update()
 	
 	if Input.is_action_just_pressed("drop"):
 		var item : Node2D = GlobalVars.slots[GlobalVars.current_slot_num]
 		if item != null:
 			print(item.my_name)
-			$throw.play()
+			#$throw.play()
 			GlobalVars.slots[GlobalVars.current_slot_num] = null
 			var result = WEAPON.instantiate()
 			result.weapon = item.my_name
 			item.queue_free()
 			result.global_position = global_position + Vector2(sign(global_position.x - get_global_mouse_position().x) * -10, -5)
-			result.apply_force(throw_power * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
+			result.apply_force(10000 * Vector2(1, 1) * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
 			get_parent().add_child(result)
 			SlotsHUD.update()
 
@@ -316,7 +299,10 @@ func respawn():
 	Camera.global_position = global_position
 	Camera.reset_smoothing()
 	Anims.play("RESET")
-	my_stats['hp'] = 100
+	my_stats['HP'] = 100
+
+func set_stat(what : String, amount):
+	my_stats[what] = amount
 
 func animation_finished(anim_name: StringName) -> void:
 	last_animation = anim_name

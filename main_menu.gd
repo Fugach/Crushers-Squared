@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var text: RichTextLabel = $RichTextLabel
 @onready var CRT: ColorRect = $CanvasLayer/CRT
@@ -86,8 +86,7 @@ func wait(x):
 func main_menu():
 	$settings_things.hide()
 	text.text = ""
-	#text.horizontal_alignment = HO
-	text.text = "-".repeat(155)
+	text.text += "-".repeat(180)
 	await wait(0.2)
 	text.text += "\n"
 	text.text += "   ##         -=     ##-=-=        #           #      #                #     ##             ##     -=-=-=-=-=      ##-=-=-=           -=-=-=-=      ##             ##       2
@@ -96,7 +95,7 @@ func main_menu():
      ##     -=         ##                            #     #       #      #     ## -=        ##             #             ##                    #          #     ## -=        ##
      ##         -=     ##                =-=-=-=-      #=-= #-=-#      ##             ##             #             ##-=-=-=      =-#          #    ##             ## "
 	await wait(0.2)
-	text.text += "\n" + "-".repeat(155)
+	text.text += "\n" + "-".repeat(178)
 	text.text += "\n\n\n" + "         НАЧАТЬ"
 	text.text += "\n\n\n" + "         НАСТРОЙКИ"
 	text.text += "\n\n\n" + "         ВЫХОД"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmgalag65n3bi"
-path="res://.godot/imported/RL.png-2700e79d6a6e369ea0b6ae4de845fcf3.ctex"
+uid="uid://cdah5x13dmpmc"
+path="res://.godot/imported/rocket_launcher.png-0f7f2f3328d4d6b1106d7a8520708688.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/HUD/slots/RL.png"
-dest_files=["res://.godot/imported/RL.png-2700e79d6a6e369ea0b6ae4de845fcf3.ctex"]
+source_file="res://textures/HUD/slots/rocket_launcher.png"
+dest_files=["res://.godot/imported/rocket_launcher.png-0f7f2f3328d4d6b1106d7a8520708688.ctex"]
 
 [params]
 
