@@ -19,7 +19,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -32,6 +32,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_m0rrv"]
+resource_name = "draw"
+length = 0.13399999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, 3), Vector2(1, 3), Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7853981633974483, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ie44i"]
@@ -47,7 +75,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.23333333),
 "transitions": PackedFloat32Array(1, 0.5, 2, 0.5),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
+"values": [Vector2(1, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -75,7 +103,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.033333335, 0.16666667, 0.23333333),
 "transitions": PackedFloat32Array(1, 0.5, 2, 0.5),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
+"values": [Vector2(1, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -93,6 +121,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4702"]
 _data = {
 &"RESET": SubResource("Animation_duhoc"),
+&"draw": SubResource("Animation_m0rrv"),
 &"shoot_left": SubResource("Animation_ie44i"),
 &"shoot_right": SubResource("Animation_r7pee")
 }
@@ -100,10 +129,13 @@ _data = {
 [node name="Pistol" type="Node2D" unique_id=1802689912]
 script = ExtResource("1_nosnq")
 
-[node name="Cooldown" type="Timer" parent="." unique_id=572311217]
+[node name="DrawTime" type="Timer" parent="." unique_id=1562620456]
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=572311217]
 wait_time = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=346581404]
+position = Vector2(1, 0)
 texture = ExtResource("2_og3ej")
 offset = Vector2(7, 0)
 
@@ -122,6 +154,6 @@ libraries/ = SubResource("AnimationLibrary_v4702")
 [node name="shoot" type="AudioStreamPlayer2D" parent="." unique_id=1059423175]
 stream = ExtResource("3_og3ej")
 
-[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]

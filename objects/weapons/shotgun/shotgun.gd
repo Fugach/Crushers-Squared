@@ -13,21 +13,14 @@ var is_player_nearby : bool = false
 var is_player_colliding : bool = false
 var my_name = "shotgun"
 var accuracy : float = 0.05 # default: 0.05
-var slots_ui
 
 func _ready():
 	BULLET = preload("uid://csr8w1qcnqlbd")
 	GlobalVars.slots.set(my_slot, self)
-	slots_ui = get_node("/root/main/UI/HUD/Slots")
-	if slots_ui:
-		slots_ui.update()
-	else:
-		push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
 	if my_owner is Player:
 		if GlobalVars.current_slot_num == my_slot:
-			slots_ui.update()
 			visible = true
 			logic()
 		else:
@@ -40,7 +33,7 @@ func _process(delta: float) -> void:
 		logic()
 
 func logic():
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		look_at(get_global_mouse_position())
 		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
 	elif my_owner is Enemy:
@@ -56,7 +49,7 @@ func logic():
 		Spawnpoint.position.y = 2
 		$Sprite2D/Area2D.position.y = 3
 	
-	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
+	if Input.is_action_pressed("lmb") and can_shoot and my_owner == GlobalVars.player:
 		shoot(7)
 
 func shoot(damage_amount):

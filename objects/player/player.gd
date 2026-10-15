@@ -1,4 +1,3 @@
-class_name Player
 extends CharacterBody2D
 
 var my_stats : Dictionary = {
@@ -11,6 +10,10 @@ var my_stats : Dictionary = {
 	'HP' = 100
 }
 
+var inventory : Dictionary[int, Node2D] = {
+	0: null,
+}
+
 var direction : int = 1
 var last_animation : String = ""
 
@@ -19,21 +22,20 @@ var is_slamming : bool = false
 var is_falling_fast : bool = false
 var is_running : bool = false
 var can_jump : bool = true
-var falling_speed : float = 0.0
 var current_gravity := Vector2(0, 980)
 var is_debugging : bool = false
 var is_noclipping : bool = false
 var is_picking_up_weapon : bool = false
 
-@onready var main : Node2D = $".."
+@onready var Slots : Control = $"../UI/HUD/Slots"
+
 @onready var HAND = preload("uid://bbxbw8j8ubuiv")
 @onready var FALL_PARTICLES = preload("uid://3jklnx6aump3")
 @onready var WEAPON = GlobalVars.WEAPON
-@onready var Camera : Camera2D = $"../Camera2D"
-@onready var SlotsHUD : Control = $"../UI/HUD/Slots"
+@onready var Camera : Camera2D = $"../Camera"
 @onready var Anims : AnimationPlayer = $AnimationPlayer
 @onready var RunTiming : Timer = $RunTiming
-@onready var wall_slide_loop : AudioStreamPlayer2D = $wall_slide_loop
+@onready var slide_loop : AudioStreamPlayer2D = $wall_slide_loop
 
 func _ready() -> void:
 	if OS.is_debug_build():
@@ -49,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		slide(delta)
 		jump()
 		fall()
+		use_weapon()
 		move_and_slide()
 
 	
@@ -60,7 +63,7 @@ func _physics_process(delta: float) -> void:
 			if previous_velocity.x + previous_velocity.y > my_stats['MAX_SPEED'] * 2:
 				collider.apply_impulse(previous_velocity * normal * -0.15)
 			else:
-				collider.apply_impulse(Vector2(my_stats['max_speed'], my_stats['MAX_SPEED']) * normal * -0.15)
+				collider.apply_impulse(Vector2(my_stats['MAX_SPEED'], my_stats['MAX_SPEED']) * normal * -0.15)
 
 func _process(_delta: float) -> void:
 	if is_debugging:
@@ -77,7 +80,7 @@ func debug():
 		get_parent().add_child(new_box)
 	if Input.is_action_just_pressed("spawn_PISTOL"):
 		var new_weapon = Debug.WEAPON.instantiate()
-		new_weapon.weapon = ['pistol', 'shotgun', 'rocket_launcher'].pick_random()
+		new_weapon.weapon = 'flamethrower'
 		new_weapon.global_position = get_global_mouse_position()
 		get_parent().add_child(new_weapon)
 	
@@ -150,12 +153,12 @@ func slide(delta : float):
 		$slide.emitting = true
 		$slide.scale.x = direction * -1
 		$slide.global_position = global_position + Vector2(-5 * get_wall_normal().x, 5)
-		wall_slide_loop.volume_db = 0.0
-		wall_slide_loop.pitch_scale = 1.0 + abs(velocity.y) / 100
+		slide_loop.volume_db = 0.0
+		slide_loop.pitch_scale = 1.0 + abs(velocity.y) / 100
 	else:
 		rotation = 0.0
 		$slide.emitting = false
-		wall_slide_loop.volume_db = -80.0
+		slide_loop.volume_db = -80.0
 	velocity.y += current_gravity.y * delta * (0.1 if is_sliding else 1.0)
 
 func jump():
@@ -181,7 +184,6 @@ func jump():
 func fall():
 	# мультяшый эффект падения и свист воздуха
 	if velocity.y > my_stats['WEIGHT']:
-		falling_speed = velocity.y
 		is_falling_fast = true
 		$Sprite2D.scale = Vector2(
 			clamp(500 / velocity.y * 1.5, 0.3, 1),
@@ -200,7 +202,7 @@ func fall():
 		$fall.pitch_scale = randf_range(0.7, 1.3)
 		$fall.play()
 		var new_fall = FALL_PARTICLES.instantiate()
-		new_fall.min_vel = 15 * (falling_speed / 50)
+		new_fall.min_vel = 15 * (velocity.y / 50)
 		new_fall.max_vel = new_fall.min_vel * 1.25
 		new_fall.global_position = global_position
 		get_parent().add_child(new_fall)
@@ -224,6 +226,11 @@ func fall():
 			   body.has_method("damage"):
 				body.damage(10, 'fall')
 
+func use_weapon():
+	if inventory[Slots.current_slot] == null:
+		return
+	
+
 func push(pwr, _dir):
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		velocity += pwr * Vector2(-1, -1) / 2
@@ -240,7 +247,7 @@ func damage(amount, type):
 			my_stats['HP'] -= amount
 		else:
 			my_stats['HP'] = 0
-			main.death()
+			GlobalVars.main.death()
 
 func _input(event: InputEvent) -> void:
 	var text = event.as_text()
@@ -262,31 +269,30 @@ func _input(event: InputEvent) -> void:
 		velocity.y += my_stats['JUMP_POWER'] * 0.3
 	
 	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
-		GlobalVars.current_slot_num = (GlobalVars.current_slot_num + 1) % len(GlobalVars.slots)
-		SlotsHUD.update()
+		Slots.current_slot = (Slots.current_slot + 1) % len(inventory)
+		Slots.update()
 	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
-		GlobalVars.current_slot_num = (GlobalVars.current_slot_num - 1 if\
-		GlobalVars.current_slot_num - 1 >= 0 else len(GlobalVars.slots) - 1)
-		SlotsHUD.update()
+		Slots.current_slot = (Slots.current_slot - 1 if\
+		Slots.current_slot - 1 >= 0 else len(inventory) - 1)
+		Slots.update()
 	if text.is_valid_int():
 		var num = int(text)
-		if num <= 9 and num > 0 and num <= len(GlobalVars.slots):
-			GlobalVars.current_slot_num = num % (len(GlobalVars.slots) + 1) - 1
-			SlotsHUD.update()
+		if num <= 9 and num > 0 and num <= len(inventory):
+			Slots.current_slot = num % (len(inventory) + 1) - 1
+			Slots.update()
 	
 	if Input.is_action_just_pressed("drop"):
-		var item : Node2D = GlobalVars.slots[GlobalVars.current_slot_num]
+		var item : Node2D = inventory[Slots.current_slot]
 		if item != null:
-			print(item.my_name)
 			#$throw.play()
-			GlobalVars.slots[GlobalVars.current_slot_num] = null
+			inventory[Slots.current_slot] = null
 			var result = WEAPON.instantiate()
 			result.weapon = item.my_name
 			item.queue_free()
 			result.global_position = global_position + Vector2(sign(global_position.x - get_global_mouse_position().x) * -10, -5)
 			result.apply_force(10000 * Vector2(1, 1) * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
 			get_parent().add_child(result)
-			SlotsHUD.update()
+			Slots.update()
 
 func respawn():
 	if Camera == null:
@@ -314,7 +320,7 @@ func _on_slide_coyote_timeout() -> void:
 
 
 func _on_pick_up_area_entered(body: Node2D) -> void:
-	if body.has_method("pick_up") and not is_picking_up_weapon and GlobalVars.slots.values().has(null):
+	if body.has_method("pick_up") and not is_picking_up_weapon and inventory.values().has(null):
 		is_picking_up_weapon = true
 		body.pick_up(self)
 		set_deferred("is_picking_up_weapon", false)

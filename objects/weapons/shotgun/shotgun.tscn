@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.033333335, 0.26666668, 0.33333334),
 "transitions": PackedFloat32Array(1, 2, 2, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
+"values": [Vector2(1, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -76,7 +76,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.033333335, 0.26666668, 0.33333334),
 "transitions": PackedFloat32Array(1, 2, 2, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
+"values": [Vector2(1, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -119,7 +119,9 @@ collision_mode = 2
 [node name="Shotgun" type="Node2D" unique_id=1263487316]
 script = ExtResource("1_hwrt3")
 
-[node name="cooldown" type="Timer" parent="." unique_id=414103338]
+[node name="DrawTime" type="Timer" parent="." unique_id=45271532]
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=414103338]
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1154187654]
@@ -151,6 +153,6 @@ one_shot = true
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_f42wg")
 
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]

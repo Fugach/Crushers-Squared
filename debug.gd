@@ -6,7 +6,6 @@ var WEAPON : PackedScene
 
 func _init() -> void:
 	if OS.is_debug_build():
-		print(" ||| RUNNING IN DEBUG MODE |||")
 		var debug_thread = Thread.new()
 		debug_thread.start(debug)
 

@@ -51,6 +51,56 @@ animations = [{
 "texture": ExtResource("4_0dqnc")
 }, {
 "duration": 1.0,
+"texture": ExtResource("18_f17kx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j6ljv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5myuk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vk66s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_26mmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3mhlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tvhsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tnn5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k2evt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dd7c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xy1i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3hcdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4sky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_muiv1")
+}],
+"loop": 1,
+"name": &"spin_left",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0dqnc")
+}, {
+"duration": 1.0,
 "texture": ExtResource("5_muiv1")
 }, {
 "duration": 1.0,
@@ -126,12 +176,39 @@ animations = [{
 }],
 "loop": 0,
 "name": &"turn_left",
-"speed": 10.0
+"speed": 20.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0dqnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_muiv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j4sky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3hcdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xy1i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vk66s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j6ljv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dd7c0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k2evt")
+}],
+"loop": 0,
 "name": &"turn_right",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="Animation" id="Animation_epypp"]
@@ -372,7 +449,9 @@ shape = SubResource("RectangleShape2D_7wy8b")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=117064103]
 material = SubResource("ShaderMaterial_m0oal")
 sprite_frames = SubResource("SpriteFrames_m0oal")
-animation = &"spin_right"
+animation = &"turn_right"
+frame = 8
+frame_progress = 1.0
 
 [node name="wall_slide_loop" type="AudioStreamPlayer2D" parent="." unique_id=366827242]
 stream = ExtResource("3_ijwuf")

@@ -37,7 +37,7 @@ func hit(body):
 	if body == my_owner:
 		return
 	Line.set_point_position(1, Line.to_local(Raycast.get_collision_point()))
-	if body is Player:
+	if body == GlobalVars.player:
 		body.damage(damage_amount, "bullet")
 		kill()
 	elif body is TileMapLayer or body is StaticBody2D:

@@ -1,11 +1,12 @@
 extends Node2D
 
+var my_owner
+var can_shoot : bool = true
+var my_slot : int
+const my_name = 'flamethrower'
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

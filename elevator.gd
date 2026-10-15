@@ -6,7 +6,7 @@ extends Area2D
 @onready var Tile_map_layer_bg : TileMapLayer = $"../TileMapLayer/bg"
 @onready var Inside : StaticBody2D = $Inside
 @onready var Outside: Node2D = $Outside
-@onready var Camera: Camera2D = $"../Camera2D"
+@onready var Camera: Camera2D = $"../Camera"
 @onready var HUD: CanvasLayer = $"../UI/HUD"
 
 func _ready() -> void:

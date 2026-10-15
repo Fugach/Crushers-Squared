@@ -5,6 +5,7 @@ const weapons : Dictionary = {
 	'pistol' : "uid://cdavqdqek4rr5",
 	'shotgun' : "uid://bsecy8dw60b21",
 	'rocket_launcher' : "uid://brcehntt6lxn6",
+	'flamethrower' : "uid://dpyw2wrkrp64a",
 }
 
 @onready var Sprite : AnimatedSprite2D = $AnimatedSprite2D
@@ -15,7 +16,7 @@ func _ready() -> void:
 	for node in get_children():
 		if node is CollisionPolygon2D:
 			node.disabled = true
-	if weapon in ['pistol', 'shotgun', 'rocket_launcher']:
+	if weapon in weapons.keys():
 		name = weapon
 		Sprite.animation = weapon
 		get_node("Collision_" + str(weapon)).disabled = false
@@ -35,12 +36,14 @@ func pick_up(character : Node2D):
 		return
 	set_deferred("freeze", true)
 	hide()
-	if character is Player:
-		for x in GlobalVars.slots:
-				if null == GlobalVars.slots[x]:
+	if character == GlobalVars.player:
+		for x in GlobalVars.player.inventory:
+				if null == GlobalVars.player.inventory[x]:
 					var new_weapon = load(weapons[weapon]).instantiate()
 					new_weapon.my_owner = character
 					new_weapon.my_slot = x
 					player.call_deferred("add_child", new_weapon)
+					GlobalVars.player.inventory.set(x, new_weapon)
+					GlobalVars.slots_node.call_deferred('update')
 					queue_free()
 					return

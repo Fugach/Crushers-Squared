@@ -10,7 +10,7 @@ extends Node2D
 
 @onready var Table : Control = $UI/HUD/Table
 
-@onready var Camera : Camera2D = $Camera2D
+@onready var Camera : Camera2D = $Camera
 
 var default = preload("res://textures/cursors/default.png")
 var pointer = preload("res://textures/cursors/pointer.png")
@@ -25,6 +25,7 @@ func _ready() -> void:
 	player.name = 'Player'
 	add_child(player)
 	player = $Player
+	GlobalVars.slots_node = get_node("/root/main/UI/HUD/Slots")
 	GlobalVars.player = player
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	load_config()

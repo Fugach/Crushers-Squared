@@ -2,3 +2,4 @@
 .godot/
 /android/
 *.tmp
+addons/fancy_editor_sounds/

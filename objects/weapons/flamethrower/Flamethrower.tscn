@@ -6,6 +6,12 @@
 [node name="Flamethrower" type="Node2D" unique_id=2045389321]
 script = ExtResource("1_0i2ke")
 
+[node name="DrawTime" type="Timer" parent="." unique_id=480976413]
+
+[node name="OverheatCooldown" type="Timer" parent="." unique_id=344111268]
+
+[node name="ShootDelay" type="Timer" parent="." unique_id=392995806]
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=715864770]
 position = Vector2(3, 1)
 texture = ExtResource("2_ly848")

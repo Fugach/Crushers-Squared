@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var Raycast: RayCast2D = $Raycast
-@onready var Camera: Camera2D = $"../../Camera2D"
+@onready var Camera: Camera2D = $"../../Camera"
 @onready var Animations: AnimationPlayer = $AnimationPlayer
 @onready var Hammer: AnimatedSprite2D = $Hammer
 

@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://drsp0ctx0iuov"
-path="res://.godot/imported/old_dynamic_amen.ogg-7cdaae08c0335b2771b1f3982d6f94d3.oggvorbisstr"
+path="res://.godot/imported/old_dynamic_amen.ogg-bb6c22405a22d869c58b0fa69fe51a9f.oggvorbisstr"
 
 [deps]
 
-source_file="res://sounds/MUSIC/old_dynamic_amen.ogg"
-dest_files=["res://.godot/imported/old_dynamic_amen.ogg-7cdaae08c0335b2771b1f3982d6f94d3.oggvorbisstr"]
+source_file="res://sounds/music/old_dynamic_amen.ogg"
+dest_files=["res://.godot/imported/old_dynamic_amen.ogg-bb6c22405a22d869c58b0fa69fe51a9f.oggvorbisstr"]
 
 [params]
 

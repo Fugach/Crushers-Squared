@@ -13,7 +13,7 @@ var current_angle : float
 var is_player_nearby : bool = false
 var is_player_colliding : bool = false
 var total_bullets : int = 0
-var my_name = "pistol"
+const my_name = "pistol"
 
 func _ready():
 	BULLET = load("uid://csr8w1qcnqlbd")
@@ -21,17 +21,15 @@ func _ready():
 		$Sprite2D/Area2D.hide()
 		$Sprite2D/Area2D.monitoring = false
 		$Sprite2D/Area2D.monitorable = false
-		GlobalVars.slots.set(my_slot, self)
-		slots_ui = get_node("/root/main/UI/HUD/Slots")
-		if slots_ui:
-			slots_ui.update()
-		else:
-			push_error('Slots are not loaded')
+		#slots_ui = get_node("/root/main/UI/HUD/Slots")
+		#if slots_ui:
+			#slots_ui.update()
+		#else:
+			#push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
 	if my_owner is Player:
 		if GlobalVars.current_slot_num == my_slot:
-			slots_ui.update()
 			visible = true
 			logic()
 		else:
@@ -50,7 +48,6 @@ func logic():
 		#current_angle = 
 	if my_owner is Player:
 		current_angle = int(rotation) % 360
-		print(current_angle)
 	
 	if -1.5 <= current_angle and current_angle <= 1.5:
 		Sprite.flip_v = false

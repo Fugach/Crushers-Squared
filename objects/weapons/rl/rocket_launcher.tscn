@@ -47,7 +47,9 @@ _data = {
 [node name="Rocket_launcher" type="Node2D" unique_id=234800380]
 script = ExtResource("1_bl5bl")
 
-[node name="cooldown" type="Timer" parent="." unique_id=1693399810]
+[node name="DrawTime" type="Timer" parent="." unique_id=37408187]
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=1693399810]
 wait_time = 1.5
 one_shot = true
 
@@ -102,7 +104,7 @@ linear_accel_curve = SubResource("Curve_1udmo")
 color_ramp = SubResource("Gradient_v5ddk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=174408379]
-root_node = NodePath("../cooldown")
+root_node = NodePath("../ShootCooldown")
 libraries/ = SubResource("AnimationLibrary_hapj5")
 
 [node name="shoot" type="AudioStreamPlayer2D" parent="." unique_id=1830746700]
@@ -110,6 +112,6 @@ stream = ExtResource("5_ce8r7")
 volume_db = -3.0
 bus = &"Sound"
 
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="body_entered" from="RL_sprite/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="RL_sprite/Area2D" to="." method="_on_area_2d_body_exited"]

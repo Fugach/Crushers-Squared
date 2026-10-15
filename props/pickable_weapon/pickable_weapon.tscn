@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://vbens2wqotc3" path="res://textures/pistol.png" id="1_34jsm"]
 [ext_resource type="Script" uid="uid://dwydvjr74lbm" path="res://props/pickable_weapon/pickable_weapon.gd" id="1_ymmnh"]
+[ext_resource type="Texture2D" uid="uid://d050nwkxl0jm0" path="res://textures/weapon_placeholder.png" id="2_eg10d"]
 [ext_resource type="Texture2D" uid="uid://bqa8r40mpt7m5" path="res://textures/rocket_launcher.png" id="2_ymmnh"]
 [ext_resource type="Texture2D" uid="uid://ve4u1mrpqwys" path="res://textures/shotgun.png" id="3_eg10d"]
 
@@ -9,6 +10,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m6w6x"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_eg10d")
+}],
+"loop": 1,
+"name": &"flamethrower",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_34jsm")
@@ -49,7 +58,7 @@ shape = SubResource("RectangleShape2D_m0oal")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=730688961]
 sprite_frames = SubResource("SpriteFrames_m6w6x")
-animation = &"shotgun"
+animation = &"flamethrower"
 
 [node name="Collision_pistol" type="CollisionPolygon2D" parent="." unique_id=478574751]
 visible = false
@@ -62,6 +71,10 @@ polygon = PackedVector2Array(-10, -5, -7, -5, -7, -4, 8, -4, 11, -5, 11, 3, 8, 3
 [node name="Collision_shotgun" type="CollisionPolygon2D" parent="." unique_id=949501171]
 visible = false
 polygon = PackedVector2Array(-6, -3, 10, -3, 10, 1, 8, 1, 8, 2, 5, 2, 5, 1, 0, 1, 0, 2, -1, 3, -4, 3, -4, 2, -7, 4, -10, 4, -10, 1)
+
+[node name="Collision_flamethrower" type="CollisionPolygon2D" parent="." unique_id=1971613286]
+visible = false
+polygon = PackedVector2Array(-3, -3, 4, -3, 4, 1, -2, 1, -2, 3, -3, 3)
 
 [node name="SpawnCooldown" type="Timer" parent="." unique_id=2025854813]
 wait_time = 0.5

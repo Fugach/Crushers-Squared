@@ -18,16 +18,15 @@ var my_name = "rocket_launcher"
 
 func _ready():
 	GlobalVars.slots.set(my_slot, self)
-	slots_ui = get_node("/root/main/UI/HUD/Slots")
-	if slots_ui:
-		slots_ui.update()
-	else:
-		push_error('Slots are not loaded')
+	#slots_ui = get_node("/root/main/UI/HUD/Slots")
+	#if slots_ui:
+		#slots_ui.update()
+	#else:
+		#push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
 	if my_owner is Player:
 		if GlobalVars.current_slot_num == my_slot:
-			slots_ui.update()
 			visible = true
 			logic()
 		else:

@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var Tiles : TileMapLayer = $"../../TileMapLayer"
 @onready var TilesAnim : AnimationPlayer = $"../../TileMapLayer/AnimationPlayer"
 @onready var Elevator : Area2D = $"../../Elevator"
-@onready var Camera : Camera2D = $"../../Camera2D"
+@onready var Camera : Camera2D = $"../../Camera"
 
 func wait(time):
 	await get_tree().create_timer(time).timeout
@@ -67,7 +67,6 @@ func hpbar_update():
 	lab.text = str(hp)
 	if bar.value != float(hp):
 		bar.value = lerp(bar.value, float(hp), 0.5)
-		print(bar.value - float(hp))
 
 func _on_timer_timeout() -> void:
 	var bar = $HP/HPBar
