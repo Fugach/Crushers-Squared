@@ -36,13 +36,13 @@ func new_dungeon():
 	rooms.clear()
 	prepared_cells.clear()
 	cells_to_be_removed.clear()
-	generation_thread = Thread.new()
 	print("=== NEW DUNGEON ===")
-	if generation_thread.is_alive():
-		print("Killing old generation thread...")
-		generation_thread.wait_to_finish()
+	if generation_thread != null:
+		if generation_thread.is_alive():
+			print("Killing old generation thread...")
+			generation_thread.wait_to_finish()
 		if not generation_thread.is_alive():
-			print("Done, now making everything clean...")
+			print("Done, cleaning...")
 			clear()
 			rooms.clear()
 			prepared_cells.clear()
@@ -50,6 +50,7 @@ func new_dungeon():
 		else:
 			push_error("Couldn't kill the thread!")
 	print('Starting new generation thread...')
+	generation_thread = Thread.new()
 	collision_enabled = false
 	var rooms_amount = randi_range(4, 100)
 	generation_thread.start(generate.bind(rooms_amount, Vector2(0, 0)))

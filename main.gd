@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("mmb"):
 		$TileMapLayer.new_dungeon()
 		GlobalVars.player.respawn()
-		GlobalVars.time = 0.0
+		GlobalVars.stats['time'] = 0.0
 	if Input.is_action_just_pressed("esc"):
 		if not Table.visible and not get_tree().paused:
 			get_tree().paused = true
