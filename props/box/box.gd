@@ -38,7 +38,7 @@ func update():
 		$CollisionPolygon0.show()
 		$CollisionPolygon1.hide()
 		$CollisionPolygon2.hide()
-	elif hp < max_hp / 1.1 and hp > max_hp / 5:
+	elif hp < max_hp / 1.1 and hp > max_hp / 5.0:
 		$AnimatedSprite2D.play("a_little_damaged")
 		$CollisionPolygon0.hide()
 		$CollisionPolygon1.show()

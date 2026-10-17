@@ -29,7 +29,7 @@ func _ready() -> void:
 		for x in range(randi_range(0, 15)):
 			var new_BOX = BOX.instantiate()
 			new_BOX.name = "Box_" + str(x)
-			new_BOX.global_position = global_position + Vector2((activation_range.x / 2) + randi_range(activation_range.x / (-0.3 * x), activation_range.x / (0.3 * x)), activation_range.y - 20)
+			new_BOX.global_position = global_position + Vector2((activation_range.x / 2.0) + randf_range(activation_range.x / (-0.3 * x), activation_range.x / (0.3 * x)), activation_range.y - 20)
 			$"..".add_child(new_BOX)
 
 func _process(_delta: float) -> void:
@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 		var new_enemy = ENEMY.instantiate()
 		new_enemy.name = "Enemy" + str(total_enemies)
 		total_enemies += 1
-		new_enemy.global_position = global_position + Vector2((activation_range.x / 2) + randi_range(activation_range.x / -3, activation_range.x / 3), activation_range.y - 20)
+		new_enemy.global_position = global_position + Vector2((activation_range.x / 2) + randf_range(activation_range.x / -3, activation_range.x / 3), activation_range.y - 20)
 		my_enemies.append(new_enemy)
 		$"..".add_child(new_enemy)
 		pending_enemies -= 1

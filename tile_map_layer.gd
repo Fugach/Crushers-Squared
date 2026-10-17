@@ -27,9 +27,6 @@ func _process(_delta: float) -> void:
 		print("Generation is finished")
 		if plan:
 			build(plan)
-	#var room_col = to_global(map_to_local(map_to_room(local_to_map(to_local(GlobalVars.player.global_position))) * ROOM_SIZE + ROOM_SIZE / 2))
-	#if $Area2D/CollisionShape2D.global_position != room_col:
-		#$Area2D/CollisionShape2D.global_position = room_col
 
 func new_dungeon():
 	clear()

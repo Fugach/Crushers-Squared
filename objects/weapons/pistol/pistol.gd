@@ -17,7 +17,7 @@ const my_name = "pistol"
 
 func _ready():
 	BULLET = load("uid://csr8w1qcnqlbd")
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		$Sprite2D/Area2D.hide()
 		$Sprite2D/Area2D.monitoring = false
 		$Sprite2D/Area2D.monitorable = false
@@ -28,7 +28,7 @@ func _ready():
 			#push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		if GlobalVars.current_slot_num == my_slot:
 			visible = true
 			logic()
@@ -42,12 +42,8 @@ func _process(delta: float) -> void:
 		logic()
 
 func logic():
-	#if my_owner is Enemy:
-		#current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
-	#elif my_owner is Player:
-		#current_angle = 
-	if my_owner is Player:
-		current_angle = int(rotation) % 360
+	if my_owner == GlobalVars.player:
+		current_angle = deg_to_rad(rotation)
 	
 	if -1.5 <= current_angle and current_angle <= 1.5:
 		Sprite.flip_v = false
@@ -58,7 +54,7 @@ func logic():
 		Spawnpoint.position.y = 2
 		$Sprite2D/Area2D.position.y = 3
 	
-	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
+	if Input.is_action_pressed("lmb") and can_shoot and my_owner == GlobalVars.player:
 		shoot(15)
 
 func shoot(damage_amount):

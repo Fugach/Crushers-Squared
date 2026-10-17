@@ -101,7 +101,7 @@ func debug():
 		$Sprite2D.scale = Vector2.ONE
 		set_physics_process(is_noclipping)
 		is_noclipping = not is_noclipping
-		$Sprite2D.self_modulate.a = 0.3 if is_noclipping else 1
+		$Sprite2D.self_modulate.a = 0.3 if is_noclipping else 1.0
 		$Sprite2D.material.set('shader_parameter/intensity', 0.5 if is_noclipping else 0.0)
 		$Collision.disabled = is_noclipping
 	
@@ -163,12 +163,16 @@ func slide(delta : float):
 
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
-		velocity += sign(current_gravity) * my_stats['JUMP_POWER']
+		if Anims.current_animation == "slam_stop":
+			velocity.y += my_stats['JUMP_POWER'] * 1.3
+		else:
+			velocity += sign(current_gravity) * my_stats['JUMP_POWER']
 		Anims.play("RESET")
 	elif $JumpCoyoteTime.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y += my_stats['JUMP_POWER']
 		if Anims.current_animation == "slam_stop":
 			Anims.play("RESET")
+	
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
 		velocity.y *= 0.6
 	elif Input.is_action_just_pressed("jump") and is_sliding and my_stats['WALLJUMPS'] > 0:
@@ -265,8 +269,6 @@ func _input(event: InputEvent) -> void:
 		Anims.stop()
 		$slam.emitting = false
 		is_slamming = false
-	if Anims.current_animation == "slam_stop" and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += my_stats['JUMP_POWER'] * 0.3
 	
 	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
 		Slots.current_slot = (Slots.current_slot + 1) % len(inventory)

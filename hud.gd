@@ -37,7 +37,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		await wait(0.5)
 		repeat(" ", 35)
 		if GlobalVars.time >= 60:
-			Console.text += str(int(GlobalVars.time) / 60)
+			Console.text += str(int(GlobalVars.time) / 60.0)
 		else:
 			Console.text += "00"
 		Console.text += " : "

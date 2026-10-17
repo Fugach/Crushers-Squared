@@ -37,11 +37,11 @@ func update():
 			'VERTICAL':
 				ui_slots[i].position = Vector2(
 					10,
-					get_viewport_rect().size.y / 2 + i * 18 + (2 * i) - (len(ui_slots) * 18 / 2)
+					get_viewport_rect().size.y / 2.0 + i * 18 + (2 * i) - (len(ui_slots) * 18 / 2.0)
 				)
 			'HORIZONTAL':
 				ui_slots[i].position = Vector2(
-					get_viewport_rect().size.x / 2 + i * 18 + (2 * i) - (len(ui_slots) * 18 / 2),
+					get_viewport_rect().size.x / 2.0 + i * 18 + (2 * i) - (len(ui_slots) * 18 / 2.0),
 					10
 				)
 	if GlobalVars.player == null:

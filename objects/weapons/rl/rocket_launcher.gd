@@ -25,7 +25,7 @@ func _ready():
 		#push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		if GlobalVars.current_slot_num == my_slot:
 			visible = true
 			logic()
