@@ -202,19 +202,20 @@ func fall():
 	
 	# тяжёлое приземление
 	if is_falling_fast and is_on_floor():
+		is_falling_fast = false
+		is_slamming = false
+		$slam.emitting = false
 		Camera.shake(0.1, 5)
+		$Sprite2D.scale = Vector2(1, 1)
+		Anims.play("slam_stop")
+		
 		$fall.pitch_scale = randf_range(0.7, 1.3)
 		$fall.play()
 		var new_fall = FALL_PARTICLES.instantiate()
-		new_fall.min_vel = 15 * (velocity.y / 50)
-		new_fall.max_vel = new_fall.min_vel * 1.25
 		new_fall.global_position = global_position
+		new_fall.min_vel = velocity.y * 10
+		new_fall.max_vel = new_fall.min_vel * 1.25
 		get_parent().add_child(new_fall)
-		$slam.emitting = false
-		$Sprite2D.scale = Vector2(1, 1)
-		Anims.play("slam_stop")
-		is_falling_fast = false
-		is_slamming = false
 		
 		for body in get_parent().get_children():
 			if not (body is Enemy or body is RigidBody2D):
