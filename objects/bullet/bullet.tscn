@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://csr8w1qcnqlbd"]
 
 [ext_resource type="Script" uid="uid://c4lx4k1v2surv" path="res://objects/bullet/bullet.gd" id="1_awion"]
-[ext_resource type="AudioStream" uid="uid://c3g6t6qe5uhai" path="res://sounds/ricoshet.ogg" id="2_1mdu2"]
-[ext_resource type="Texture2D" uid="uid://lnybixvjunlq" path="res://textures/particles/dead_bullet.png" id="2_g1w5t"]
+[ext_resource type="AudioStream" uid="uid://c3g6t6qe5uhai" path="res://assets/sounds/ricoshet.ogg" id="2_1mdu2"]
+[ext_resource type="Texture2D" uid="uid://lnybixvjunlq" path="res://assets/textures/particles/dead_bullet.png" id="2_g1w5t"]
 
 [sub_resource type="Curve" id="Curve_sils6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.19148937, 1), 0.0749075, 0.0749075, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

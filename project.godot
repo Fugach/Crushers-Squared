@@ -15,7 +15,7 @@ run/main_scene="uid://1x5v2og6yriv"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="uid://cvdu2c6s18wf0"
+config/icon="uid://5exs2oaar7ei"
 
 [audio]
 
@@ -23,7 +23,7 @@ buses/default_bus_layout="uid://d3p6onew80nrs"
 
 [autoload]
 
-GlobalVars="*res://global_vars.gd"
+GlobalVars="*res://scripts/global_vars.gd"
 GlobalConfig="*uid://cbfqridi3qseq"
 Debug="*uid://td2c1ajcb0nv"
 

@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c3qxg2ahr7shg"]
 
-[ext_resource type="Texture2D" uid="uid://d0lihokvpkx2s" path="res://textures/HUD/slots/empty.png" id="1_1eg4w"]
-[ext_resource type="Texture2D" uid="uid://cchgved8conpv" path="res://textures/HUD/slots/pistol.png" id="2_xhuvf"]
-[ext_resource type="Texture2D" uid="uid://cdah5x13dmpmc" path="res://textures/HUD/slots/rocket_launcher.png" id="3_cwqae"]
-[ext_resource type="Texture2D" uid="uid://3hj22n845p05" path="res://textures/HUD/slots/shotgun.png" id="4_kybjj"]
-[ext_resource type="Texture2D" uid="uid://b1uji6gi8lyat" path="res://textures/HUD/slots/unknown.png" id="5_cbeh3"]
+[ext_resource type="Texture2D" uid="uid://d0lihokvpkx2s" path="res://assets/textures/HUD/slots/empty.png" id="1_1eg4w"]
+[ext_resource type="Texture2D" uid="uid://cchgved8conpv" path="res://assets/textures/HUD/slots/pistol.png" id="2_xhuvf"]
+[ext_resource type="Texture2D" uid="uid://cdah5x13dmpmc" path="res://assets/textures/HUD/slots/rocket_launcher.png" id="3_cwqae"]
+[ext_resource type="Texture2D" uid="uid://3hj22n845p05" path="res://assets/textures/HUD/slots/shotgun.png" id="4_kybjj"]
+[ext_resource type="Texture2D" uid="uid://b1uji6gi8lyat" path="res://assets/textures/HUD/slots/unknown.png" id="5_cbeh3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0cbny"]
 animations = [{

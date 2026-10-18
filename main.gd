@@ -12,11 +12,11 @@ extends Node2D
 
 @onready var Camera : Camera2D = $Camera
 
-var default = preload("res://textures/cursors/default.png")
-var pointer = preload("res://textures/cursors/pointer.png")
-var grabbing = preload("res://textures/cursors/grabbing.png")
-var text = preload("res://textures/cursors/text.png")
-var no = preload("res://textures/cursors/no.png")
+var default = preload("res://assets/textures/cursors/default.png")
+var pointer = preload("res://assets/textures/cursors/pointer.png")
+var grabbing = preload("res://assets/textures/cursors/grabbing.png")
+var text = preload("res://assets/textures/cursors/text.png")
+var no = preload("res://assets/textures/cursors/no.png")
 
 const PLAYER = preload("uid://7pwfca8tanen")
 

@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		logic()
 
 func logic():
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		look_at(get_global_mouse_position())
 		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
 	elif my_owner is Enemy:
@@ -51,7 +51,7 @@ func logic():
 	else:
 		Sprite.scale.y = -1
 
-	if Input.is_action_pressed("lmb") and can_shoot and my_owner is Player:
+	if Input.is_action_pressed("lmb") and can_shoot and my_owner == GlobalVars.player:
 		shoot(25)
 
 func shoot(damage_amount):

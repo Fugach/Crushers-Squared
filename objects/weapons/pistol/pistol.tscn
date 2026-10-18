@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cdavqdqek4rr5"]
 
 [ext_resource type="Script" uid="uid://bvwopcdi6xjgh" path="res://objects/weapons/pistol/pistol.gd" id="1_nosnq"]
-[ext_resource type="Texture2D" uid="uid://vbens2wqotc3" path="res://textures/pistol.png" id="2_og3ej"]
-[ext_resource type="AudioStream" uid="uid://b2bvoy5dd4ur" path="res://sounds/pistol/shoot.wav" id="3_og3ej"]
+[ext_resource type="Texture2D" uid="uid://vbens2wqotc3" path="res://assets/textures/pistol.png" id="2_og3ej"]
+[ext_resource type="AudioStream" uid="uid://b2bvoy5dd4ur" path="res://assets/sounds/pistol/shoot.wav" id="3_og3ej"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_duhoc"]
 points = PackedVector2Array(13, -3, 13, 0, 250, 3, 255, 0, 250, -3)

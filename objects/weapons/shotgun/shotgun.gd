@@ -19,7 +19,7 @@ func _ready():
 	GlobalVars.slots.set(my_slot, self)
 
 func _process(delta: float) -> void:
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		if GlobalVars.current_slot_num == my_slot:
 			visible = true
 			logic()
@@ -70,7 +70,7 @@ func shoot(damage_amount):
 		new_bullet.global_rotation = Sprite.global_rotation + x * accuracy - 2 * accuracy
 		get_node("/root/main").add_child(new_bullet)
 	can_shoot = false
-	if my_owner is Player:
+	if my_owner == GlobalVars.player:
 		GlobalVars.player.velocity += Vector2(-100, 0).rotated(rotation)
 	Cooldown.start()
 

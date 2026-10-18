@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ca60at5rx6y4f"
+path="res://.godot/imported/ladder (7).wav-0ef79fcb68f016a241aed408cc9c8fcb.sample"
+
+[deps]
+
+source_file="res://assets/sounds/unsorted/ladder (7).wav"
+dest_files=["res://.godot/imported/ladder (7).wav-0ef79fcb68f016a241aed408cc9c8fcb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
