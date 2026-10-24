@@ -1,22 +1,22 @@
 extends Control
 
 @onready var ui_slots : Array[Node2D] = [get_node("0")]
-@onready var Current: Sprite2D = $Current
+@onready var Border: Sprite2D = $Current
 
-var current_slot : int = 0
+var current : int = 0
 const SLOT = preload("uid://c3qxg2ahr7shg")
 
 func _ready() -> void:
 	update()
-	Current.global_position = ui_slots.get(current_slot).global_position
+	Border.global_position = ui_slots.get(current).global_position
 
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
 		add_slot()
-	Current.global_position = lerp(
-		Current.global_position,
-		ui_slots.get(current_slot).global_position,
+	Border.global_position = lerp(
+		Border.global_position,
+		ui_slots.get(current).global_position,
 		25 * delta
 	)
 

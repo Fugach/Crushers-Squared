@@ -13,6 +13,7 @@ var my_stats : Dictionary = {
 var inventory : Dictionary[int, Node2D] = {
 	0: null,
 }
+var current_weapon : Node2D
 
 var direction : int = 1
 var last_animation : String = ""
@@ -42,6 +43,8 @@ func _ready() -> void:
 		is_debugging = true
 	add_child(HAND.instantiate())
 	GlobalVars.player = self
+	Slots.add_slot()
+	Slots.add_slot()
 
 func _physics_process(delta: float) -> void:
 	var previous_velocity = velocity
@@ -66,6 +69,13 @@ func _physics_process(delta: float) -> void:
 				collider.apply_impulse(Vector2(my_stats['MAX_SPEED'], my_stats['MAX_SPEED']) * normal * -0.15)
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
+		switch_to((Slots.current + 1) % len(inventory))
+	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
+		switch_to(Slots.current - 1 if\
+		Slots.current - 1 >= 0 else len(inventory) - 1)
+	if current_weapon != null:
+		current_weapon.look_at(get_global_mouse_position())
 	if is_debugging:
 		debug()
 
@@ -232,9 +242,10 @@ func fall():
 				body.damage(10, 'fall')
 
 func use_weapon():
-	if inventory[Slots.current_slot] == null:
+	if current_weapon == null:
 		return
-	
+	if Input.is_action_pressed('lmb'):
+		current_weapon.shoot()
 
 func push(pwr, _dir):
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -271,24 +282,16 @@ func _input(event: InputEvent) -> void:
 		$slam.emitting = false
 		is_slamming = false
 	
-	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
-		Slots.current_slot = (Slots.current_slot + 1) % len(inventory)
-		Slots.update()
-	elif Input.is_action_just_released("scroll_down") and not Input.is_action_just_released("zoom_out"):
-		Slots.current_slot = (Slots.current_slot - 1 if\
-		Slots.current_slot - 1 >= 0 else len(inventory) - 1)
-		Slots.update()
 	if text.is_valid_int():
 		var num = int(text)
-		if num <= 9 and num > 0 and num <= len(inventory):
-			Slots.current_slot = num % (len(inventory) + 1) - 1
-			Slots.update()
+		if num <= 9 and num > 0 and num <= len(inventory) and num != (Slots.current + 1):
+			switch_to(num % (len(inventory) + 1) - 1)
 	
 	if Input.is_action_just_pressed("drop"):
-		var item : Node2D = inventory[Slots.current_slot]
+		var item : Node2D = inventory[Slots.current]
 		if item != null:
 			#$throw.play()
-			inventory[Slots.current_slot] = null
+			inventory[Slots.current] = null
 			var result = WEAPON.instantiate()
 			result.weapon = item.my_name
 			item.queue_free()
@@ -296,7 +299,17 @@ func _input(event: InputEvent) -> void:
 			result.apply_force(10000 * Vector2(1, 1) * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
 			get_parent().add_child(result)
 			Slots.update()
-
+func switch_to(slot : int):
+	if current_weapon != null:
+		current_weapon.put_away()
+	Slots.current = slot
+	Slots.update()
+	current_weapon = inventory[Slots.current]
+	if current_weapon != null:
+		current_weapon.show()
+		current_weapon.set_process(true)
+		current_weapon.pull_out()
+	
 func respawn():
 	if Camera == null:
 		Camera = $"../Camera2D"

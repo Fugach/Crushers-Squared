@@ -1218,7 +1218,7 @@ texture = ExtResource("55_tko6h")
 [sub_resource type="TileSet" id="TileSet_ycdy4"]
 occlusion_layer_0/light_mask = 1
 occlusion_layer_0/sdf_collision = true
-physics_layer_0/collision_layer = 3
+physics_layer_0/collision_layer = 7
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "outside"
 terrain_set_0/terrain_0/color = Color(0.34509805, 0.47224265, 0.67058825, 1)

@@ -2,13 +2,13 @@ extends Node2D
 
 @onready var Sprite : Sprite2D = $Sprite2D
 @onready var Spawnpoint : Marker2D = $Sprite2D/Spawnpoint
-@onready var Cooldown : Timer = $Cooldown
+@onready var ShootCooldown : Timer = $ShootCooldown
 
 var BULLET : PackedScene
 var my_slot : int
 var my_owner
 var slots_ui
-var can_shoot : bool = true
+var can_shoot : bool = false
 var current_angle : float
 var is_player_nearby : bool = false
 var is_player_colliding : bool = false
@@ -21,11 +21,6 @@ func _ready():
 		$Sprite2D/Area2D.hide()
 		$Sprite2D/Area2D.monitoring = false
 		$Sprite2D/Area2D.monitorable = false
-		#slots_ui = get_node("/root/main/UI/HUD/Slots")
-		#if slots_ui:
-			#slots_ui.update()
-		#else:
-			#push_error('Slots are not loaded')
 
 func _process(delta: float) -> void:
 	if my_owner == GlobalVars.player:
@@ -74,11 +69,10 @@ func shoot(damage_amount):
 	total_bullets += 1
 	get_node("/root/main").add_child(new_bullet)
 	can_shoot = false
-	Cooldown.start()
+	ShootCooldown.start()
 
 func _on_cooldown_timeout() -> void:
 	can_shoot = true
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == GlobalVars.player:

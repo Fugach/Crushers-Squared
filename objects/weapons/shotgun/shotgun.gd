@@ -17,6 +17,7 @@ var accuracy : float = 0.05 # default: 0.05
 func _ready():
 	BULLET = preload("uid://csr8w1qcnqlbd")
 	GlobalVars.slots.set(my_slot, self)
+	
 
 func _process(delta: float) -> void:
 	if my_owner == GlobalVars.player:

@@ -3,8 +3,11 @@ extends Node
 var player : CharacterBody2D
 var main_node : Node2D
 var slots_node : Control
+
 var WEAPON = preload("uid://d18mm0obf3dqi")
 var ROCKET = preload("uid://cfex0tmkaj6q4")
+var FIRE = preload("uid://b031wyq3p3dvw")
+
 var cleared_rooms : Dictionary = {}
 
 var stats : Dictionary = {
