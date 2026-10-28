@@ -4,7 +4,6 @@ var my_owner
 var can_shoot : bool = false
 var my_slot : int
 var temperature : float = 25
-var FIRE = GlobalVars.FIRE
 const my_name = 'flamethrower'
 
 func _ready() -> void:
@@ -17,10 +16,10 @@ func shoot():
 	if $ShootDelay.time_left > 0 or $OverheatCooldown.time_left > 0 or not can_shoot:
 		return
 	for i in range(1):
-		var new = FIRE.instantiate()
-		new.global_position = $ShootPosition.global_position + Vector2.RIGHT.rotated(global_rotation) * randf_range(0, 20)
-		new.global_rotation = global_rotation + randf_range(-0.075, 0.075)
-		get_node("/root/main").add_child(new)
+		var flame = GlobalVars.FLAME.instantiate()
+		flame.global_position = $ShootPosition.global_position + Vector2.RIGHT.rotated(global_rotation) * (i - 1)
+		flame.global_rotation = global_rotation + randf_range(-0.075, 0.075)
+		GlobalVars.main_node.add_child(flame)
 	$ShootDelay.start()
 	#temperature += 25
 	if temperature >= 5000:

@@ -63,7 +63,7 @@ func hpbar_update():
 	var lab = $HP/HPBar/HPLabel
 	var bar = $HP/HPBar
 	var bar_sm = $HP/HPBar_smooth
-	var hp = GlobalVars.player.my_stats['HP']
+	var hp = GlobalVars.player.stats['HP']
 	lab.text = str(hp)
 	if bar.value != float(hp):
 		bar.value = lerp(bar.value, float(hp), 0.5)
@@ -91,5 +91,5 @@ func _on_hp_bar_value_changed(value: float) -> void:
 	if $HP/HPBar.value <= 0:
 		$HP/HPBar.value = 0
 		$HP/HPBar/HPLabel.text = "0"
-		GlobalVars.player_hp = 0
+		GlobalVars.player.stats['HP'] = 0
 		get_parent().get_parent().death()

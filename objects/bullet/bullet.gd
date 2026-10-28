@@ -12,30 +12,27 @@ var blacklist = []
 var SPEED = 4000
 
 func _ready() -> void:
-	await get_tree().create_timer(60).timeout
+	blacklist.append(my_owner)
+	await get_tree().create_timer(30).timeout
 	kill()
 
 func _physics_process(delta: float) -> void:
-	if not flying:
-		return
-	
-	Raycast.target_position += Vector2.RIGHT * SPEED * delta
-	Raycast.force_raycast_update()
-	if Raycast.is_colliding():
-		var body = Raycast.get_collider()
-		if body and body not in blacklist:
-			blacklist.append(body)
-			hit(body)
-			if not flying:
-				return
-	if flying:
-		Line.set_point_position(1, Raycast.target_position)
-		if abs(Line.get_point_position(1).x - Line.get_point_position(0).x) > 200:
-			Line.set_point_position(0, Line.get_point_position(0) + Vector2.RIGHT * SPEED * delta)
+	var point : Vector2 = Raycast.get_collision_point()
+	while Raycast.enabled:
+		Raycast.force_raycast_update()
+		if Raycast.is_colliding():
+			var body = Raycast.get_collider()
+			if body != null and body not in blacklist:
+				blacklist.append(body)
+				hit(body)
+		Raycast.target_position.x += 1000
+	set_physics_process(false)
+	#if flying:
+		#Line.set_point_position(1, Raycast.target_position)
+		#if abs(Line.get_point_position(1).x - Line.get_point_position(0).x) > 200:
+			#Line.set_point_position(0, Line.get_point_position(0) + Vector2.RIGHT * SPEED * delta)
 
 func hit(body):
-	if body == my_owner:
-		return
 	Line.set_point_position(1, Line.to_local(Raycast.get_collision_point()))
 	if body == GlobalVars.player:
 		body.damage(damage_amount, "bullet")

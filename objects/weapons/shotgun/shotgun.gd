@@ -2,62 +2,38 @@ extends Node2D
 
 @onready var Sprite : Sprite2D = $Sprite2D
 @onready var Spawnpoint : Marker2D = $Sprite2D/spawnpoint
-@onready var Cooldown : Timer = $cooldown
+@onready var ShootCooldown : Timer = $ShootCooldown
+@onready var Anims = $AnimationPlayer
 
-var BULLET : PackedScene
-var my_slot : int
+var BULLET : PackedScene = GlobalVars.BULLET
 var my_owner
 var can_shoot : bool = true
-var current_angle = null
-var is_player_nearby : bool = false
-var is_player_colliding : bool = false
-var my_name = "shotgun"
+const my_name = "shotgun"
 var accuracy : float = 0.05 # default: 0.05
-
-func _ready():
-	BULLET = preload("uid://csr8w1qcnqlbd")
-	GlobalVars.slots.set(my_slot, self)
-	
 
 func _process(delta: float) -> void:
 	if my_owner == GlobalVars.player:
-		if GlobalVars.current_slot_num == my_slot:
-			visible = true
-			logic()
-		else:
-			visible = false
-	elif my_owner is Enemy:
-		if is_player_colliding and can_shoot:
-			is_player_nearby = true
-		else:
-			is_player_nearby = false
-		logic()
+		logic_player()
 
-func logic():
-	if my_owner == GlobalVars.player:
-		look_at(get_global_mouse_position())
-		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
-	elif my_owner is Enemy:
-		look_at(GlobalVars.player.global_position)
-		current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
-	
-	if -1.5 <= current_angle and current_angle <= 1.5:
+func logic_player():
+	var angle = int(global_rotation_degrees) % 360
+	if abs(angle) < 90:
 		Sprite.flip_v = false
 		Spawnpoint.position.y = -1
-		$Sprite2D/Area2D.position.y = 0
 	else:
 		Sprite.flip_v = true
 		Spawnpoint.position.y = 2
-		$Sprite2D/Area2D.position.y = 3
-	
-	if Input.is_action_pressed("lmb") and can_shoot and my_owner == GlobalVars.player:
-		shoot(7)
 
-func shoot(damage_amount):
+func shoot():
+	if not can_shoot:
+		return
+	else:
+		can_shoot = false
+	ShootCooldown.start()
 	$shoot.pitch_scale = randf_range(0.8, 1.2)
 	$shoot.play()
 	if Sprite.flip_v == false:
-		$AnimationPlayer.play("shoot_right")
+		Anims.play("shoot_right")
 		$GPUParticles2D.global_rotation = global_rotation
 	else:
 		$AnimationPlayer.play("shoot_left")
@@ -65,7 +41,7 @@ func shoot(damage_amount):
 	$GPUParticles2D.restart()
 	for x in range(5):
 		var new_bullet = BULLET.instantiate()
-		new_bullet.damage_amount = damage_amount
+		new_bullet.damage_amount = 7
 		new_bullet.my_owner = my_owner
 		new_bullet.global_position = Spawnpoint.global_position
 		new_bullet.global_rotation = Sprite.global_rotation + x * accuracy - 2 * accuracy
@@ -73,15 +49,15 @@ func shoot(damage_amount):
 	can_shoot = false
 	if my_owner == GlobalVars.player:
 		GlobalVars.player.velocity += Vector2(-100, 0).rotated(rotation)
-	Cooldown.start()
+
+func pull_out():
+	can_shoot = false
+	Anims.play("pull_out")
+func put_away():
+	pass
 
 func _on_cooldown_timeout() -> void:
 	can_shoot = true
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == GlobalVars.player:
-		is_player_colliding = true
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body == GlobalVars.player:
-		is_player_colliding = false
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == 'pull_out':
+		can_shoot = true

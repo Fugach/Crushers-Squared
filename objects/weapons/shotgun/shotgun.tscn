@@ -5,9 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://dgbmjh6wm6g2i" path="res://assets/sounds/shotgun/shotgun_shoot.ogg" id="3_apfrx"]
 [ext_resource type="Texture2D" uid="uid://8n022y3ipke3" path="res://assets/textures/particles/ammo/shotgun.png" id="4_ggjqm"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_rxqsx"]
-points = PackedVector2Array(13, -2, 13, 0, 150, 15, 160, 0, 150, -15)
-
 [sub_resource type="Animation" id="Animation_rxqsx"]
 length = 0.001
 tracks/0/type = "value"
@@ -33,6 +30,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ta5jj"]
+resource_name = "pull_out"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.13333334),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [-1.5707963267948966, 0.17453292519943295, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333334, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ggjqm"]
@@ -94,6 +119,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ggjqm"]
 _data = {
 &"RESET": SubResource("Animation_rxqsx"),
+&"pull_out": SubResource("Animation_ta5jj"),
 &"shoot_left": SubResource("Animation_ggjqm"),
 &"shoot_right": SubResource("Animation_apfrx")
 }
@@ -119,8 +145,6 @@ collision_mode = 2
 [node name="Shotgun" type="Node2D" unique_id=1263487316]
 script = ExtResource("1_hwrt3")
 
-[node name="DrawTime" type="Timer" parent="." unique_id=45271532]
-
 [node name="ShootCooldown" type="Timer" parent="." unique_id=414103338]
 one_shot = true
 
@@ -133,11 +157,6 @@ region_rect = Rect2(0, 0, 20, 7)
 
 [node name="spawnpoint" type="Marker2D" parent="Sprite2D" unique_id=1903406102]
 position = Vector2(1, -1)
-
-[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=830060615]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=30916041]
-shape = SubResource("ConvexPolygonShape2D_rxqsx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=701821859]
 libraries/ = SubResource("AnimationLibrary_ggjqm")
@@ -154,5 +173,4 @@ interpolate = false
 process_material = SubResource("ParticleProcessMaterial_f42wg")
 
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
-[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

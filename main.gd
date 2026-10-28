@@ -33,7 +33,6 @@ func _ready() -> void:
 	player.respawn()
 	$SubViewport.use_hdr_2d = true
 	$UI/Pause/AnimationPlayer.play_backwards("appear")
-	
 
 func load_config():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), GlobalConfig.get_value("audio", "Master_volume_db"))
@@ -74,9 +73,10 @@ func _process(_delta: float) -> void:
 			Engine.time_scale = lerpf(Engine.time_scale, 1.0, 0.2)
 		AudioServer.playback_speed_scale = Engine.time_scale
 func death():
-	GlobalVars.player_hp = 0
-	$UI/HUD/HPBar/HPLabel.text = str(GlobalVars.player_hp)
-	$UI/HUD/HPBar.value =  GlobalVars.player_hp
+	print(GlobalVars.player.stats['HP'])
+	GlobalVars.player.stats['HP'] = 0
+	$UI/HUD/HP/HPBar/HPLabel.text = str(GlobalVars.player.stats['HP'])
+	$UI/HUD/HP/HPBar.value =  GlobalVars.player.stats['HP']
 	$UI/Restart.death()
 	get_tree().paused = true
 

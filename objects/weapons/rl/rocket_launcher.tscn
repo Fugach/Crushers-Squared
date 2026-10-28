@@ -47,8 +47,6 @@ _data = {
 [node name="Rocket_launcher" type="Node2D" unique_id=234800380]
 script = ExtResource("1_bl5bl")
 
-[node name="DrawTime" type="Timer" parent="." unique_id=37408187]
-
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1693399810]
 wait_time = 1.5
 one_shot = true

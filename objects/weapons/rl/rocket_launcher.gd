@@ -4,67 +4,38 @@ var ROCKET = GlobalVars.ROCKET
 
 @onready var Sprite : Node2D = $RL_sprite
 @onready var ShootPos : Marker2D = $RL_sprite/shoot_pos
-@onready var Cooldown : Timer = $cooldown
+@onready var ShootCooldown = $ShootCooldown
 
-var is_player_nearby : bool = false
-var my_slot : int
 var can_shoot: bool = true
 var current_angle: float = 0.0
 var my_owner
-var slots_ui
-var is_player_colliding : bool = false
-var total_rockets : int = 0
-var my_name = "rocket_launcher"
-
-func _ready():
-	GlobalVars.slots.set(my_slot, self)
-	#slots_ui = get_node("/root/main/UI/HUD/Slots")
-	#if slots_ui:
-		#slots_ui.update()
-	#else:
-		#push_error('Slots are not loaded')
+const my_name = "rocket_launcher"
 
 func _process(delta: float) -> void:
 	if my_owner == GlobalVars.player:
-		if GlobalVars.current_slot_num == my_slot:
-			visible = true
-			logic()
-		else:
-			visible = false
-	elif my_owner is Enemy:
-		if is_player_colliding and can_shoot:
-			is_player_nearby = true
-		else:
-			is_player_nearby = false
-		logic()
+		logic_player()
 
-func logic():
-	if my_owner == GlobalVars.player:
-		look_at(get_global_mouse_position())
-		current_angle = (get_global_mouse_position() - global_position).normalized().angle()
-	elif my_owner is Enemy:
-		look_at(GlobalVars.player.global_position)
-		current_angle = (GlobalVars.player.global_position - global_position).normalized().angle()
-	
-	if -1.5 <= current_angle and current_angle <= 1.5:
+func logic_player():
+	var angle = int(global_rotation_degrees) % 360
+	if abs(angle) < 90:
 		Sprite.scale.y = 1
 	else:
 		Sprite.scale.y = -1
 
-	if Input.is_action_pressed("lmb") and can_shoot and my_owner == GlobalVars.player:
-		shoot(25)
-
-func shoot(damage_amount):
+func shoot():
+	if not can_shoot:
+		return
+	else:
+		can_shoot = false
+	ShootCooldown.start()
 	$AnimationPlayer.play("shoot")
 	$shoot.pitch_scale = randf_range(0.8, 1.2)
 	$shoot.play()
 	var new_rocket = ROCKET.instantiate()
 	new_rocket.global_position = ShootPos.global_position
 	new_rocket.global_rotation = ShootPos.global_rotation
-	new_rocket.damage_amount = damage_amount
+	new_rocket.damage_amount = 25
 	new_rocket.my_owner = my_owner
-	new_rocket.name = "Rocket" + str(total_rockets)
-	total_rockets += 1
 	get_node("/root/main").add_child(new_rocket)
 	#$RL_sprite/Cloud.initial_velocity_max += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
 	#$RL_sprite/Cloud.initial_velocity_min += (GlobalVars.player.velocity.x + GlobalVars.player.velocity.y) * 1.25
@@ -75,17 +46,12 @@ func shoot(damage_amount):
 	#$RL_sprite/Clouds_small.emitting = true
 	
 	can_shoot = false
-	Cooldown.start()
+	ShootCooldown.start()
+
+func pull_out():
+	pass
+func put_away():
+	pass
 
 func _on_cooldown_timeout() -> void:
 	can_shoot = true
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == GlobalVars.player:
-		is_player_colliding = true
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body == GlobalVars.player:
-		is_player_colliding = false

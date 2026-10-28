@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var my_stats : Dictionary = {
+var stats : Dictionary = {
 	'MAX_SPEED' = 165.0,
 	'JUMP_POWER' = -300.0,
 	'WEIGHT' = 650.0,
@@ -45,11 +45,19 @@ func _ready() -> void:
 	GlobalVars.player = self
 	Slots.add_slot()
 	Slots.add_slot()
+	Slots.add_slot()
+	
+	for x in ['FLAMETHROWER', 'ROCKET_LAUNCHER', 'SHOTGUN', 'PISTOL']:
+		var new = GlobalVars.WEAPON.instantiate()
+		new.weapon = x
+		new.global_position = global_position + Vector2(0, -50)
+		get_parent().add_child(new)
+		new.SpawnCooldown.stop()
 
 func _physics_process(delta: float) -> void:
 	var previous_velocity = velocity
 	
-	if my_stats['HP'] > 0:
+	if stats['HP'] > 0:
 		walk(delta)
 		slide(delta)
 		jump()
@@ -63,10 +71,10 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider is RigidBody2D:
 			var normal = collision.get_normal()
-			if previous_velocity.x + previous_velocity.y > my_stats['MAX_SPEED'] * 2:
+			if previous_velocity.x + previous_velocity.y > stats['MAX_SPEED'] * 2:
 				collider.apply_impulse(previous_velocity * normal * -0.15)
 			else:
-				collider.apply_impulse(Vector2(my_stats['MAX_SPEED'], my_stats['MAX_SPEED']) * normal * -0.15)
+				collider.apply_impulse(Vector2(stats['MAX_SPEED'], stats['MAX_SPEED']) * normal * -0.15)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("scroll_up") and not Input.is_action_just_released("zoom_in"):
@@ -97,10 +105,10 @@ func debug():
 	if Input.is_action_just_pressed("debug_thingy"):
 		Engine.time_scale = 0.0
 	if Input.is_action_just_pressed("heal"):
-		if my_stats['HP'] < 100:
-			my_stats['HP'] = 100
+		if stats['HP'] < 100:
+			stats['HP'] = 100
 		else:
-			my_stats['HP'] = 999
+			stats['HP'] = 999
 	if Input.is_action_just_pressed('noclip'):
 		rotation = 0.0
 		is_sliding = false
@@ -129,19 +137,19 @@ func walk(delta : float):
 		Anims.play("unsquish")
 	if Input.is_action_just_pressed("move_left"):
 		direction = -1
-		velocity.x += my_stats["MAX_SPEED"] * direction
+		velocity.x += stats["MAX_SPEED"] * direction
 	elif Input.is_action_just_released("move_right") and Input.is_action_pressed("move_left"):
 		direction = -1
 	elif Input.is_action_just_pressed("move_right"):
 		direction = 1
-		velocity.x += my_stats.MAX_SPEED * direction
+		velocity.x += stats.MAX_SPEED * direction
 	elif Input.is_action_just_released("move_left") and Input.is_action_pressed("move_right"):
 		direction = 1
 	elif Input.is_action_just_released("move_left") and direction == -1 or\
 		 Input.is_action_just_released("move_right") and direction == 1:
 			is_running = false
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		velocity.x += (my_stats['MAX_SPEED'] - abs(velocity.x)) * direction * delta * 5
+		velocity.x += (stats['MAX_SPEED'] - abs(velocity.x)) * direction * delta * 5
 		if sign(velocity.x) != direction and velocity.x != 0:
 			velocity.x *= 0.8
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -174,30 +182,30 @@ func slide(delta : float):
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor() and can_jump:
 		if Anims.current_animation == "slam_stop":
-			velocity.y += my_stats['JUMP_POWER'] * 1.3
+			velocity.y += stats['JUMP_POWER'] * 1.3
 		else:
-			velocity += sign(current_gravity) * my_stats['JUMP_POWER']
+			velocity += sign(current_gravity) * stats['JUMP_POWER']
 		Anims.play("RESET")
 	elif $JumpCoyoteTime.time_left > 0 and Input.is_action_just_pressed("jump") and can_jump:
-		velocity.y += my_stats['JUMP_POWER']
+		velocity.y += stats['JUMP_POWER']
 		if Anims.current_animation == "slam_stop":
 			Anims.play("RESET")
 	
 	if Input.is_action_just_released("jump") and not is_on_floor() and velocity.y < 0:
 		velocity.y *= 0.6
-	elif Input.is_action_just_pressed("jump") and is_sliding and my_stats['WALLJUMPS'] > 0:
+	elif Input.is_action_just_pressed("jump") and is_sliding and stats['WALLJUMPS'] > 0:
 		Anims.stop()
 		is_slamming = false
 		velocity.x = sign(get_wall_normal().x) * 200
 		velocity.y = -350
-		my_stats['WALLJUMPS'] -= 1
+		stats['WALLJUMPS'] -= 1
 	if is_on_floor():
-		my_stats['WALLJUMPS'] = my_stats['MAX_WALLJUMPS']
+		stats['WALLJUMPS'] = stats['MAX_WALLJUMPS']
 		$JumpCoyoteTime.start()
 
 func fall():
 	# мультяшый эффект падения и свист воздуха
-	if velocity.y > my_stats['WEIGHT']:
+	if velocity.y > stats['WEIGHT']:
 		is_falling_fast = true
 		$Sprite2D.scale = Vector2(
 			clamp(500 / velocity.y * 1.5, 0.3, 1),
@@ -205,7 +213,7 @@ func fall():
 			)
 		$wind.volume_db = min((abs(velocity.x) + abs(velocity.y)) * 0.025 - 35, 7.5)
 		$wind.pitch_scale = (abs(velocity.x) + abs(velocity.y)) * 0.0001 + 1.0
-	elif is_falling_fast and velocity.y <= my_stats['WEIGHT'] and not is_on_floor():
+	elif is_falling_fast and velocity.y <= stats['WEIGHT'] and not is_on_floor():
 		is_falling_fast = false
 		$Sprite2D.scale = Vector2(1, 1)
 		$wind.volume_db = -80
@@ -258,12 +266,12 @@ func push(pwr, _dir):
 func damage(amount, type):
 	if $damage_cooldown.is_stopped():
 		$damage_cooldown.start()
-		my_stats['HP'] -= amount
-		if my_stats['HP'] - amount > 0:
-			my_stats['HP'] -= amount
+		stats['HP'] -= amount
+		if stats['HP'] - amount > 0:
+			stats['HP'] -= amount
 		else:
-			my_stats['HP'] = 0
-			GlobalVars.main.death()
+			stats['HP'] = 0
+			GlobalVars.main_node.death()
 
 func _input(event: InputEvent) -> void:
 	var text = event.as_text()
@@ -301,6 +309,8 @@ func _input(event: InputEvent) -> void:
 			Slots.update()
 func switch_to(slot : int):
 	if current_weapon != null:
+		current_weapon.hide()
+		current_weapon.set_process(false)
 		current_weapon.put_away()
 	Slots.current = slot
 	Slots.update()
@@ -309,7 +319,7 @@ func switch_to(slot : int):
 		current_weapon.show()
 		current_weapon.set_process(true)
 		current_weapon.pull_out()
-	
+
 func respawn():
 	if Camera == null:
 		Camera = $"../Camera2D"
@@ -321,10 +331,10 @@ func respawn():
 	Camera.global_position = global_position
 	Camera.reset_smoothing()
 	Anims.play("RESET")
-	my_stats['HP'] = 100
+	stats['HP'] = 100
 
 func set_stat(what : String, amount):
-	my_stats[what] = amount
+	stats[what] = amount
 
 func animation_finished(anim_name: StringName) -> void:
 	last_animation = anim_name

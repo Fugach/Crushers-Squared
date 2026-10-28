@@ -49,7 +49,7 @@ func update():
 	for i in len(ui_slots):
 		if GlobalVars.player.inventory[i] != null:
 			if ui_slots[i].sprite_frames.has_animation(GlobalVars.player.inventory[i].my_name):
-				ui_slots[i].play(GlobalVars.slots[i].my_name)
+				ui_slots[i].play(GlobalVars.player.inventory[i].my_name)
 			else:
 				ui_slots[i].play('unknown')
 		else:

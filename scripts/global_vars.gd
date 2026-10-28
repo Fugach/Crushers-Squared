@@ -6,7 +6,8 @@ var slots_node : Control
 
 var WEAPON = preload("uid://d18mm0obf3dqi")
 var ROCKET = preload("uid://cfex0tmkaj6q4")
-var FIRE = preload("uid://b031wyq3p3dvw")
+var FLAME = preload("uid://b031wyq3p3dvw")
+var BULLET = preload("uid://csr8w1qcnqlbd")
 
 var cleared_rooms : Dictionary = {}
 

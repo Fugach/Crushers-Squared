@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://vbens2wqotc3" path="res://assets/textures/pistol.png" id="2_og3ej"]
 [ext_resource type="AudioStream" uid="uid://b2bvoy5dd4ur" path="res://assets/sounds/pistol/shoot.wav" id="3_og3ej"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_duhoc"]
-points = PackedVector2Array(13, -3, 13, 0, 250, 3, 255, 0, 250, -3)
-
 [sub_resource type="Animation" id="Animation_duhoc"]
 length = 0.001
 tracks/0/type = "value"
@@ -35,7 +32,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_m0rrv"]
-resource_name = "draw"
+resource_name = "pull_out"
 length = 0.13399999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -121,7 +118,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4702"]
 _data = {
 &"RESET": SubResource("Animation_duhoc"),
-&"draw": SubResource("Animation_m0rrv"),
+&"pull_out": SubResource("Animation_m0rrv"),
 &"shoot_left": SubResource("Animation_ie44i"),
 &"shoot_right": SubResource("Animation_r7pee")
 }
@@ -129,10 +126,8 @@ _data = {
 [node name="Pistol" type="Node2D" unique_id=1802689912]
 script = ExtResource("1_nosnq")
 
-[node name="DrawTime" type="Timer" parent="." unique_id=1562620456]
-
 [node name="ShootCooldown" type="Timer" parent="." unique_id=572311217]
-wait_time = 0.5
+wait_time = 0.4
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=346581404]
 position = Vector2(1, 0)
@@ -142,12 +137,6 @@ offset = Vector2(7, 0)
 [node name="Spawnpoint" type="Marker2D" parent="Sprite2D" unique_id=1560848576]
 position = Vector2(4, -2)
 
-[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1009109331]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1835458610]
-shape = SubResource("ConvexPolygonShape2D_duhoc")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1108657206]
 libraries/ = SubResource("AnimationLibrary_v4702")
 
@@ -155,5 +144,4 @@ libraries/ = SubResource("AnimationLibrary_v4702")
 stream = ExtResource("3_og3ej")
 
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
-[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
