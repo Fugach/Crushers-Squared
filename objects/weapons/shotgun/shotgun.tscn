@@ -158,6 +158,12 @@ region_rect = Rect2(0, 0, 20, 7)
 [node name="spawnpoint" type="Marker2D" parent="Sprite2D" unique_id=1903406102]
 position = Vector2(1, -1)
 
+[node name="GrabLeft" type="Marker2D" parent="Sprite2D" unique_id=1091004630]
+position = Vector2(11, 1)
+
+[node name="GrabRight" type="Marker2D" parent="Sprite2D" unique_id=737085779]
+position = Vector2(1, 2)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=701821859]
 libraries/ = SubResource("AnimationLibrary_ggjqm")
 

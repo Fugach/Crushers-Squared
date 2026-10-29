@@ -123,7 +123,7 @@ _data = {
 &"shoot_right": SubResource("Animation_r7pee")
 }
 
-[node name="Pistol" type="Node2D" unique_id=1802689912]
+[node name="Pistol" type="Node2D" unique_id=1366107329]
 script = ExtResource("1_nosnq")
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=572311217]
@@ -136,6 +136,12 @@ offset = Vector2(7, 0)
 
 [node name="Spawnpoint" type="Marker2D" parent="Sprite2D" unique_id=1560848576]
 position = Vector2(4, -2)
+
+[node name="GrabLeft" type="Marker2D" parent="Sprite2D" unique_id=111008677]
+position = Vector2(2, 1)
+
+[node name="GrabRight" type="Marker2D" parent="Sprite2D" unique_id=1509723162]
+position = Vector2(3, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1108657206]
 libraries/ = SubResource("AnimationLibrary_v4702")

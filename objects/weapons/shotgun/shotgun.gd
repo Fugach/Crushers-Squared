@@ -4,6 +4,8 @@ extends Node2D
 @onready var Spawnpoint : Marker2D = $Sprite2D/spawnpoint
 @onready var ShootCooldown : Timer = $ShootCooldown
 @onready var Anims = $AnimationPlayer
+@onready var GrabLeft = $Sprite2D/GrabLeft
+@onready var GrabRight = $Sprite2D/GrabRight
 
 var BULLET : PackedScene = GlobalVars.BULLET
 var my_owner
@@ -13,16 +15,14 @@ var accuracy : float = 0.05 # default: 0.05
 
 func _process(delta: float) -> void:
 	if my_owner == GlobalVars.player:
-		logic_player()
+		logic()
 
-func logic_player():
+func logic():
 	var angle = int(global_rotation_degrees) % 360
 	if abs(angle) < 90:
-		Sprite.flip_v = false
-		Spawnpoint.position.y = -1
+		Sprite.scale.y = 1
 	else:
-		Sprite.flip_v = true
-		Spawnpoint.position.y = 2
+		Sprite.scale.y = -1
 
 func shoot():
 	if not can_shoot:

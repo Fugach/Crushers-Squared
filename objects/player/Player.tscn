@@ -25,12 +25,10 @@
 [ext_resource type="Texture2D" uid="uid://ck6wy77bijggg" path="res://assets/textures/player/spin_right/spin_right_0013.png" id="16_26mmu"]
 [ext_resource type="Texture2D" uid="uid://c6bpbk45ag7m5" path="res://assets/textures/player/spin_right/spin_right_0014.png" id="17_5myuk"]
 [ext_resource type="Texture2D" uid="uid://cjrka8jtpsmmi" path="res://assets/textures/player/spin_right/spin_right_0015.png" id="18_f17kx"]
+[ext_resource type="Texture2D" uid="uid://bjlkrjlgf5xsc" path="res://assets/textures/player/hand.png" id="26_0dqnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m0oal"]
 size = Vector2(15, 15)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
-size = Vector2(8, 8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0oal"]
 shader = ExtResource("2_n1h8g")
@@ -211,12 +209,15 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wy8b"]
+size = Vector2(8, 8)
+
 [sub_resource type="Animation" id="Animation_epypp"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -228,7 +229,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -240,7 +241,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/path = NodePath("Sprite:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -252,7 +253,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:rotation")
+tracks/3/path = NodePath("Sprite:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -268,7 +269,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -284,7 +285,7 @@ length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -300,7 +301,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -312,7 +313,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -328,7 +329,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -340,7 +341,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/path = NodePath("Sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -356,7 +357,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -368,7 +369,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/path = NodePath("Sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -442,16 +443,21 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickUpArea2D" unique_id=495832546]
 shape = SubResource("RectangleShape2D_m0oal")
 
-[node name="Collision" type="CollisionShape2D" parent="." unique_id=1382299090]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=524356141]
 visible = false
-shape = SubResource("RectangleShape2D_7wy8b")
+shadow_enabled = true
+texture = ExtResource("13_ercwk")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=117064103]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=117064103]
 material = SubResource("ShaderMaterial_m0oal")
 sprite_frames = SubResource("SpriteFrames_m0oal")
 animation = &"turn_right"
 frame = 8
 frame_progress = 1.0
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1382299090]
+visible = false
+shape = SubResource("RectangleShape2D_7wy8b")
 
 [node name="wall_slide_loop" type="AudioStreamPlayer2D" parent="." unique_id=366827242]
 stream = ExtResource("3_ijwuf")
@@ -464,8 +470,20 @@ autoplay = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=106726941]
 libraries/ = SubResource("AnimationLibrary_0dqnc")
 
+[node name="RunTiming" type="Timer" parent="." unique_id=622724295]
+wait_time = 0.5
+one_shot = true
+
+[node name="damage_cooldown" type="Timer" parent="." unique_id=771856998]
+wait_time = 0.1
+one_shot = true
+
 [node name="JumpCoyoteTime" type="Timer" parent="." unique_id=475918392]
 wait_time = 0.1
+one_shot = true
+
+[node name="SlideCoyoteTime" type="Timer" parent="." unique_id=207828079]
+wait_time = 0.05
 one_shot = true
 
 [node name="slide" type="GPUParticles2D" parent="." unique_id=217437572]
@@ -476,10 +494,6 @@ randomness = 0.45
 collision_base_size = 8.4
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_3hcdt")
-
-[node name="SlideCoyoteTime" type="Timer" parent="." unique_id=207828079]
-wait_time = 0.05
-one_shot = true
 
 [node name="fall" type="AudioStreamPlayer2D" parent="." unique_id=66982629]
 stream = ExtResource("11_dnsx0")
@@ -495,18 +509,13 @@ lifetime = 0.5
 randomness = 0.6
 process_material = SubResource("ParticleProcessMaterial_vk66s")
 
-[node name="damage_cooldown" type="Timer" parent="." unique_id=771856998]
-wait_time = 0.1
-one_shot = true
+[node name="RightHand" type="Sprite2D" parent="." unique_id=190025101]
+position = Vector2(-10, 0)
+texture = ExtResource("26_0dqnc")
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=524356141]
-visible = false
-shadow_enabled = true
-texture = ExtResource("13_ercwk")
-
-[node name="RunTiming" type="Timer" parent="." unique_id=622724295]
-wait_time = 0.5
-one_shot = true
+[node name="LeftHand" type="Sprite2D" parent="." unique_id=2088669300]
+position = Vector2(9, 0)
+texture = ExtResource("26_0dqnc")
 
 [connection signal="body_entered" from="PickUpArea2D" to="." method="_on_pick_up_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]

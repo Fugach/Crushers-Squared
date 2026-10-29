@@ -5,7 +5,6 @@ class_name Bullet
 @onready var Raycast : RayCast2D = $RayCast2D
 @onready var Ricoshet: AudioStreamPlayer2D = $Ricoshet
 
-var flying : bool = true
 var damage_amount : int = 0
 var my_owner
 var blacklist = []
@@ -18,15 +17,17 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var point : Vector2 = Raycast.get_collision_point()
-	while Raycast.enabled:
+	for i in range(0, 10):
 		Raycast.force_raycast_update()
 		if Raycast.is_colliding():
 			var body = Raycast.get_collider()
 			if body != null and body not in blacklist:
 				blacklist.append(body)
 				hit(body)
-		Raycast.target_position.x += 1000
+		Raycast.target_position.x = 1000 * i
 	set_physics_process(false)
+	if Raycast.is_colliding() == false:
+		kill()
 	#if flying:
 		#Line.set_point_position(1, Raycast.target_position)
 		#if abs(Line.get_point_position(1).x - Line.get_point_position(0).x) > 200:
@@ -38,15 +39,12 @@ func hit(body):
 		body.damage(damage_amount, "bullet")
 		kill()
 	elif body is TileMapLayer or body is StaticBody2D:
-		flying = false
 		Raycast.enabled = false
-		Raycast.target_position = Vector2.ZERO
 		wall_particles()
 	elif body is Enemy:
 		body.damage(damage_amount, "bullet")
 		body.push(75, Vector2(1, 0).rotated(global_rotation))
 		Raycast.enabled = false
-		Raycast.target_position = Vector2.ZERO
 		kill()
 	elif body is RigidBody2D:# or "Door" in str(body):
 		if body.has_method("damage"):
@@ -83,7 +81,6 @@ func _on_gpu_particles_2d_finished() -> void:
 	kill()
 
 func kill():
-	flying = false
 	set_physics_process(false)
 	Raycast.enabled = false
 	for x in range(2):
