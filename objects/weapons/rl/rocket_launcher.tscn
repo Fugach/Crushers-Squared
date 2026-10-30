@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bkg3t4dteu7eq" path="res://assets/textures/particles/cloud_small.png" id="4_v5ddk"]
 [ext_resource type="AudioStream" uid="uid://char6b2mjlfie" path="res://assets/sounds/rl/shoot.ogg" id="5_ce8r7"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_jd356"]
-points = PackedVector2Array(13, -3, 13, 1, 260, 6, 260, -9)
-
 [sub_resource type="Curve" id="Curve_1udmo"]
 _limits = [-200.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, -200), 0.0, 560.0, 0, 0, Vector2(1, 200), 0.0, 0.0, 0, 0]
@@ -21,6 +18,86 @@ colors = PackedColorArray(1.5720325, 1.5720325, 1.5720325, 1, 1.353256, 1.353256
 
 [sub_resource type="Animation" id="Animation_v5ddk"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jbuh3"]
+resource_name = "pull_out"
+length = 0.39999999999999997
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 2),
+"update": 0,
+"values": [-1.5707963267948966, -1.7453292519943295, 0.2617993877991494, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8rc8b"]
+resource_name = "put_away"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [0.0, -1.5707963267948966]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1)]
+}
 
 [sub_resource type="Animation" id="Animation_ce8r7"]
 resource_name = "shoot"
@@ -28,7 +105,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../RL_sprite:position")
+tracks/0/path = NodePath("../Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,6 +118,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hapj5"]
 _data = {
 &"RESET": SubResource("Animation_v5ddk"),
+&"pull_out": SubResource("Animation_jbuh3"),
+&"put_away": SubResource("Animation_8rc8b"),
 &"shoot": SubResource("Animation_ce8r7")
 }
 
@@ -51,23 +130,17 @@ script = ExtResource("1_bl5bl")
 wait_time = 1.5
 one_shot = true
 
-[node name="RL_sprite" type="Sprite2D" parent="." unique_id=1986036035]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1986036035]
 texture_filter = 1
 texture = ExtResource("2_5mrk5")
 offset = Vector2(0, -2)
 region_enabled = true
 region_rect = Rect2(0, 0, 21, 11)
 
-[node name="shoot_pos" type="Marker2D" parent="RL_sprite" unique_id=427160559]
-position = Vector2(0, -3)
+[node name="Spawnpoint" type="Marker2D" parent="Sprite2D" unique_id=427160559]
+position = Vector2(-6, -3)
 
-[node name="Area2D" type="Area2D" parent="RL_sprite" unique_id=816954710]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RL_sprite/Area2D" unique_id=1374269291]
-position = Vector2(-5, -2)
-shape = SubResource("ConvexPolygonShape2D_jd356")
-
-[node name="Cloud" type="CPUParticles2D" parent="RL_sprite" unique_id=1413888917]
+[node name="Cloud" type="CPUParticles2D" parent="Sprite2D" unique_id=1413888917]
 position = Vector2(-12, -3)
 emitting = false
 amount = 1
@@ -83,7 +156,7 @@ initial_velocity_max = 75.0
 linear_accel_curve = SubResource("Curve_1udmo")
 color_ramp = SubResource("Gradient_v5ddk")
 
-[node name="Clouds_small" type="CPUParticles2D" parent="RL_sprite" unique_id=274265182]
+[node name="Clouds_small" type="CPUParticles2D" parent="Sprite2D" unique_id=274265182]
 position = Vector2(-9, -3)
 emitting = false
 amount = 2
@@ -101,6 +174,12 @@ initial_velocity_max = 150.0
 linear_accel_curve = SubResource("Curve_1udmo")
 color_ramp = SubResource("Gradient_v5ddk")
 
+[node name="GrabLeft" type="Marker2D" parent="Sprite2D" unique_id=1864931627]
+position = Vector2(-4, 0)
+
+[node name="GrabRight" type="Marker2D" parent="Sprite2D" unique_id=1600838648]
+position = Vector2(4, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=174408379]
 root_node = NodePath("../ShootCooldown")
 libraries/ = SubResource("AnimationLibrary_hapj5")
@@ -111,5 +190,4 @@ volume_db = -3.0
 bus = &"Sound"
 
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_cooldown_timeout"]
-[connection signal="body_entered" from="RL_sprite/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="RL_sprite/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

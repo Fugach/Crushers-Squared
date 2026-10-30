@@ -46,9 +46,8 @@ func _ready() -> void:
 	GlobalVars.player = self
 	Slots.add_slot()
 	Slots.add_slot()
-	Slots.add_slot()
 	
-	for x in ['SHOTGUN', 'PISTOL']:
+	for x in ['ROCKET_LAUNCHER']:
 		var new = GlobalVars.WEAPON.instantiate()
 		new.weapon = x
 		new.global_position = global_position# + Vector2(0, -50)
@@ -219,7 +218,7 @@ func fall():
 	# тяжёлое приземление
 	if is_falling_fast and is_on_floor():
 		is_falling_fast = false
-		state = PlayerState.SLAMMING
+		state = PlayerState.IDLE
 		$slam.emitting = false
 		Camera.shake(0.1, 5)
 		$Sprite.scale = Vector2(1, 1)
@@ -284,20 +283,12 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("slam") and not is_on_floor() and\
 	not Input.is_action_just_pressed("jump") and\
 	(state == PlayerState.IDLE or state == PlayerState.SLIDING):
-		velocity.y = 750
-		velocity.x = 0
 		state = PlayerState.SLAMMING
+		rotation = 0.0
+		velocity.y = 750
+		is_falling_fast = true
+		velocity.x = 0
 		$slam.emitting = true
-	elif (state == PlayerState.SLAMMING or is_falling_fast) and is_on_floor():
-		Anims.play("slam_stop")
-		state = PlayerState.IDLE
-		is_falling_fast = false	
-		$slam.emitting = false
-	#elif state == PlayerState.SLIDING and\
-	#Input.get_axis('move_left', 'move_right') != sign(get_wall_normal().x) * -1:
-		#Anims.stop()
-		#$slam.emitting = false
-		#state = PlayerState.IDLE
 	
 	if text.is_valid_int():
 		var num = int(text)
