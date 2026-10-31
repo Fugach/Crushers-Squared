@@ -37,7 +37,6 @@ var titles = {
 
 func _ready() -> void:
 	Table.hide()
-	$"../UI/HUD/AnimationPlayer".play_backwards("show_table")
 
 func _process(_delta: float) -> void:
 	get_input()
