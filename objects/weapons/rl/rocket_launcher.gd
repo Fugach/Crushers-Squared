@@ -50,6 +50,7 @@ func shoot():
 	#$Sprite2D/Clouds_small.emitting = true
 
 func pull_out():
+	can_shoot = false
 	Anims.play("pull_out")
 func put_away():
 	Anims.play("put_away")

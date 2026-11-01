@@ -2,26 +2,27 @@ extends CanvasLayer
 
 @onready var Console : RichTextLabel = $Console
 @onready var Camera : Camera2D = $"../../Camera"
+@onready var label = $HP/HPBar/HPLabel
+@onready var Bar = $HP/HPBar
+@onready var Bar_sm = $HP/HPBar_smooth
+@onready var Delay = $HP/HPBar/Delay
 
 func _process(delta: float) -> void:
 	scale = Camera.scale
 	update_hpbar()
 
 func update_hpbar():
-	var label = $HP/HPBar/HPLabel
-	var bar = $HP/HPBar
-	var bar_sm = $HP/HPBar_smooth
+
 	var hp = GlobalVars.player.stats['HP']
 	label.text = str(hp)
-	if bar.value != float(hp):
-		bar.value = lerp(bar.value, float(hp), 0.5)
+	if Bar.value != float(hp):
+		Bar.value = lerp(Bar.value, float(hp), 0.5)
 
 func _on_timer_timeout() -> void:
-	var bar = $HP/HPBar
-	var bar_sm = $HP/HPBar_smooth
-	while bar_sm.value != bar.value:
-		bar_sm.value = lerp(bar_sm.value, bar.value, 0.5)
+	while not (Bar_sm.value - 1 == Bar.value) and not (Bar_sm.value == Bar.value):
+		Bar_sm.value = lerp(Bar_sm.value, Bar.value, 0.5)
 		await get_tree().process_frame
+		print(Bar_sm.value, ' | ', Bar.value)
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:
@@ -35,9 +36,9 @@ func _on_upgrade_3_mouse_entered() -> void:
 
 
 func _on_hp_bar_value_changed(value: float) -> void:
-	$HP/HPBar/Timer.start()
-	if $HP/HPBar.value <= 0:
-		$HP/HPBar.value = 0
-		$HP/HPBar/HPLabel.text = "0"
+	Delay.start()
+	if Bar.value <= 0:
+		Bar.value = 0
+		label.text = "0"
 		GlobalVars.player.stats['HP'] = 0
 		get_parent().get_parent().death()
