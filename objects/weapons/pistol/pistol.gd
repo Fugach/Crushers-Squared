@@ -11,6 +11,7 @@ var BULLET = GlobalVars.BULLET
 var my_owner
 var can_shoot : bool = false
 const my_name = "pistol"
+const my_cursor = GlobalVars.HITSCAN
 
 func _process(delta: float) -> void:
 	logic()
@@ -45,7 +46,7 @@ func pull_out():
 	can_shoot = false
 	Anims.play('pull_out')
 func put_away():
-	pass
+	can_shoot = false
 
 
 func _on_cooldown_timeout() -> void:

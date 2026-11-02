@@ -11,12 +11,10 @@ var blacklist = []
 var SPEED = 4000
 
 func _ready() -> void:
+	name = 'Bullet' + str(get_instance_id())
 	blacklist.append(my_owner)
-	await get_tree().create_timer(30).timeout
-	kill()
 
-func _physics_process(delta: float) -> void:
-	var point : Vector2 = Raycast.get_collision_point()
+func _physics_process(_delta: float) -> void:
 	for i in range(0, 10):
 		Raycast.force_raycast_update()
 		if Raycast.is_colliding():

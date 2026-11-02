@@ -12,12 +12,6 @@ extends Node2D
 
 @onready var Camera : Camera2D = $Camera
 
-var default = preload("res://assets/textures/cursors/default.png")
-var pointer = preload("res://assets/textures/cursors/pointer.png")
-var grabbing = preload("res://assets/textures/cursors/grabbing.png")
-var text = preload("res://assets/textures/cursors/text.png")
-var no = preload("res://assets/textures/cursors/no.png")
-
 const PLAYER = preload("uid://7pwfca8tanen")
 
 func _ready() -> void:
@@ -49,7 +43,7 @@ func _process(_delta: float) -> void:
 		GlobalVars.player.respawn()
 		if not $UI/HUD/lost.playing:
 			$UI/HUD/lost.play()
-		Input.set_custom_mouse_cursor(no)
+		Input.set_custom_mouse_cursor(GlobalVars.NO)
 		
 	if Input.is_action_just_pressed("mmb"):
 		$TileMapLayer.new_dungeon()

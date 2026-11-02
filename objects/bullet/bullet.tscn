@@ -39,7 +39,7 @@ script = ExtResource("1_awion")
 [node name="Line2D" type="Line2D" parent="." unique_id=1527437106]
 z_index = -1
 scale = Vector2(0.78846157, 1)
-points = PackedVector2Array(0, 0, 100, 0)
+points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
 default_color = Color(6.840123, 4.661678, 0, 1)
 

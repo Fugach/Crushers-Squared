@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dkpuqxf15icc6" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Shader" uid="uid://dwmr157brsa3w" path="res://assets/shaders/crt_OpenGL.gdshader" id="2_0o4t1"]
-[ext_resource type="Texture2D" uid="uid://dhnhnqnk2f7ox" path="res://assets/textures/console_background.png" id="2_7vrkn"]
-[ext_resource type="AudioStream" path="res://sounds/UI/crt_noise.ogg" id="4_jix8l"]
-[ext_resource type="AudioStream" path="res://sounds/UI/choose.ogg" id="5_glbon"]
+[ext_resource type="AudioStream" uid="uid://biw2ws4aiws52" path="res://assets/sounds/ui/crt_noise.ogg" id="4_jix8l"]
+[ext_resource type="AudioStream" uid="uid://cnkdtr18gm8lj" path="res://assets/sounds/ui/choose.ogg" id="5_glbon"]
 [ext_resource type="Texture2D" uid="uid://b765v15wc134m" path="res://assets/textures/UI/grabber.png" id="7_0o4t1"]
 [ext_resource type="Texture2D" uid="uid://n764luyo8kt5" path="res://assets/textures/UI/grabber_highlight.png" id="8_0k4wn"]
 [ext_resource type="Texture2D" uid="uid://dcnoxmmn1xfjq" path="res://assets/textures/UI/grabber_disabled.png" id="9_j5v2v"]
@@ -72,10 +71,11 @@ offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=354371820]
-position = Vector2(320, 180)
-scale = Vector2(10, 5.625)
-texture = ExtResource("2_7vrkn")
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1255223183]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.12109375, 0.080886856, 0.04067993, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=22106723]
 modulate = Color(6.84, 6.84, 6.84, 1)
@@ -84,8 +84,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 scale = Vector2(0.5, 0.5)
 focus_mode = 2
-theme_override_colors/default_color = Color(0.4609375, 0.25970104, 0.05041504, 1)
-theme_override_colors/selection_color = Color(0.18275288, 0.088113904, 0, 0.56078434)
+theme_override_colors/default_color = Color(0.21802102, 0.19394685, 0.12578227, 1)
+theme_override_colors/selection_color = Color(0.12890625, 0.09196656, 0.062942505, 0.56078434)
 text = "   ##         -=     ##-=-=        #           #      #                #     ##             ##     -=-=-=-=-=      ##-=-=-=           -=-=-=-=      ##             ##       2
     ##     -=         ##       #     #           #      #       #      #     ##        -= ##             #             ##                     #          #     ##        -= ##            
     ##-=-=           ##==-=       #=-=-=#       #       #      #     ##    -=     ##             #             ##-=-=              #          #     ##    -=     ##         

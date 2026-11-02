@@ -136,7 +136,6 @@ func load_config():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Atmosphere"), GlobalConfig.get_value("audio", "Atmosphere_volume_db"))
 
 func _on_start_button_pressed() -> void:
-	GlobalVars.lifes = 3
 	get_tree().change_scene_to_file("res://main.tscn")
 func _on_start_button_mouse_entered() -> void:
 	if not $start.disabled:

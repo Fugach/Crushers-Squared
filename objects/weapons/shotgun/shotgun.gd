@@ -11,6 +11,7 @@ var BULLET : PackedScene = GlobalVars.BULLET
 var my_owner
 var can_shoot : bool = true
 const my_name = "shotgun"
+const my_cursor = GlobalVars.SPLASH
 var accuracy : float = 0.05 # default: 0.05
 
 func _process(delta: float) -> void:
@@ -32,13 +33,17 @@ func shoot():
 	ShootCooldown.start()
 	$shoot.pitch_scale = randf_range(0.8, 1.2)
 	$shoot.play()
-	if Sprite.flip_v == false:
+	var clone = $ShotgunParticle.duplicate()
+	clone.name = 'ShotgunParticle' + str(clone.get_instance_id())
+	if Sprite.scale.y == 1:
 		Anims.play("shoot_right")
-		$GPUParticles2D.global_rotation = global_rotation
+		clone.global_rotation = global_rotation
 	else:
 		$AnimationPlayer.play("shoot_left")
-		$GPUParticles2D.global_rotation = global_rotation + PI
-	$GPUParticles2D.restart()
+		clone.global_rotation = global_rotation + PI
+	clone.restart()
+	clone.finished.connect(clone.queue_free)
+	get_parent().add_child(clone)
 	for x in range(5):
 		var new_bullet = BULLET.instantiate()
 		new_bullet.damage_amount = 7
@@ -54,7 +59,7 @@ func pull_out():
 	can_shoot = false
 	Anims.play("pull_out")
 func put_away():
-	pass
+	can_shoot = false
 
 func _on_cooldown_timeout() -> void:
 	can_shoot = true

@@ -22,7 +22,6 @@ func _on_timer_timeout() -> void:
 	while not (Bar_sm.value - 1 == Bar.value) and not (Bar_sm.value == Bar.value):
 		Bar_sm.value = lerp(Bar_sm.value, Bar.value, 0.5)
 		await get_tree().process_frame
-		print(Bar_sm.value, ' | ', Bar.value)
 
 func _on_upgrade_1_mouse_entered() -> void:
 	if not $Table/Upgrade1.disabled:

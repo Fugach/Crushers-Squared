@@ -456,7 +456,6 @@ frame = 8
 frame_progress = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1382299090]
-visible = false
 shape = SubResource("RectangleShape2D_7wy8b")
 
 [node name="wall_slide_loop" type="AudioStreamPlayer2D" parent="." unique_id=366827242]

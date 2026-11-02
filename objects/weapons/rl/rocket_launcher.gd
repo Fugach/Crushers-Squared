@@ -14,12 +14,12 @@ var can_shoot: bool = true
 var current_angle: float = 0.0
 var my_owner
 const my_name = "rocket_launcher"
+const my_cursor = GlobalVars.SPLASH
 
 func _process(delta: float) -> void:
-	if my_owner == GlobalVars.player:
-		logic_player()
+	logic()
 
-func logic_player():
+func logic():
 	var angle = int(global_rotation_degrees) % 360
 	if abs(angle) < 90:
 		Sprite.scale.y = 1
@@ -54,6 +54,7 @@ func pull_out():
 	Anims.play("pull_out")
 func put_away():
 	Anims.play("put_away")
+	can_shoot = false
 
 func _on_cooldown_timeout() -> void:
 	can_shoot = true

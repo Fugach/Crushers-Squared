@@ -4,7 +4,7 @@ var stats : Dictionary = {
 	'MAX_SPEED' = 165.0,
 	'JUMP_POWER' = -300.0,
 	'WEIGHT' = 650.0,
-	'MAX_WALLJUMPS' = 3,
+	'MAX_WALLJUMPS' = 30,
 	'WALLJUMPS' = 3,
 	'MAX_HP' = 100,
 	'HP' = 100
@@ -18,7 +18,7 @@ var current_weapon : Node2D
 var direction : int = 1
 var last_animation : String = ""
 
-enum PlayerState {IDLE, SLIDING, SLAMMING, NOCLIPPING}
+enum PlayerState {IDLE, SLIDING, SLAMMING, NOCLIPPING, SQUISHED}
 var state = PlayerState.IDLE
 var is_falling_fast : bool = false
 var is_running : bool = false
@@ -47,11 +47,12 @@ func _ready() -> void:
 	Slots.add_slot()
 	Slots.add_slot()
 	
-	for x in ['ROCKET_LAUNCHER']:
+	for x in ['ROCKET_LAUNCHER', 'SHOTGUN', 'PISTOL']:
 		var new = GlobalVars.WEAPON.instantiate()
 		new.weapon = x
-		new.global_position = global_position# + Vector2(0, -50)
+		new.global_position = global_position + Vector2(0, 10)
 		get_parent().add_child(new)
+		new.freeze = true
 		new.SpawnCooldown.stop()
 
 func _physics_process(delta: float) -> void:
@@ -130,9 +131,11 @@ func debug():
 func walk(delta : float):
 	if Input.is_action_just_pressed("move_down") and is_on_floor():
 		Anims.play("squish")
+		state = PlayerState.SQUISHED
 	elif (Input.is_action_just_released("move_down") or not is_on_floor()) and\
 		 (Anims.current_animation == "squish" or last_animation == "squish"):
 		Anims.play("unsquish")
+		state = PlayerState.IDLE
 	if Input.is_action_just_pressed("move_left"):
 		direction = -1
 		velocity.x += stats["MAX_SPEED"] * direction
@@ -248,6 +251,7 @@ func fall():
 
 func use_weapon():
 	if current_weapon == null:
+		animate_hands()
 		return
 	
 	current_weapon.look_at(get_global_mouse_position())
@@ -302,33 +306,104 @@ func _input(event: InputEvent) -> void:
 			RightHand.reparent(self)
 			LeftHand.reparent(self)
 			inventory[Slots.current] = null
+			Slots.update()
+			switch_to(Slots.current)
 			var result = WEAPON.instantiate()
 			result.weapon = item.my_name.to_upper()
 			item.queue_free()
 			result.global_position = global_position + Vector2(sign(global_position.x - get_global_mouse_position().x) * -10, -5)
 			result.apply_force(10000 * Vector2(1, 1) * Vector2(sign(global_position.x - get_global_mouse_position().x), 1))
 			get_parent().add_child(result)
-			Slots.update()
 func switch_to(slot : int):
+	RightHand.reparent(self)
+	LeftHand.reparent(self)
+	RightHand.global_rotation = 0.0
+	LeftHand.global_rotation = 0.0
 	if current_weapon != null:
-		RightHand.reparent(self)
-		LeftHand.reparent(self)
 		current_weapon.hide()
 		current_weapon.set_process(false)
 		current_weapon.put_away()
+	
 	Slots.current = slot
 	Slots.update()
 	current_weapon = inventory[Slots.current]
-	if current_weapon != null:
+	
+	if current_weapon == null:
+		Input.set_custom_mouse_cursor(GlobalVars.DEFAULT, Input.CURSOR_ARROW, Vector2(0, 0))
+		RightHand.global_position = global_position + Vector2(7, 1)
+		LeftHand.global_position = global_position + Vector2(-7, 1)
+	else:
+		Input.set_custom_mouse_cursor(current_weapon.my_cursor, Input.CURSOR_ARROW, Vector2(5 * 3, 5 * 3))
 		current_weapon.show()
 		current_weapon.set_process(true)
 		current_weapon.pull_out()
 		
 		RightHand.reparent(current_weapon.GrabRight)
 		RightHand.global_position = current_weapon.GrabRight.global_position
+		RightHand.global_rotation = current_weapon.GrabRight.global_rotation
 		
 		LeftHand.reparent(current_weapon.GrabLeft)
 		LeftHand.global_position = current_weapon.GrabLeft.global_position
+		LeftHand.global_rotation = current_weapon.GrabLeft.global_rotation
+
+func animate_hands():
+	match state:
+		PlayerState.SLIDING:
+			RightHand.global_position = lerp(
+				RightHand.global_position,
+				global_position + Vector2(3 * direction, -9 - velocity.y / 100),
+				0.4
+			)
+			LeftHand.global_position = lerp(
+				LeftHand.global_position,
+				global_position + Vector2(2 * direction * -1, 7 - velocity.y / 100),
+				0.4
+			)
+		PlayerState.SLAMMING:
+			RightHand.global_position = lerp(
+				RightHand.global_position,
+				global_position + Vector2(4, -5 - velocity.y / 50),
+				0.4
+			)
+			LeftHand.global_position = lerp(
+				LeftHand.global_position,
+				global_position + Vector2(-4, -5 - velocity.y / 50),
+				0.4
+			)
+		PlayerState.IDLE:
+			if is_falling_fast:
+				RightHand.global_position = lerp(
+					RightHand.global_position,
+					global_position + Vector2(4, -1 - velocity.y / 50),
+					0.1
+				)
+				LeftHand.global_position = lerp(
+					LeftHand.global_position,
+					global_position + Vector2(-4, -1 - velocity.y / 50),
+					0.1
+				)
+			else:
+				RightHand.global_position = lerp(
+					RightHand.global_position,
+					global_position + Vector2(6 * direction, 1),
+					0.2
+				)
+				LeftHand.global_position = lerp(
+					LeftHand.global_position,
+					global_position + Vector2(-2 * direction, 1),
+					0.2
+				)
+		PlayerState.SQUISHED:
+			RightHand.global_position = lerp(
+				RightHand.global_position,
+				global_position + Vector2(12 * direction, 1),
+				0.2
+			)
+			LeftHand.global_position = lerp(
+				LeftHand.global_position,
+				global_position + Vector2(-12 * direction, 1),
+				0.2
+			)
 
 func respawn():
 	if Camera == null:

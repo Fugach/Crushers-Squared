@@ -170,7 +170,7 @@ libraries/ = SubResource("AnimationLibrary_ggjqm")
 [node name="shoot" type="AudioStreamPlayer2D" parent="." unique_id=173016495]
 stream = ExtResource("3_apfrx")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1307837274]
+[node name="ShotgunParticle" type="GPUParticles2D" parent="." unique_id=1307837274]
 emitting = false
 amount = 1
 texture = ExtResource("4_ggjqm")

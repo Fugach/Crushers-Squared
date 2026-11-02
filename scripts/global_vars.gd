@@ -9,6 +9,22 @@ var ROCKET = preload("uid://cfex0tmkaj6q4")
 var FLAME = preload("uid://b031wyq3p3dvw")
 var BULLET = preload("uid://csr8w1qcnqlbd")
 
+
+const DEFAULT = preload("uid://bemiao6fdt5rx")
+const DEFAULT_CLICKED = preload("uid://byb7c1x4ap1xh")
+const GOOD = preload("uid://bf4lredv4dfre")
+const BAD = preload("uid://bkdx86pdaby8c")
+const GRAB = preload("uid://by4nbpa3o7ovs")
+const HITSCAN = preload("uid://dxr0dlvqqj1xl")
+const NO = preload("uid://d1jfg55xa3kqg")
+const OTHER = preload("uid://blyc8fodhovfi")
+const POINTER = preload("uid://cm158u7avgsfw")
+const POINTER_CLICKED = preload("uid://djdndjxkuh6rs")
+const SPLASH = preload("uid://bgvnas1i4cu2")
+const TEXT = preload("uid://bkqkaei3hxj2l")
+const USABLE = preload("uid://bm8nku3t8smrp")
+const WAIT = preload("uid://c2f5luxocn7rb")
+
 var cleared_rooms : Dictionary = {}
 
 var stats : Dictionary = {
@@ -17,6 +33,14 @@ var stats : Dictionary = {
 	'passed_layers' = 0,
 	'lifes' = 3
 }
+
+func _init() -> void:
+	Input.set_custom_mouse_cursor(DEFAULT, Input.CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(TEXT, Input.CURSOR_IBEAM, Vector2(7 * 3, 6 * 3))
+	Input.set_custom_mouse_cursor(POINTER, Input.CURSOR_POINTING_HAND)
+	Input.set_custom_mouse_cursor(HITSCAN, Input.CURSOR_CROSS)
+	Input.set_custom_mouse_cursor(WAIT, Input.CURSOR_WAIT)
+	Input.set_custom_mouse_cursor(WAIT, Input.CURSOR_BUSY)
 
 func apply_CRT(body_material):
 	if str(RenderingServer.get_current_rendering_method()) == "gl_compatibility":
