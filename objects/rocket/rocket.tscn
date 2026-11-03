@@ -164,6 +164,7 @@ script = ExtResource("1_qxf0c")
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1120221242]
 position = Vector2(0, 2)
 target_position = Vector2(12, 0)
+hit_from_inside = true
 
 [node name="fire" type="AnimatedSprite2D" parent="." unique_id=1271622328]
 modulate = Color(2.844042, 2.844042, 2.844042, 1)

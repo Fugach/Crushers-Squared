@@ -22,6 +22,7 @@ func _physics_process(_delta: float) -> void:
 			if body != null and body not in blacklist:
 				blacklist.append(body)
 				hit(body)
+				break
 		Raycast.target_position.x = 1000 * i
 	set_physics_process(false)
 	if Raycast.is_colliding() == false:
@@ -33,6 +34,7 @@ func _physics_process(_delta: float) -> void:
 
 func hit(body):
 	Line.set_point_position(1, Line.to_local(Raycast.get_collision_point()))
+	Raycast.target_position = Raycast.to_local(Raycast.get_collision_point())
 	if body == GlobalVars.player:
 		body.damage(damage_amount, "bullet")
 		kill()

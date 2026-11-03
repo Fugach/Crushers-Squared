@@ -160,6 +160,7 @@ position = Vector2(1, -1)
 
 [node name="GrabLeft" type="Marker2D" parent="Sprite2D" unique_id=1091004630]
 position = Vector2(11, 1)
+rotation = 1.5707964
 
 [node name="GrabRight" type="Marker2D" parent="Sprite2D" unique_id=737085779]
 position = Vector2(1, 2)
