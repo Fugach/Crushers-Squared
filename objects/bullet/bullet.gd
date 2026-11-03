@@ -15,17 +15,21 @@ func _ready() -> void:
 	blacklist.append(my_owner)
 
 func _physics_process(_delta: float) -> void:
-	for i in range(0, 10):
+	for i in range(0, 5):
 		Raycast.force_raycast_update()
 		if Raycast.is_colliding():
 			var body = Raycast.get_collider()
 			if body != null and body not in blacklist:
 				blacklist.append(body)
 				hit(body)
-				break
+				set_physics_process(false)
+				return
 		Raycast.target_position.x = 1000 * i
-	set_physics_process(false)
+	
 	if Raycast.is_colliding() == false:
+		print('hi')
+		#Line.width = 2.0
+		Line.set_point_position(1, Raycast.target_position)
 		kill()
 	#if flying:
 		#Line.set_point_position(1, Raycast.target_position)
@@ -83,7 +87,7 @@ func _on_gpu_particles_2d_finished() -> void:
 func kill():
 	set_physics_process(false)
 	Raycast.enabled = false
-	for x in range(2):
+	for x in range(3):
 		await get_tree().process_frame
 	Line.hide()
 	queue_free()

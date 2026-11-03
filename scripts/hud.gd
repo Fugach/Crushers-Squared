@@ -11,6 +11,13 @@ func _process(delta: float) -> void:
 	scale = Camera.scale
 	update_hpbar()
 
+func _physics_process(delta: float) -> void:
+	$Ammo.position = lerp(
+			$Ammo.position,
+			Vector2(640, 360) + GlobalVars.player.velocity / -50,
+			0.2
+		)
+
 func update_hpbar():
 
 	var hp = GlobalVars.player.stats['HP']

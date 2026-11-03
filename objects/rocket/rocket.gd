@@ -5,7 +5,7 @@ extends Sprite2D
 @onready var ExplosionPos: Sprite2D = $Babax
 @onready var Collision: Area2D = $Babax/BabaxCollision
 
-var damage_amount : int = -5
+var damage_amount : int = 25
 var can_push : bool = true
 var speed = 100
 var direction = 1
@@ -55,9 +55,9 @@ func _on_collision_body_entered(body: Node2D):
 		if body.has_method("damage") and body not in targets:
 			targets.append(body)
 			if body == my_owner:
-				body.damage(8, "explosion")
+				body.damage(int(damage_amount / 4), "explosion")
 			else:
-				body.damage(25, "explosion")
+				body.damage(damage_amount, "explosion")
 		var explosion_pos = ExplosionPos.global_position
 		var dir = (body.global_position - explosion_pos).normalized()
 		var distance = explosion_pos.distance_to(body.global_position)

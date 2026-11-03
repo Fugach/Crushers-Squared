@@ -1,10 +1,15 @@
 extends Node2D
 
+@onready var GrabLeft: Marker2D = $Sprite2D/GrabLeft
+@onready var GrabRight: Marker2D = $Sprite2D/GrabRight
+
+
 var my_owner
 var can_shoot : bool = false
 var my_slot : int
 var temperature : float = 25
 const my_name = 'flamethrower'
+const my_cursor = GlobalVars.SPLASH
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -17,7 +22,7 @@ func shoot():
 		return
 	for i in range(1):
 		var flame = GlobalVars.FLAME.instantiate()
-		flame.global_position = $ShootPosition.global_position + Vector2.RIGHT.rotated(global_rotation) * (i - 1)
+		flame.global_position = $Sprite2D/ShootPosition.global_position + Vector2.RIGHT.rotated(global_rotation) * (i - 1)
 		flame.global_rotation = global_rotation + randf_range(-0.075, 0.075)
 		GlobalVars.main_node.add_child(flame)
 	$ShootDelay.start()

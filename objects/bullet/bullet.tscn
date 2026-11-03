@@ -42,6 +42,7 @@ scale = Vector2(0.78846157, 1)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 1.0
 default_color = Color(6.840123, 4.661678, 0, 1)
+antialiased = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1084103653]
 target_position = Vector2(1000, 0)

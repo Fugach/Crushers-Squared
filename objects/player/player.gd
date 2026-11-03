@@ -47,7 +47,7 @@ func _ready() -> void:
 	Slots.add_slot()
 	Slots.add_slot()
 	
-	for x in ['ROCKET_LAUNCHER', 'SHOTGUN', 'PISTOL']:
+	for x in ['FLAMETHROWER']:
 		var new = GlobalVars.WEAPON.instantiate()
 		new.weapon = x
 		new.global_position = global_position + Vector2(0, 10)
@@ -385,12 +385,12 @@ func animate_hands():
 			else:
 				RightHand.global_position = lerp(
 					RightHand.global_position,
-					global_position + Vector2(6 * direction, 1),
+					global_position + Vector2(6 * direction, 1 - velocity.y / 50),
 					0.2
 				)
 				LeftHand.global_position = lerp(
 					LeftHand.global_position,
-					global_position + Vector2(-2 * direction, 1),
+					global_position + Vector2(-2 * direction, 1 - velocity.y / 50),
 					0.2
 				)
 		PlayerState.SQUISHED:

@@ -1693,7 +1693,7 @@ stream = ExtResource("41_htgcl")
 max_distance = 357357.0
 bus = &"Atmosphere"
 
-[node name="Control" type="Control" parent="UI/HUD" unique_id=679284716]
+[node name="Ammo" type="Control" parent="UI/HUD" unique_id=679284716]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 640.0
@@ -1701,20 +1701,19 @@ offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/Control" unique_id=1778867309]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/Ammo" unique_id=1778867309]
 position = Vector2(-55, -37)
 sprite_frames = SubResource("SpriteFrames_m0oal")
 animation = &"empty"
 
-[node name="Label" type="Label" parent="UI/HUD/Control" unique_id=1270827655]
+[node name="Label" type="Label" parent="UI/HUD/Ammo" unique_id=1270827655]
 layout_mode = 0
-offset_left = -72.0
-offset_top = -25.0
-offset_right = -47.0
-offset_bottom = -18.0
-rotation = 0.034906585
+offset_left = -81.0
+offset_top = -21.0
+offset_right = -48.0
+offset_bottom = -13.0
 theme_override_fonts/font = ExtResource("44_htgcl")
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 8
 text = "99:99"
 
 [node name="Restart" type="CanvasLayer" parent="UI" unique_id=1233357972]

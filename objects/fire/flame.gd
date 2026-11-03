@@ -13,9 +13,21 @@ func _ready() -> void:
 	$SpriteSmoke.self_modulate.a = 0.0
 	
 func _physics_process(delta: float) -> void:
-	velocity *= 0.98
+	# Старый метод, при замедлении времени огонь останавливается КУДА быстрее
+	#velocity *= 0.98
+	
+	# Другой метод, но если игра зависнет то кабзда
+	#velocity *= 1.0 - 1.2 * delta
+	
+	# Вроде норм, некое "экспоненциальное затухание".
+	# Я слишком тупой для того, чтобы понять, каким образом это получается.
+	# Но оно работает, и проблем не должно вызывать
+	velocity *= pow(0.5, 1.2 * delta)
+	
+	velocity.y -= 1.5 * delta
+	
 	move_and_slide()
-	velocity.y -= 1.5
+	
 	if $AliveTime.time_left <= 0.2 + randf_range(-0.05, 0.05):
 		var percent = $AliveTime.time_left / 0.2
 		var percent_backwards = abs($AliveTime.time_left - 0.2) / 0.2
@@ -24,10 +36,6 @@ func _physics_process(delta: float) -> void:
 		$SpriteFlame.self_modulate = Color(percent_backwards, percent_backwards, percent_backwards)
 		$SpriteSmoke.self_modulate = Color(percent, percent, percent)
 		#print(percent)
-
-func _process(delta: float) -> void:
-	pass
-
 
 func _on_alive_time_timeout() -> void:
 	queue_free()

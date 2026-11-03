@@ -83,11 +83,18 @@ one_shot = true
 position = Vector2(3, 1)
 texture = ExtResource("2_ly848")
 
+[node name="ShootPosition" type="Marker2D" parent="Sprite2D" unique_id=1992365419]
+position = Vector2(8, -1)
+
+[node name="GrabLeft" type="Marker2D" parent="Sprite2D" unique_id=1700632844]
+position = Vector2(-2, 1)
+rotation = 1.5707964
+
+[node name="GrabRight" type="Marker2D" parent="Sprite2D" unique_id=324836317]
+position = Vector2(-2, 2)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1435489116]
 libraries/ = SubResource("AnimationLibrary_tjomb")
-
-[node name="ShootPosition" type="Marker2D" parent="." unique_id=1992365419]
-position = Vector2(11, 0)
 
 [connection signal="timeout" from="DrawTime" to="." method="_on_draw_time_timeout"]
 [connection signal="timeout" from="OverheatCooldown" to="." method="_on_overheat_cooldown_timeout"]
