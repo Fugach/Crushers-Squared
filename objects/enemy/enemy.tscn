@@ -152,8 +152,4 @@ width = 2.0
 
 [node name="UniLooker" type="RayCast2D" parent="." unique_id=1647370788]
 
-[node name="Line2D" type="Line2D" parent="." unique_id=35537563]
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -47,7 +47,7 @@ func _ready() -> void:
 	Slots.add_slot()
 	Slots.add_slot()
 	
-	for x in ['FLAMETHROWER']:
+	for x in ['FLAMETHROWER', 'SHOTGUN', 'ROCKET_LAUNCHER']:
 		var new = GlobalVars.WEAPON.instantiate()
 		new.weapon = x
 		new.global_position = global_position + Vector2(0, 10)

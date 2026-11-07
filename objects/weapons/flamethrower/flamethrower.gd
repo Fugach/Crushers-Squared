@@ -22,6 +22,7 @@ func shoot():
 		return
 	for i in range(1):
 		var flame = GlobalVars.FLAME.instantiate()
+		flame.my_owner = my_owner
 		flame.global_position = $Sprite2D/ShootPosition.global_position + Vector2.RIGHT.rotated(global_rotation) * (i - 1)
 		flame.global_rotation = global_rotation + randf_range(-0.075, 0.075)
 		GlobalVars.main_node.add_child(flame)
