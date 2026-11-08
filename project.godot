@@ -31,8 +31,8 @@ Debug="*uid://td2c1ajcb0nv"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/resizable=false
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=2
 
 [editor_plugins]
@@ -213,5 +213,8 @@ lights_and_shadows/directional_shadow/size=2048
 2d/shadow_atlas/size=1024
 textures/default_filters/anisotropic_filtering_level=0
 viewport/hdr_2d=true
+scaling_3d/mode=5
+scaling_3d/mode.ios=5
+scaling_3d/mode.macos=5
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

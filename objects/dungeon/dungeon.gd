@@ -1,0 +1,107 @@
+extends Node2D
+
+@onready var CRT : ColorRect = $UI/Restart/CRT
+@onready var CRT_mat: ShaderMaterial = CRT.material as ShaderMaterial
+@onready var RestartUI : CanvasLayer = $UI/Restart
+@onready var PauseUI : CanvasLayer = $UI/Pause
+@onready var HUD : CanvasLayer = $UI/HUD
+@onready var HPBar : TextureProgressBar = $UI/HUD/HP/HPBar
+@onready var Table : Control = $UI/HUD/Table
+
+@onready var Camera : Camera2D = $Camera
+
+const PLAYER = preload("uid://7pwfca8tanen")
+
+func _ready() -> void:
+	var player = PLAYER.instantiate()
+	player.name = 'Player'
+	add_child(player)
+	player = $Player
+	GlobalVars.slots_node = get_node("/root/main/UI/HUD/Slots")
+	GlobalVars.player = player
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
+	load_config()
+	GlobalVars.main_node = self
+	player.respawn()
+	$SubViewport.use_hdr_2d = true
+	$UI/Pause/AnimationPlayer.play_backwards("appear")
+
+func load_config():
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), GlobalConfig.get_value("audio", "Master_volume_db"))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), GlobalConfig.get_value("audio", "Music_volume_db"))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), GlobalConfig.get_value("audio", "Sound_volume_db"))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Atmosphere"), GlobalConfig.get_value("audio", "Atmosphere_volume_db"))
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("crash"):
+		get_tree().quit(0)
+
+func _process(_delta: float) -> void:
+	if GlobalVars.player.global_position.y > 10000:
+		GlobalVars.player.respawn()
+		if not $UI/HUD/lost.playing:
+			$UI/HUD/lost.play()
+		Input.set_custom_mouse_cursor(GlobalVars.NO)
+		
+	if Input.is_action_just_pressed("mmb"):
+		$TileMapLayer.new_dungeon()
+		GlobalVars.player.respawn()
+		GlobalVars.stats['time'] = 0.0
+	if Input.is_action_just_pressed("esc"):
+		if not Table.visible and not get_tree().paused:
+			get_tree().paused = true
+			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+			$UI/Pause.show()
+			$UI/Pause/AnimationPlayer.play("appear")
+		#else:
+			#Engine.time_scale = 0.5
+			#$UI/Pause.hide()
+			#get_tree().paused = false
+			#get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
+	if Engine.time_scale != 1.0:
+		if Engine.time_scale < 0.5:
+			Engine.time_scale = lerpf(Engine.time_scale, 1.0, 0.005)
+		else:
+			Engine.time_scale = lerpf(Engine.time_scale, 1.0, 0.2)
+		AudioServer.playback_speed_scale = Engine.time_scale
+func death():
+	print('POW! You are DEAD!')
+	$UI/Restart.death()
+	get_tree().paused = true
+
+
+func _on_exit_pressed() -> void:
+	get_tree().paused = false
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_tree().change_scene_to_file("res://main_menu.tscn")
+
+func _on_continue_pressed() -> void:
+	Engine.time_scale = 0.5
+	$UI/Pause.hide()
+	get_tree().paused = false
+	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
+
+
+
+
+func _on_lost_finished() -> void:
+	get_tree().quit(-1)
+
+
+func _on_exit_mouse_entered() -> void:
+	$UI/Pause/ColorRect/exit.text = ">> ВЫХОД <<"
+func _on_exit_mouse_exited() -> void:
+	$UI/Pause/ColorRect/exit.text = "ВЫХОД"
+
+
+func _on_continue_mouse_entered() -> void:
+	$UI/Pause/ColorRect/continue.text = ">> ПРОДОЛЖИТЬ <<"
+func _on_continue_mouse_exited() -> void:
+	$UI/Pause/ColorRect/continue.text = "ПРОДОЛЖИТЬ"
+
+func _on_restart_pressed() -> void:
+	GlobalVars.player.respawn()
+func _on_restart_mouse_entered() -> void:
+	$UI/Pause/ColorRect/restart.text = ">> ПЕРЕЗАПУСК <<"
+func _on_restart_mouse_exited() -> void:
+	$UI/Pause/ColorRect/restart.text = "ПЕРЕЗАПУСК"

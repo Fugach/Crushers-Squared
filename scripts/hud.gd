@@ -2,24 +2,24 @@ extends CanvasLayer
 
 @onready var Console : RichTextLabel = $Console
 @onready var Camera : Camera2D = $"../../Camera"
-@onready var label = $HP/HPBar/HPLabel
+@onready var label = $HP/Label
 @onready var Bar = $HP/HPBar
 @onready var Bar_sm = $HP/HPBar_smooth
-@onready var Delay = $HP/HPBar/Delay
+@onready var Delay = $HP/Delay
 
 func _process(delta: float) -> void:
 	scale = Camera.scale
 	update_hpbar()
 
 func _physics_process(delta: float) -> void:
+	#print($Ammo.position)
 	$Ammo.position = lerp(
 			$Ammo.position,
-			Vector2(640, 360) + GlobalVars.player.velocity / -50,
+			Vector2(get_viewport().size) / 2 + GlobalVars.player.velocity / -50,
 			0.2
 		)
 
 func update_hpbar():
-
 	var hp = GlobalVars.player.stats['HP']
 	label.text = str(hp)
 	if Bar.value != float(hp):
