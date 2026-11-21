@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qm08lhwlnywd"]
 
-[ext_resource type="Script" uid="uid://yow5y37d3njq" path="res://objects/dungeon/dungeon.gd" id="1_qb7sp"]
+[ext_resource type="Script" uid="uid://yow5y37d3njq" path="res://scenes/dungeon/dungeon.gd" id="1_qb7sp"]
 [ext_resource type="Script" uid="uid://87kani2n8ufu" path="res://scripts/hud.gd" id="2_barkg"]
 [ext_resource type="Texture2D" uid="uid://de4xq5wbfud5r" path="res://assets/textures/HUD/hp_bar/hp_bg.png" id="3_45twq"]
 [ext_resource type="Texture2D" uid="uid://od73v1s7mqk0" path="res://assets/textures/HUD/hp_bar/hp_bar_white.png" id="4_7w7wd"]

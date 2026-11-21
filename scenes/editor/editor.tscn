@@ -1,0 +1,242 @@
+[gd_scene format=3 uid="uid://c1h0ojur3lgim"]
+
+[ext_resource type="Script" uid="uid://c8nxshofbeat1" path="res://scenes/editor/editor.gd" id="1_m0is4"]
+[ext_resource type="Texture2D" uid="uid://bfri7gdw1wood" path="res://assets/textures/HUD/moving_tip.png" id="2_m0is4"]
+[ext_resource type="Texture2D" uid="uid://d0lihokvpkx2s" path="res://assets/textures/HUD/slots/empty.png" id="3_5cfe8"]
+[ext_resource type="Script" uid="uid://06xyalnfta6h" path="res://scenes/editor/hotbar.gd" id="3_jwsr6"]
+[ext_resource type="Texture2D" uid="uid://b2tvfl8cqi60j" path="res://assets/textures/babax.png" id="4_7gtdv"]
+
+[sub_resource type="Animation" id="Animation_m0is4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/UI/MovingTip/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5cfe8"]
+resource_name = "how2move"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/UI/MovingTip/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.33522308, 0.5, 0.6666667, 0.7552616, 0.9),
+"transitions": PackedFloat32Array(2, 0.5, 0.5, 2, 0.5, 0.5, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.2), Color(1, 1, 1, 0.2), Color(1, 1, 1, 1), Color(1, 1, 1, 0.2), Color(1, 1, 1, 0.2), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gtdv"]
+_data = {
+&"RESET": SubResource("Animation_m0is4"),
+&"how2move": SubResource("Animation_5cfe8")
+}
+
+[node name="Node2D" type="Node2D" unique_id=582268064]
+script = ExtResource("1_m0is4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1011524929]
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1108761833]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MovingTip" type="Control" parent="CanvasLayer/UI" unique_id=770007678]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 17.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/UI/MovingTip" unique_id=634593173]
+position = Vector2(18, 19)
+texture = ExtResource("2_m0is4")
+
+[node name="VisibilityTime" type="Timer" parent="CanvasLayer/UI/MovingTip" unique_id=1816049694]
+
+[node name="Hotbar" type="Control" parent="CanvasLayer/UI" unique_id=768445809]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_jwsr6")
+
+[node name="Slot1" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=757314122]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot2" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=815376461]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot3" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=391951794]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot4" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=944695012]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot5" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=1939938241]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot6" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=1340074634]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot7" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=665711479]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot8" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=1583328156]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="Slot9" type="TextureButton" parent="CanvasLayer/UI/Hotbar" unique_id=1478571226]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 18.0
+offset_bottom = 18.0
+pivot_offset = Vector2(9, 9)
+texture_normal = ExtResource("3_5cfe8")
+
+[node name="BuildMenu" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=533764346]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="CategoryList" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1015452999]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+color = Color(0.13725491, 0.13725491, 0.13725491, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/BuildMenu/CategoryList" unique_id=367312812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1249297192]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+color = Color(0.09985284, 0.09985284, 0.086104214, 0.95000005)
+
+[node name="ItemList" type="ItemList" parent="CanvasLayer/UI/BuildMenu/ColorRect2" unique_id=1106132417]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1184834766]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+color = Color(0.13816993, 0.13816993, 0.13816993, 0.90000004)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1405964792]
+
+[node name="MoveTimeout" type="Timer" parent="Camera2D" unique_id=1079059339]
+wait_time = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=994630611]
+libraries/ = SubResource("AnimationLibrary_7gtdv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=439505786]
+modulate = Color(1, 1, 1, 0.042000003)
+position = Vector2(65, 48)
+texture = ExtResource("4_7gtdv")
+offset = Vector2(-65, -48)
+
+[connection signal="timeout" from="CanvasLayer/UI/MovingTip/VisibilityTime" to="." method="_on_visibility_time_timeout"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot1" to="CanvasLayer/UI/Hotbar" method="_on_slot_1_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot1" to="CanvasLayer/UI/Hotbar" method="_on_slot_1_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot2" to="CanvasLayer/UI/Hotbar" method="_on_slot_2_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot2" to="CanvasLayer/UI/Hotbar" method="_on_slot_2_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot3" to="CanvasLayer/UI/Hotbar" method="_on_slot_3_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot3" to="CanvasLayer/UI/Hotbar" method="_on_slot_3_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot4" to="CanvasLayer/UI/Hotbar" method="_on_slot_4_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot4" to="CanvasLayer/UI/Hotbar" method="_on_slot_4_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot5" to="CanvasLayer/UI/Hotbar" method="_on_slot_5_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot5" to="CanvasLayer/UI/Hotbar" method="_on_slot_5_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot6" to="CanvasLayer/UI/Hotbar" method="_on_slot_6_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot6" to="CanvasLayer/UI/Hotbar" method="_on_slot_6_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot7" to="CanvasLayer/UI/Hotbar" method="_on_slot_7_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot7" to="CanvasLayer/UI/Hotbar" method="_on_slot_7_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot8" to="CanvasLayer/UI/Hotbar" method="_on_slot_8_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot8" to="CanvasLayer/UI/Hotbar" method="_on_slot_8_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot9" to="CanvasLayer/UI/Hotbar" method="_on_slot_9_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot9" to="CanvasLayer/UI/Hotbar" method="_on_slot_9_mouse_exited"]
+[connection signal="timeout" from="Camera2D/MoveTimeout" to="." method="_on_move_timeout_timeout"]
