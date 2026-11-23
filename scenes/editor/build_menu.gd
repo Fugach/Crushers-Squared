@@ -1,11 +1,11 @@
-extends HSplitContainer
+extends Control
 
 enum Categories {BLOCKS, ENTITIES, OTHER}
 
-@onready var blocks_btn = $Categories/VBoxContainer/Blocks
-@onready var TilesBg : TileMapLayer = $"../../../TilesBg"
+@onready var blocks_btn = $HSplitContainer/Categories/VBoxContainer/Blocks
+@onready var TilesBg: TileMapLayer = $"../../../TilesBg"
 @onready var TileSetBg : TileSet = TilesBg.tile_set
-@onready var ItemsList: GridContainer = $Items/List
+@onready var ItemsList: GridContainer = $HSplitContainer/Items/List
 
 var items_group = ButtonGroup.new()
 var current_choice : Categories = Categories.BLOCKS
@@ -47,11 +47,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('lmb') and not visible:
-		TilesBg.set_cell(
-			TilesBg.local_to_map(TilesBg.to_local(TilesBg.get_global_mouse_position())),
-			0,
-			current_item
-		)
+		var pos = TilesBg.local_to_map(TilesBg.to_local(TilesBg.get_global_mouse_position()))
+		if TilesBg.get_cell_atlas_coords(pos) != Vector2i(current_item):
+			TilesBg.set_cell(
+				pos,
+				0,
+				current_item
+			)
+			$"../../../place".play()
 
 func _on_category_selected(button : Button) -> void:
 	var new_choice : Categories

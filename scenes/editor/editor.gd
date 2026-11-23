@@ -1,12 +1,13 @@
 extends Node2D
 
 @onready var camera: Camera2D = $Camera2D
-@onready var moving_tip_visibility_time: Timer = $CanvasLayer/UI/MovingTip/VisibilityTime
+@onready var moving_tip_visibility_time: Timer = $CanvasLayer/UI/Tips/How2Move/MoveVisibilityTime
 @onready var camera_move_timeout: Timer = $Camera2D/MoveTimeout
 @onready var Hotbar: Control = $CanvasLayer/UI/Hotbar
-@onready var build_menu: HSplitContainer = $CanvasLayer/UI/BuildMenu
-@onready var CategoriesCont: VBoxContainer = $CanvasLayer/UI/BuildMenu/Categories/VBoxContainer
-@onready var ItemsCont: GridContainer = $CanvasLayer/UI/BuildMenu/Items/List
+@onready var build_menu: Control = $CanvasLayer/UI/Build
+@onready var build_menu_container: HSplitContainer = $CanvasLayer/UI/Build/HSplitContainer
+@onready var CategoriesCont: VBoxContainer = $CanvasLayer/UI/Build/HSplitContainer/Categories/VBoxContainer
+@onready var ItemsCont: GridContainer = $CanvasLayer/UI/Build/HSplitContainer/Items/List
 
 
 @onready var slots : Array = [
@@ -64,4 +65,10 @@ func _on_move_timeout_timeout() -> void:
 
 func _on_visibility_time_timeout() -> void:
 	$AnimationPlayer.stop()
-	$CanvasLayer/UI/MovingTip.call_deferred('queue_free')
+	$CanvasLayer/UI/Tips/How2Move.call_deferred('queue_free')
+
+
+func _on_texture_button_pressed() -> void:
+	build_menu.show()
+func _on_close_pressed() -> void:
+	build_menu.hide()
