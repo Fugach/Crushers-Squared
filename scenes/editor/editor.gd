@@ -4,7 +4,11 @@ extends Node2D
 @onready var moving_tip_visibility_time: Timer = $CanvasLayer/UI/MovingTip/VisibilityTime
 @onready var camera_move_timeout: Timer = $Camera2D/MoveTimeout
 @onready var Hotbar: Control = $CanvasLayer/UI/Hotbar
-@onready var build_menu: HBoxContainer = $CanvasLayer/UI/BuildMenu
+@onready var build_menu: HSplitContainer = $CanvasLayer/UI/BuildMenu
+@onready var CategoriesCont: VBoxContainer = $CanvasLayer/UI/BuildMenu/Categories/VBoxContainer
+@onready var ItemsCont: GridContainer = $CanvasLayer/UI/BuildMenu/Items/List
+
+
 @onready var slots : Array = [
 	$CanvasLayer/UI/Hotbar/Slot1, 
 	$CanvasLayer/UI/Hotbar/Slot2, 
@@ -23,9 +27,6 @@ func _ready() -> void:
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	for i in range(len(slots)):
 		slots[i].position.x = (18 + 2) * i - 20 * len(slots) / 2
-	build_menu.hide()
-	#print(get_viewport_rect().size / 2)
-	#$CanvasLayer/UI/MovingTip.position = get_viewport_rect().size / 2
 	$AnimationPlayer.play("how2move")
 
 

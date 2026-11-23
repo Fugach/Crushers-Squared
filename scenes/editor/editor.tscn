@@ -5,6 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://d0lihokvpkx2s" path="res://assets/textures/HUD/slots/empty.png" id="3_5cfe8"]
 [ext_resource type="Script" uid="uid://06xyalnfta6h" path="res://scenes/editor/hotbar.gd" id="3_jwsr6"]
 [ext_resource type="Texture2D" uid="uid://b2tvfl8cqi60j" path="res://assets/textures/babax.png" id="4_7gtdv"]
+[ext_resource type="Script" uid="uid://owidcrokhity" path="res://scenes/editor/build_menu.gd" id="5_ro56m"]
+[ext_resource type="Texture2D" uid="uid://82wcjdgprt2i" path="res://assets/textures/tiles/backgrounds.png" id="7_qbwwq"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_m0oal"]
 
 [sub_resource type="Animation" id="Animation_m0is4"]
 length = 0.001
@@ -43,6 +47,33 @@ _data = {
 &"RESET": SubResource("Animation_m0is4"),
 &"how2move": SubResource("Animation_5cfe8")
 }
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5q5vg"]
+resource_name = "background_brick"
+texture = ExtResource("7_qbwwq")
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
+0:15/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_m0oal"]
+sources/0 = SubResource("TileSetAtlasSource_5q5vg")
 
 [node name="Node2D" type="Node2D" unique_id=582268064]
 script = ExtResource("1_m0is4")
@@ -162,23 +193,23 @@ offset_bottom = 18.0
 pivot_offset = Vector2(9, 9)
 texture_normal = ExtResource("3_5cfe8")
 
-[node name="BuildMenu" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=533764346]
+[node name="BuildMenu" type="HSplitContainer" parent="CanvasLayer/UI" unique_id=1585752487]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 1
-alignment = 1
+split_offsets = PackedInt32Array(0, 0)
+script = ExtResource("5_ro56m")
 
-[node name="CategoryList" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1015452999]
+[node name="Categories" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1015452999]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 color = Color(0.13725491, 0.13725491, 0.13725491, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/BuildMenu/CategoryList" unique_id=367312812]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/BuildMenu/Categories" unique_id=367312812]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,21 +217,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1249297192]
+[node name="Blocks" type="Button" parent="CanvasLayer/UI/BuildMenu/Categories/VBoxContainer" unique_id=1038324317]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_m0oal")
+text = "Блоки"
+alignment = 0
+
+[node name="Entities" type="Button" parent="CanvasLayer/UI/BuildMenu/Categories/VBoxContainer" unique_id=1259444203]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_m0oal")
+text = "Сущности"
+alignment = 0
+
+[node name="Other" type="Button" parent="CanvasLayer/UI/BuildMenu/Categories/VBoxContainer" unique_id=1017638551]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_m0oal")
+text = "Прочее"
+alignment = 0
+
+[node name="Items" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1249297192]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 color = Color(0.09985284, 0.09985284, 0.086104214, 0.95000005)
 
-[node name="ItemList" type="ItemList" parent="CanvasLayer/UI/BuildMenu/ColorRect2" unique_id=1106132417]
+[node name="List" type="GridContainer" parent="CanvasLayer/UI/BuildMenu/Items" unique_id=1577777062]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 
-[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1184834766]
+[node name="Description" type="ColorRect" parent="CanvasLayer/UI/BuildMenu" unique_id=1184834766]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -220,23 +278,8 @@ position = Vector2(65, 48)
 texture = ExtResource("4_7gtdv")
 offset = Vector2(-65, -48)
 
+[node name="TilesBg" type="TileMapLayer" parent="." unique_id=1932023960]
+tile_set = SubResource("TileSet_m0oal")
+
 [connection signal="timeout" from="CanvasLayer/UI/MovingTip/VisibilityTime" to="." method="_on_visibility_time_timeout"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot1" to="CanvasLayer/UI/Hotbar" method="_on_slot_1_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot1" to="CanvasLayer/UI/Hotbar" method="_on_slot_1_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot2" to="CanvasLayer/UI/Hotbar" method="_on_slot_2_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot2" to="CanvasLayer/UI/Hotbar" method="_on_slot_2_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot3" to="CanvasLayer/UI/Hotbar" method="_on_slot_3_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot3" to="CanvasLayer/UI/Hotbar" method="_on_slot_3_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot4" to="CanvasLayer/UI/Hotbar" method="_on_slot_4_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot4" to="CanvasLayer/UI/Hotbar" method="_on_slot_4_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot5" to="CanvasLayer/UI/Hotbar" method="_on_slot_5_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot5" to="CanvasLayer/UI/Hotbar" method="_on_slot_5_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot6" to="CanvasLayer/UI/Hotbar" method="_on_slot_6_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot6" to="CanvasLayer/UI/Hotbar" method="_on_slot_6_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot7" to="CanvasLayer/UI/Hotbar" method="_on_slot_7_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot7" to="CanvasLayer/UI/Hotbar" method="_on_slot_7_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot8" to="CanvasLayer/UI/Hotbar" method="_on_slot_8_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot8" to="CanvasLayer/UI/Hotbar" method="_on_slot_8_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/UI/Hotbar/Slot9" to="CanvasLayer/UI/Hotbar" method="_on_slot_9_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/UI/Hotbar/Slot9" to="CanvasLayer/UI/Hotbar" method="_on_slot_9_mouse_exited"]
 [connection signal="timeout" from="Camera2D/MoveTimeout" to="." method="_on_move_timeout_timeout"]
