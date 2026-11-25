@@ -6,13 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://c57n7ln324nbu" path="res://assets/textures/icons/build.png" id="3_5q5vg"]
 [ext_resource type="Script" uid="uid://06xyalnfta6h" path="res://scenes/editor/hotbar.gd" id="3_jwsr6"]
 [ext_resource type="Texture2D" uid="uid://b2tvfl8cqi60j" path="res://assets/textures/babax.png" id="4_7gtdv"]
+[ext_resource type="Texture2D" uid="uid://b8pxt6va6a8rw" path="res://assets/textures/icons/build_pressed.png" id="4_hg2ka"]
+[ext_resource type="Texture2D" uid="uid://df5o07v0fo57q" path="res://assets/textures/icons/erase.png" id="4_i3ywb"]
 [ext_resource type="Script" uid="uid://owidcrokhity" path="res://scenes/editor/build_menu.gd" id="5_ro56m"]
-[ext_resource type="Texture2D" uid="uid://c4unfjjs0h0k5" path="res://assets/textures/UI/X.png" id="7_p4u40"]
+[ext_resource type="Texture2D" uid="uid://b6enan2jr5np6" path="res://assets/textures/icons/erase_pressed.png" id="6_oljq2"]
 [ext_resource type="Texture2D" uid="uid://82wcjdgprt2i" path="res://assets/textures/tiles/backgrounds.png" id="7_qbwwq"]
-[ext_resource type="Texture2D" uid="uid://btsihdgho6s3l" path="res://assets/textures/UI/X_pressed.png" id="8_syr16"]
+[ext_resource type="Texture2D" uid="uid://bthwc8r7dkye2" path="res://assets/textures/UI/BigX.png" id="7_syr16"]
+[ext_resource type="Texture2D" uid="uid://dbownux34tiel" path="res://assets/textures/UI/BigX_pressed.png" id="8_qnluh"]
+[ext_resource type="Script" uid="uid://dpv2xbwxyxih3" path="res://scenes/editor/tiles_bg.gd" id="11_qnluh"]
 [ext_resource type="AudioStream" uid="uid://djruf3mf00pxa" path="res://assets/sounds/place.ogg" id="11_syr16"]
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_hg2ka"]
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_m0oal"]
+allow_unpress = true
 
 [sub_resource type="Animation" id="Animation_m0is4"]
 length = 0.001
@@ -75,6 +82,20 @@ texture = ExtResource("7_qbwwq")
 1:1/0 = 0
 1:2/0 = 0
 3:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+1:3/0 = 0
+1:4/0 = 0
+1:5/0 = 0
+1:6/0 = 0
+1:7/0 = 0
+1:8/0 = 0
+1:9/0 = 0
+1:10/0 = 0
+1:11/0 = 0
+1:12/0 = 0
+1:13/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_m0oal"]
 sources/0 = SubResource("TileSetAtlasSource_5q5vg")
@@ -120,23 +141,31 @@ texture = ExtResource("2_m0is4")
 
 [node name="MoveVisibilityTime" type="Timer" parent="CanvasLayer/UI/Tips/How2Move" unique_id=1816049694]
 
-[node name="Hotkeys" type="Control" parent="CanvasLayer/UI/Tips" unique_id=1821136639]
+[node name="Hotkeys" type="HBoxContainer" parent="CanvasLayer/UI/Tips" unique_id=1303870148]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -32.0
+offset_right = 68.0
 grow_vertical = 0
+theme_override_constants/separation = 0
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UI/Tips/Hotkeys" unique_id=1750757409]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Build" type="TextureButton" parent="CanvasLayer/UI/Tips/Hotkeys" unique_id=1750757409]
+layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_hg2ka")
 texture_normal = ExtResource("3_5q5vg")
-texture_pressed = ExtResource("3_5q5vg")
-texture_hover = ExtResource("3_5q5vg")
+texture_pressed = ExtResource("4_hg2ka")
+texture_hover = ExtResource("4_hg2ka")
+
+[node name="Erase" type="TextureButton" parent="CanvasLayer/UI/Tips/Hotkeys" unique_id=718682980]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_hg2ka")
+texture_normal = ExtResource("4_i3ywb")
+texture_pressed = ExtResource("6_oljq2")
+texture_hover = ExtResource("6_oljq2")
 
 [node name="Hotbar" type="Control" parent="CanvasLayer/UI" unique_id=768445809]
 layout_mode = 1
@@ -224,6 +253,7 @@ pivot_offset = Vector2(9, 9)
 texture_normal = ExtResource("3_5cfe8")
 
 [node name="Build" type="Control" parent="CanvasLayer/UI" unique_id=2085552403]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -310,11 +340,11 @@ anchor_right = 1.0
 offset_left = -8.0
 offset_bottom = 5.0
 grow_horizontal = 0
-texture_normal = ExtResource("7_p4u40")
-texture_pressed = ExtResource("8_syr16")
-texture_hover = ExtResource("8_syr16")
-texture_disabled = ExtResource("7_p4u40")
-texture_focused = ExtResource("8_syr16")
+texture_normal = ExtResource("7_syr16")
+texture_pressed = ExtResource("8_qnluh")
+texture_hover = ExtResource("8_qnluh")
+texture_disabled = ExtResource("7_syr16")
+texture_focused = ExtResource("8_qnluh")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1405964792]
 
@@ -332,12 +362,13 @@ offset = Vector2(-65, -48)
 
 [node name="TilesBg" type="TileMapLayer" parent="." unique_id=1932023960]
 tile_set = SubResource("TileSet_m0oal")
+script = ExtResource("11_qnluh")
 
 [node name="place" type="AudioStreamPlayer2D" parent="." unique_id=276066231]
 stream = ExtResource("11_syr16")
-max_polyphony = 100
 
 [connection signal="timeout" from="CanvasLayer/UI/Tips/How2Move/MoveVisibilityTime" to="." method="_on_visibility_time_timeout"]
-[connection signal="pressed" from="CanvasLayer/UI/Tips/Hotkeys/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Tips/Hotkeys/Build" to="CanvasLayer/UI/Build" method="_on_build_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Tips/Hotkeys/Erase" to="CanvasLayer/UI/Build" method="_on_erase_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Build/Close" to="." method="_on_close_pressed"]
 [connection signal="timeout" from="Camera2D/MoveTimeout" to="." method="_on_move_timeout_timeout"]
